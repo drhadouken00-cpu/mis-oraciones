@@ -1,0 +1,4 @@
+.mysterySelect{display:flex;flex-wrap:wrap;gap:6px;margin:-12px 0 22px}.mysterySelect button{min-height:38px;padding:6px 12px;font-size:12px}.mysterySelect .chosen{background:var(--green);color:#fff}
+.installTip{width:100%;margin-top:14px;font-size:13px;text-align:left}#installDialog ol{padding-left:20px;font-size:15px}#installDialog button{display:block;width:100%;margin-top:8px}
+.alarmRow .ics{grid-column:1/-1;font-size:13px;min-height:40px}
+html[data-theme=dark] .mysterySelect .chosen{background:#385e4c}

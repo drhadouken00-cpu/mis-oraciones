@@ -1,0 +1,18 @@
+#passages p{white-space:pre-line}
+#home header{margin-bottom:26px}.menuButton{display:flex;flex-direction:column;justify-content:center;gap:5px;width:48px;height:48px;padding:12px 11px}.menuButton span{display:block;height:2px;border-radius:2px;background:var(--green)}
+.centerBrand{flex:1;text-align:center}
+.intro h1{font-size:33px;margin:4px 0 22px}
+#todayCards{gap:14px;margin-top:0}.streak{text-align:center;margin:2px 0}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:16px;min-height:112px}.tile strong{font-family:Georgia,serif;font-weight:400;font-size:17px;line-height:1.25}.tile small{font-size:12px;color:var(--muted)}.tileIcon{font-family:Georgia,serif;font-size:24px;color:var(--gold);line-height:1;margin-bottom:6px}
+#drawerShade{position:fixed;inset:0;background:rgba(20,32,27,.38);z-index:60}
+#drawer{position:fixed;top:0;bottom:0;left:0;width:min(84vw,330px);background:var(--bg);z-index:61;transform:translateX(-102%);transition:transform .25s ease;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,.18);padding:env(safe-area-inset-top) 0 20px}
+#drawer.open{transform:none}.drawerHead{padding:30px 24px 18px;border-bottom:1px solid var(--line);background:#e9eddf}.drawerHead small{display:block;color:var(--muted);font-size:12px;margin-top:6px}
+#drawer ul{list-style:none;margin:8px 0;padding:0}#drawer li.sep{border-top:1px solid var(--line);margin:8px 18px}
+#drawer li button{width:100%;display:flex;gap:14px;align-items:center;text-align:left;background:transparent;color:var(--ink);border-radius:0;padding:11px 24px;font-size:15px;min-height:48px}#drawer li button:active{background:#e9eddf}.dIcon{width:22px;text-align:center;color:var(--green);font-family:Georgia,serif;font-size:17px}
+#timerView h1{font-size:33px}.timerQuote{font-family:Georgia,serif;color:var(--muted);font-size:15px;font-style:italic}
+.dial{margin:26px 0 20px;padding:32px 20px 22px;text-align:center;background:#e9eddf;border:1px solid #dbdfd0;border-radius:26px}#timerDisplay{font-family:Georgia,serif;font-size:min(26vw,104px);line-height:1;color:var(--green);font-variant-numeric:tabular-nums;letter-spacing:2px}
+.ring{height:4px;background:#d3d9c6;border-radius:4px;margin:24px 10% 14px;overflow:hidden}#timerRing{height:100%;width:0;background:var(--gold);transition:width .25s linear}#timerState{color:var(--muted);font-size:14px;margin:0}
+.presets{display:flex;flex-wrap:wrap;gap:8px}.presets button{min-height:40px;padding:6px 14px;font-size:13px}.presets .chosen{background:var(--green);color:#fff}.slider input{accent-color:var(--green);padding:0;border:0}
+.timerControls{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.timerControls button{flex:1;min-width:130px}
+html[data-theme=dark] #drawer,html[data-theme=dark] .drawerHead{background:#1e2e24}html[data-theme=dark] .dial{background:#273d2e;border-color:#3a4b3e}html[data-theme=dark] .menuButton span{background:var(--green)}html[data-theme=dark] .tile{background:transparent;color:var(--ink)}html[data-theme=dark] #drawer li button{background:transparent;color:var(--ink)}
+#backupDialog{max-height:90dvh;overflow-y:auto}#backupDialog>button{display:block;width:100%;margin-top:8px}#backupDialog details{margin-top:12px}#openBackupSettings{display:block;margin-bottom:8px}
