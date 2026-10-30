@@ -1,0 +1,4 @@
+/* v5: palabra que se está leyendo */
+article p .w{border-radius:4px;transition:background-color .15s ease,box-shadow .15s ease}
+article p .w.w-on{background:#f1dc9c;box-shadow:0 0 0 2px #f1dc9c;color:inherit}
+html[data-theme=dark] article p .w.w-on{background:#7a5f2a;box-shadow:0 0 0 2px #7a5f2a;color:#fff6e6}

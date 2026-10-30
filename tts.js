@@ -36,14 +36,18 @@ window.TTS=(()=>{
    if(gap>0){set({waiting:true,index:0});waitT=setTimeout(()=>{if(my===gen){set({waiting:false});speakCurrent()}},gap*1000);return}
   }
   const part=parts[pi];set({index:pi,playing:true,paused:false,petition:!!part.pause,waiting:false,petWait:0,ready:true,error:'',completed:false});saveProgress();
-  const el=document.getElementById('part-'+pi);if(el&&current?.id===state.id&&document.visibilityState==='visible')el.scrollIntoView({behavior:'smooth',block:'center'});
+  try{Follow.halt(true);if(!part.pause)Follow.setWord(pi,0)}catch{}
   if(part.pause){set({playing:false,paused:true,petition:true});bgOff(true);return}
   if(!synth){set({error:'Tu navegador no permite leer en voz alta.',playing:false});return}
   bgOn();
-  const list=chunks(part.speech||part.text),v=voice();let ci=0;synth.cancel();
+  const sp=part.speech||part.text,list=chunks(sp),v=voice();let ci=0,pos=0;synth.cancel();
   const next=()=>{if(my!==gen)return;lastActivity=Date.now();if(ci>=list.length){pi++;if(/^rosario-/.test(state.id||'')&&/^(?:[^·]*· )*Oh Jesús mío/.test(part.text)&&parts.slice(pi,pi+3).some(x=>/misterio/i.test(x.text.split(' · ')[0])||/^✧/.test(x.text))&&!parts.slice(pi,pi+2).some(x=>/^(Salve|✧ LETAN)/.test(x.text))){petitionWait(my);return}speakCurrent();return}
-   const u=new SpeechSynthesisUtterance(list[ci++]);u.lang='es-ES';if(v)u.voice=v;u.rate=Math.max(.5,Math.min(1.6,rate));
-   u.onstart=()=>{lastActivity=Date.now()};u.onend=next;
+   const txt=list[ci++],u=new SpeechSynthesisUtterance(txt);u.lang='es-ES';if(v)u.voice=v;u.rate=Math.max(.5,Math.min(1.6,rate));
+   let base=sp.indexOf(txt,pos);if(base<0)base=pos;pos=base+txt.length;let bseen=false,t0=0,fb=null;const ip=pi;
+   // Palabra a palabra: eventos 'boundary' si la voz los da; si no, estimación por tiempo.
+   u.onboundary=e=>{if(my!==gen||e.name==='sentence')return;bseen=true;clearTimeout(fb);try{Follow.halt(true);Follow.at(ip,sp,base+(e.charIndex|0))}catch{}};
+   u.onstart=()=>{lastActivity=Date.now();t0=Date.now();try{Follow.at(ip,sp,base)}catch{}fb=setTimeout(()=>{if(my===gen&&!bseen)try{Follow.estimate(ip,sp,base,txt.length,u.rate)}catch{}},450)};
+   u.onend=()=>{clearTimeout(fb);if(my===gen&&t0&&!bseen)try{Follow.calibrate(txt.length,Date.now()-t0,u.rate)}catch{}try{Follow.halt(true)}catch{}next()};
    u.onerror=e=>{if(my!==gen||e.error==='interrupted'||e.error==='canceled')return;next()};
    synth.speak(u)};
   next();startKeep();
@@ -58,9 +62,9 @@ window.TTS=(()=>{
   if(!watch)watch=setInterval(()=>{if(state.playing&&!state.waiting&&!state.petition&&synth&&!synth.speaking&&!synth.pending&&Date.now()-lastActivity>4000)speakCurrent()},3000)}
  function stopKeep(){clearInterval(keepAlive);keepAlive=null;clearInterval(watch);watch=null}
  function play(ids,index=0){q=ids.slice();qi=0;pi=Math.max(0,index|0);timerEnd=timer>0?Date.now()+timer*60000:0;showPlayer();if(!load())return;speakCurrent()}
- function pause(){gen++;clearTimeout(waitT);if(synth)synth.cancel();set({playing:false,paused:true,waiting:false});saveProgress();bgOff(true)}
+ function pause(){gen++;try{Follow.halt(true)}catch{}clearTimeout(waitT);if(synth)synth.cancel();set({playing:false,paused:true,waiting:false});saveProgress();bgOff(true)}
  function resume(){if(state.petition){pi++;}speakCurrent()}
- function stop(){gen++;clearTimeout(waitT);if(synth)synth.cancel();stopKeep();bgOff();set({playing:false,paused:false,waiting:false,petition:false,index:0})}
+ function stop(){gen++;try{Follow.halt()}catch{}clearTimeout(waitT);if(synth)synth.cancel();stopKeep();bgOff();set({playing:false,paused:false,waiting:false,petition:false,index:0})}
  function configure(){if(state.playing){pause();resume()}}
  return {play,pause,resume,stop,configure,supported:!!synth};
 })();
