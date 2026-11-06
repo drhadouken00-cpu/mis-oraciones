@@ -31,7 +31,7 @@ window.TTS=(()=>{
   if(pi>=parts.length){
    if(timer===-1){stop();clearProgress();return}
    qi++;pi=0;
-   if(qi>=q.length){if(repeat){qi=0}else{clearProgress();set({playing:false,paused:false,completed:true,index:0});stopKeep();bgOff();try{document.dispatchEvent(new CustomEvent('mo-finished',{detail:{id:q[q.length-1]}}))}catch{}return}}
+   if(qi>=q.length){if(repeat&&!window.PrayerAudio?.hybrid){qi=0}else{clearProgress();set({playing:false,paused:false,completed:true,index:0});stopKeep();bgOff();try{document.dispatchEvent(new CustomEvent('mo-finished',{detail:{id:q[q.length-1]}}))}catch{}return}}
    if(!load())return;
    if(gap>0){set({waiting:true,index:0});waitT=setTimeout(()=>{if(my===gen){set({waiting:false});speakCurrent()}},gap*1000);return}
   }

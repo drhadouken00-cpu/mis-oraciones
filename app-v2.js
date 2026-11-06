@@ -37,7 +37,7 @@ function goHome(){if($('editorDialog').open){$('editorDialog').close();return}if
 function favoriteUI(){$('favorite').textContent=favorites.includes(current.id)?'♥':'♡';$('favorite').setAttribute('aria-label',favorites.includes(current.id)?'Quitar de favoritas':'Guardar en favoritas')}
 function startQueue(ids,index=0){
  if(!ids.length)return;
- TTS.play(ids,index);
+ PrayerAudio.play(ids,index,(q,i)=>TTS.play(q,i));
 }
 function play(){if(current)startQueue([current.id])}
 function updateResume(){
@@ -63,7 +63,7 @@ function savePrayer(event){
  if(/\b(?:rezar|se\s+rezan?)\s+(?:un[ao]?|el|la|los|las|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|\d+|ave|padre|gloria|credo|salve|oraci[oó]n)\b|\brepetir\s+(?:\d+|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|la|el)\b/i.test(text)){$('editorStatus').textContent='Quedan indicaciones de rezo o repetición. Completa el texto o sustitúyelas por [PETICIÓN] si necesitas una pausa.';return}
  const parts=prayerTools.parts(text);
  if(!parts.length||parts.every(p=>p.pause)){$('editorStatus').textContent='Añade al menos un pasaje para leer.';return}
- const p={id:editing?.id||'personal-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),title,parts,minutes:Math.max(1,Math.round(text.split(/\s+/).length/115))};
+ const p={...(typeof editing?.audio==='string'?{audio:editing.audio}:{}),id:editing?.id||'personal-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),title,parts,minutes:Math.max(1,Math.round(text.split(/\s+/).length/115))};
  const updated=[...custom.filter(entry=>entry.id!==p.id),p];
  let ok=true;
  try{if(native)ok=Android.saveLibrary(JSON.stringify(updated));else localStorage.custom=JSON.stringify(updated)}catch{ok=false}
@@ -89,5 +89,5 @@ function appearance(){document.documentElement.dataset.theme=$('theme').value;do
 $('theme').onchange=appearance;$('fontSize').onchange=appearance;appearance();$('gap').onchange=()=>{gap=Number($('gap').value);localStorage.gap=String(gap)};$('timer').onchange=()=>timer=Number($('timer').value);
 $('addPrayer').onclick=()=>edit();$('editPrayer').onclick=()=>{if(state.id===current.id&&(state.playing||state.paused)){TTS.pause()}edit(current)};$('cancelEditor').onclick=()=>$('editorDialog').close();$('editorForm').onsubmit=savePrayer;
 $('expandPrayer').onclick=()=>{const original=$('editorText').value;$('editorText').value=prayerTools.expand(original);$('editorStatus').textContent=original===$('editorText').value?'No he encontrado abreviaturas compatibles. Puedes pegar el texto completo.':'Texto completado. Revísalo antes de guardar.'};
-setInterval(()=>{if(!native)return;try{const next=JSON.parse(Android.state());if(JSON.stringify(next)!==JSON.stringify(state)){const previous=state;state=next;if(state.playing&&state.id!==previous.id){const p=prayers.find(p=>p.id===state.id);if(p&&(!$('reader').hidden&&(!current||current.id===previous.id)))openPrayer(p)}if(state.playing||state.paused)showPlayer();updatePlayer()}}catch{}},500);
+setInterval(()=>{if(!native||window.PrayerAudio?.active)return;try{const next=JSON.parse(Android.state());if(JSON.stringify(next)!==JSON.stringify(state)){const previous=state;state=next;if(state.playing&&state.id!==previous.id){const p=prayers.find(p=>p.id===state.id);if(p&&(!$('reader').hidden&&(!current||current.id===previous.id)))openPrayer(p)}if(state.playing||state.paused)showPlayer();updatePlayer()}}catch{}},500);
 refreshLibrary();renderList();

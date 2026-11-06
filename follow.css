@@ -2,3 +2,7 @@
 article p .w{border-radius:4px;transition:background-color .15s ease,box-shadow .15s ease}
 article p .w.w-on{background:#f1dc9c;box-shadow:0 0 0 2px #f1dc9c;color:inherit}
 html[data-theme=dark] article p .w.w-on{background:#7a5f2a;box-shadow:0 0 0 2px #7a5f2a;color:#fff6e6}
+
+#continuous{font-size:13px;padding:9px 10px;border-radius:18px}#continuous[aria-pressed="true"]{background:var(--gold,#b18743);color:#fff}.controls{flex-wrap:wrap}
+
+.controls{gap:14px}#continuous{width:auto;min-width:88px;white-space:nowrap}html[data-theme=dark] #continuous[aria-pressed="true"]{background:var(--gold,#b18743);color:#171c17}

@@ -70,6 +70,7 @@ function doImport(text){
  for(const p of (d.prayers||[]).filter(valid)){if(p.id===GID)continue;
   if(sigs.has(sig(p))){same++;const ex=merged.find(e=>sig(e)===sig(p));if(ex)idMap[p.id]=ex.id;continue}
   const q={id:p.id,title:p.title.trim(),parts:p.parts.map(x=>{const o={text:x.text};if(x.speech)o.speech=x.speech;if(x.pause)o.pause=true;return o}),minutes:Number(p.minutes)||Math.max(1,Math.round(p.parts.map(x=>x.text).join(' ').split(/\s+/).length/115))};
+  if(typeof p.audio==='string')q.audio=p.audio;
   if(ids.has(q.id)){q.id='personal-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);}
   idMap[p.id]=q.id;ids.add(q.id);sigs.add(sig(q));merged.push(q);added++}
  if(merged.length>500){status('Demasiadas oraciones (máximo 500).');return}
