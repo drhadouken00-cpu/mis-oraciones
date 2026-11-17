@@ -36,7 +36,7 @@ featured.after(cards);
 function listen(p){if(!p)return;openPrayer(p);play()}
 function renderCards(){
  const p=dailyPrayer();$('dailyTitle').textContent=p.title;$('dailyText').textContent='«'+excerpt(p,90)+'»';
- $('dailyDate').textContent=new Date().toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'}).toUpperCase();
+ $('dailyDate').textContent=new Date().toLocaleDateString((window.MO_LANG==='en'?'en-GB':'es-ES'),{weekday:'long',day:'numeric',month:'long'}).toUpperCase();
  const r=rosaryToday();$('rosarySub').textContent=r.title.split('· ')[1];
  renderStreak();renderAlarmSummary();
 }

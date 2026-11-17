@@ -1,0 +1,8 @@
+/* Mis oraciones v7: selector de idioma ES | EN */
+.langToggle{display:inline-flex;align-items:center;border:1px solid var(--green,#254f45);color:var(--green,#254f45);border-radius:999px;overflow:hidden;opacity:.85;margin:0 .15rem;flex:none}
+.langToggle button{all:unset;cursor:pointer;font:600 .72rem/1 system-ui,sans-serif;letter-spacing:.06em;padding:.38rem .48rem;min-width:1.3rem;text-align:center}
+.langToggle button[aria-pressed="true"]{background:var(--green,#254f45);color:var(--bg,#f8f5ed)}
+.langToggle button:focus-visible{outline:2px solid currentColor;outline-offset:-3px}
+#drawer .drawerHead .langToggle{margin:.7rem 0 0}
+@media (max-width:420px){#home header{gap:8px}#home .topIcons .icon{min-width:36px;padding:4px 5px}}
+@media (max-width:350px){#home header{gap:6px}#home .topIcons .icon{min-width:32px;padding:4px 3px;font-size:22px}.langToggle button{padding:.34rem .36rem}}

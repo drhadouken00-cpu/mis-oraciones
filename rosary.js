@@ -10,12 +10,12 @@ const cut=(s,n=70)=>s.length>n?s.slice(0,n).replace(/\s\S*$/,'')+'…':s;
 // Secciones de una oración: [{i,label,group}]
 function sections(p){const out=[];let group='';const seen=new Set();
  p.parts.forEach((x,i)=>{const t=x.text.trim();let label=null;
-  if(i===0)label='Oraciones iniciales';
-  else if(t.startsWith('✧')){const h=t.replace(/^✧\s*/,'');if(/^MISTERIOS /.test(h)){group=h.charAt(0)+h.slice(1).toLowerCase();label=group+' · inicio'}else label=/^[A-ZÁÉÍÓÚÑ ]+$/.test(h)?(h.charAt(0)+h.slice(1).toLowerCase()).replace('virgen','Virgen'):h}
-  else{const pre=t.split(' · ')[0];const m=/^(Salve|Letanías|Decena \d+ de|Al final|Oración final|Oración inicial)/.exec(pre);if(m&&!(m[1]==='Letanías'&&out.some(o=>/^Letan/i.test(o.label)))&&!seen.has(group+pre.replace(/ de \d+$/,''))){seen.add(group+pre.replace(/ de \d+$/,''));label=pre.replace(/ · .*/,'')}}
+  if(i===0)label=(window.MO_LANG==='en'?'Opening prayers':'Oraciones iniciales');
+  else if(t.startsWith('✧')){const h=t.replace(/^✧\s*/,'');if(/^MISTERIOS |^[A-Z]+ MYSTERIES$/.test(h)){group=h.charAt(0)+h.slice(1).toLowerCase();label=group+(window.MO_LANG==='en'?' · start':' · inicio')}else label=/^[A-ZÁÉÍÓÚÑ ]+$/.test(h)?(h.charAt(0)+h.slice(1).toLowerCase()).replace('virgen','Virgen').replace('loreto','Loreto'):h}
+  else{const pre=t.split(' · ')[0];const m=/^(Salve|Letanías|Decena \d+ de|Al final|Oración final|Oración inicial|Hail, Holy Queen|Litany|Decade \d+ of|At the end|Closing prayer|Opening prayer)/.exec(pre);if(m&&!((m[1]==='Letanías'||m[1]==='Litany')&&out.some(o=>/^(Letan|Litany)/i.test(o.label)))&&!seen.has(group+pre.replace(/ (de|of) \d+$/,''))){seen.add(group+pre.replace(/ (de|of) \d+$/,''));label=pre.replace(/ · .*/,'')}}
   if(label&&!(out.length&&out[out.length-1].i===i-1&&/inicio$/.test(out[out.length-1].label)&&/misterio/i.test(label)&&false))out.push({i,label:cut(label),group})});
  return out}
-function where(p,i){const s=sections(p).filter(s=>s.i<=i).pop();const t=(p.parts[i]?.text||'').split(' · ');const sub=t.length>1?t.slice(0,-1).filter(x=>!/^Misterios /.test(x)&&!/misterio$/.test(x)).join(' · '):'';
+function where(p,i){const s=sections(p).filter(s=>s.i<=i).pop();const t=(p.parts[i]?.text||'').split(' · ');const sub=t.length>1?t.slice(0,-1).filter(x=>!/^(Misterios |\w+ mysteries$)/i.test(x)&&!/(misterio|mystery)$/i.test(x)).join(' · '):'';
  return [s?.group&&!s.label.startsWith(s.group)?s.group:'',s?.label,sub&&sub!==s?.label?sub:''].filter(Boolean).join(' · ')}
 function save(id,i){if(!isR(id))return;const p=find(id);if(!p)return;const set=(/^rosario-(\w+)/.exec(id)||[])[1]||id;localStorage[KEY]=JSON.stringify({id,set,index:i,label:where(p,i),ts:Date.now()})}
 function jump(id,i){const p=find(id);if(!p)return;if(current?.id!==id){origOpen(p);fillPanel(p)}save(id,i);startQueue([id],i);const el=$('part-'+i);if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}
@@ -30,13 +30,13 @@ const origUpdate=window.updatePlayer;window.updatePlayer=updatePlayer=function()
 document.addEventListener('mo-finished',e=>{const g=get();if(g&&(!e.detail?.id||g.id===e.detail.id))clear()});
 // Diálogo «Ibas por aquí»
 const dlg=document.createElement('dialog');dlg.id='resumeRosary';dlg.innerHTML='<h2>Ibas por aquí</h2><p id="rrWhere"></p><p class="hint" id="rrWhen"></p><p>¿Quieres continuar?</p><button id="rrGo">▶ Continuar</button><button id="rrNew" class="secondary">Empezar de nuevo</button><button id="rrLater" class="secondary">Ahora no</button>';document.body.append(dlg);
-function ask(g){const p=find(g.id);if(!p)return;$('rrWhere').textContent=p.title+' — '+(g.label||'paso '+(g.index+1));$('rrWhen').textContent='Guardado el '+new Date(g.ts).toLocaleString('es-ES',{dateStyle:'medium',timeStyle:'short'})+' · paso '+(g.index+1)+' de '+p.parts.length;
+function ask(g){const p=find(g.id);if(!p)return;$('rrWhere').textContent=p.title+' — '+((()=>{try{return where(p,g.index)}catch{return ''}})()||g.label||(window.MO_LANG==='en'?'step ':'paso ')+(g.index+1));$('rrWhen').textContent=(window.MO_LANG==='en'?'Saved on '+new Date(g.ts).toLocaleString('en-GB',{dateStyle:'medium',timeStyle:'short'})+' · step '+(g.index+1)+' of '+p.parts.length:'Guardado el '+new Date(g.ts).toLocaleString('es-ES',{dateStyle:'medium',timeStyle:'short'})+' · paso '+(g.index+1)+' de '+p.parts.length);
  $('rrGo').onclick=()=>{dlg.close();jump(g.id,g.index)};$('rrNew').onclick=()=>{dlg.close();clear();if(current?.id!==g.id){origOpen(p);fillPanel(p)}window.scrollTo(0,0)};$('rrLater').onclick=()=>dlg.close();if(!dlg.open)dlg.showModal()}
 // Selector «Empezar desde»
 const panel=document.createElement('div');panel.id='startPanel';panel.className='startPanel';panel.innerHTML='<label for="startFrom">Empezar desde</label><div class="startRow"><select id="startFrom"></select><button id="startGo">▶ Empezar aquí</button></div><small>También puedes tocar cualquier bloque del texto para escuchar desde ahí.</small>';
 document.querySelector('#reader .membership').after(panel);
 function fillPanel(p){const r=isR(p.id);panel.hidden=!r;$('jumpBtn').hidden=!r;if(!r)return;const sel=$('startFrom');sel.replaceChildren();let og=null,last='#';
- for(const s of sections(p)){if(s.group!==last){last=s.group;og=s.group?document.createElement('optgroup'):null;if(og){og.label=s.group;sel.append(og)}}const o=document.createElement('option');o.value=s.i;o.textContent=s.group&&s.label.startsWith(s.group)?'Inicio de '+s.group.toLowerCase():s.label;(og||sel).append(o)}
+ for(const s of sections(p)){if(s.group!==last){last=s.group;og=s.group?document.createElement('optgroup'):null;if(og){og.label=s.group;sel.append(og)}}const o=document.createElement('option');o.value=s.i;o.textContent=s.group&&s.label.startsWith(s.group)?(window.MO_LANG==='en'?'Start of ':'Inicio de ')+s.group.toLowerCase():s.label;(og||sel).append(o)}
  $('startGo').onclick=()=>jump(p.id,Number(sel.value))}
 const jb=document.createElement('button');jb.id='jumpBtn';jb.textContent='⇢ Ir a…';jb.setAttribute('aria-label','Elegir misterio o parte del rosario');jb.onclick=()=>{panel.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>$('startFrom').focus(),300)};$('repeat').after(jb);
 // Bloques pulsables (todas las oraciones)

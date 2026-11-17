@@ -1,0 +1,101 @@
+// Mis oraciones v7: textos de la interfaz en inglés (solo se carga con el idioma EN).
+window.MO_I18N={
+// Inicio
+"Mis oraciones":"My Prayers","✝ MIS ORACIONES":"✝ MY PRAYERS","UN MOMENTO PARA TI Y PARA DIOS":"A MOMENT FOR YOU AND FOR GOD","Un momento para ti y para Dios":"A moment for you and for God",
+"Encuentra tu paz.":"Find your peace.","Una oración a la vez.":"One prayer at a time.","Lee, escucha y reza a tu ritmo.":"Read, listen and pray at your own pace.",
+"PARA EMPEZAR":"TO BEGIN","Oración a Dios":"Prayer to God","«Dios mío, creo, adoro,":"“My God, I believe, I adore,","espero y te amo».":"I hope and I love Thee.”",
+"▶ Escuchar oración":"▶ Listen to prayer","Escuchar oración":"Listen to prayer","▶ Retomar mi última oración":"▶ Resume my last prayer","Tu biblioteca":"Your library",
+"＋ Añadir oración":"＋ Add prayer","Añadir oración":"Add prayer","Todas":"All","♡ Favoritas":"♡ Favourites","☀ Día":"☀ Day","☾ Noche":"☾ Night","▶ Escuchar esta lista":"▶ Listen to this list",
+"Usa las flechas para elegir el orden. Puedes añadir oraciones a esta lista desde su pantalla de lectura.":"Use the arrows to set the order. You can add prayers to this list from their reading screen.",
+"Un espacio de recogimiento, siempre contigo.":"A place of recollection, always with you.","Buscar una oración…":"Search for a prayer…","Buscar una oración":"Search for a prayer",
+"Ajustes de lectura":"Reading settings","Abrir menú":"Open menu","Menú":"Menu","Buscar oraciones":"Search prayers","Modo oscuro":"Dark mode","Cambiar a modo oscuro":"Switch to dark mode","Cambiar a modo claro":"Switch to light mode","Descartar sugerencia":"Dismiss suggestion",
+"Empieza hoy tu racha de oración ✧":"Start your prayer streak today ✧","ORACIÓN DEL DÍA ·":"PRAYER OF THE DAY ·","Oración del día":"Prayer of the day","Evangelio del día":"Gospel of the day","Rosario del día":"Rosary of the day",
+"Hoy es viernes":"Today is Friday","Coronilla de la Divina Sangre de Cristo":"Chaplet of the Most Precious Blood of Christ","Coronilla de la Divina Misericordia":"Chaplet of Divine Mercy",
+"Consagración a la Santísima Virgen María":"Consecration to the Most Holy Virgin Mary","Magníficat":"Magnificat","Letanías de la Virgen":"Litany of Loreto","Ángelus":"The Angelus","Tiempo con el Altísimo":"Time with the Most High",
+"Inicio · Mi biblioteca":"Home · My library","Añadir a pantalla de inicio":"Add to Home screen","⬇ Instalar Mis oraciones en tu pantalla de inicio":"⬇ Install My Prayers on your home screen",
+"Divina Misericordia":"Divine Mercy","Misericordia":"Mercy","Sangre":"Precious Blood","Rosario completo":"Complete Rosary","Rosario":"Rosary","Coronilla":"Chaplet","Credo":"Creed","Gloria":"Glory Be","Salve":"Hail, Holy Queen","Letanías":"Litany","Evangelio":"Gospel","Mi oración":"My prayer","Oración":"Prayer","María":"Mary","San José":"Saint Joseph","Espíritu Santo":"Holy Spirit","Ángeles":"Angels",
+"▶ Escuchar":"▶ Listen","No hay oraciones con ese nombre.":"No prayers with that name.","Gozosos":"Joyful","Dolorosos":"Sorrowful","Gloriosos":"Glorious","Luminosos":"Luminous","Elegir misterios":"Choose mysteries",
+"☾ ¿Te recuerdo rezar por la noche?":"☾ Shall I remind you to pray at night?","Un aviso diario que abre tu lista «Mi noche».":"A daily reminder that opens your “My night” list.","Activar a las 22:00":"Turn on at 22:00","Ahora no":"Not now",
+// Lectura y reproductor
+"‹ Biblioteca":"‹ Library","‹ Inicio":"‹ Home","Guardar en favoritas":"Save to favourites","Quitar de favoritas":"Remove from favourites","TU MOMENTO DE ORACIÓN":"YOUR PRAYER TIME","☀ Mi día":"☀ My day","☾ Mi noche":"☾ My night","Mi día":"My day","Mi noche":"My night",
+"Editar texto":"Edit text","Reproductor":"Player","Volver al principio":"Back to the start","Reproducir":"Play","Pausar":"Pause","Continuar":"Continue","Terminar lectura":"Stop reading","Ⅱ Pausar":"Ⅱ Pause","↻ Repetir":"↻ Repeat","⇢ Ir a…":"⇢ Go to…",
+"Elegir misterio o parte del rosario":"Choose a mystery or part of the rosary","Empezar desde":"Start from","▶ Empezar aquí":"▶ Start here","También puedes tocar cualquier bloque del texto para escuchar desde ahí.":"You can also tap any block of text to listen from there.",
+"Preparada para escuchar":"Ready to listen","Preparando la voz…":"Preparing the voice…","En pausa":"Paused","Un momento de silencio…":"A moment of silence…","Haz tu petición. Pulsa ▶ para continuar.":"Make your petition. Tap ▶ to continue.",
+"Haz tu petición en silencio. Pulsa continuar cuando quieras seguir.":"Make your petition in silence. Tap continue when you want to go on.",
+"🙏 Tus peticiones":"🙏 Your petitions","(ej.: Madre del Rosario, ruega por nosotros…)":"(e.g. Our Lady of the Rosary, pray for us…)","Tus peticiones…":"Your petitions…",
+"Ibas por aquí":"You were here","¿Quieres continuar?":"Would you like to continue?","▶ Continuar":"▶ Continue","Empezar de nuevo":"Start over","Opening prayers":"Opening prayers",
+"Seguir con las siguientes oraciones de la lista":"Continue with the next prayers in the list","⟳ Lista: sí":"⟳ List: on","⟳ Lista: no":"⟳ List: off",
+"Reproducción continua de la lista: activada":"Continuous list playback: on","Reproducción continua de la lista: desactivada":"Continuous list playback: off",
+"‹ Desliza para cambiar de oración ›":"‹ Swipe to change prayer ›","Has llegado a la última oración de la lista":"You have reached the last prayer in the list","Esta es la primera oración de la lista":"This is the first prayer in the list",
+"Tu navegador no permite leer en voz alta.":"Your browser cannot read aloud.","Tu navegador no permite la lectura en voz alta; puedes leer las oraciones.":"Your browser cannot read aloud; you can still read the prayers.",
+"No se ha podido cargar la grabación. Comprueba la conexión.":"Could not load the recording. Check your connection.","Pulsa ▶ para iniciar la grabación.":"Tap ▶ to start the recording.","No se ha podido iniciar la grabación.":"Could not start the recording.",
+"Marca el corazón de una oración para guardarla aquí.":"Tap the heart on a prayer to keep it here.",
+// Ajustes
+"Velocidad":"Speed","Muy tranquila":"Very calm","Tranquila":"Calm","Normal":"Normal","Ágil":"Brisk","A tu ritmo":"At your pace","Aspecto":"Appearance","Claro":"Light","Oscuro":"Dark","Tamaño de letra":"Text size","Grande":"Large","Muy grande":"Very large",
+"Automático (como el sistema)":"Automatic (like the system)","Automático (oscuro de 21:00 a 07:00)":"Automatic (dark from 21:00 to 07:00)","Modo claro ☀":"Light mode ☀","Modo oscuro ☾ (cámbialo a «Automático» en Ajustes)":"Dark mode ☾ (set it to “Automatic” in Settings)",
+"Pausa entre oraciones":"Pause between prayers","Sin pausa":"No pause","Temporizador":"Sleep timer","Sin temporizador":"No timer","Al acabar esta oración":"When this prayer ends",
+"La pausa y el temporizador se aplican al iniciar una lectura nueva. El temporizador cuenta también mientras la lectura está en pausa.":"The pause and the timer apply when a new reading starts. The timer keeps counting while reading is paused.",
+"Para escuchar sin conexión, descarga una voz en español en Android. Al pausar, continuarás desde el inicio del pasaje actual.":"To listen offline, download an English voice on Android. When you pause, you will continue from the start of the current passage.",
+"La lectura usa la voz en español de tu móvil o navegador. En iPhone puedes elegir y descargar voces en Ajustes › Accesibilidad › Contenido leído › Voces › Español.":"Reading uses your phone’s or browser’s English voice. On iPhone you can choose and download voices in Settings › Accessibility › Spoken Content › Voices › English.",
+"Abrir ajustes de voz":"Open voice settings","Volver":"Back","Idioma":"Language",
+// Añadir / editar
+"Título":"Title","Texto":"Text","Guardar también en":"Also save to","Solo biblioteca":"Library only","Completar oraciones abreviadas":"Complete abbreviated prayers","Guardar oración":"Save prayer","Cancelar":"Cancel","✕ Cancelar":"✕ Cancel","Guardar":"Save",
+"«Rezar un Ave María», «rezar tres Padrenuestros» y «rezar un Gloria» se pueden completar con el botón de abajo. Revisa siempre el resultado antes de guardar.":"Spanish shortcuts such as «Rezar un Ave María» can be expanded with the button below. Always check the result before saving.",
+"Pega aquí tu oración. Escribe [PETICIÓN] donde quieras hacer una pausa personal.":"Paste your prayer here. Write [PETICIÓN] wherever you want a personal pause.","Mi oración de la noche":"My night prayer",
+"Editar oración":"Edit prayer","Escribe el título y el texto de la oración.":"Write the title and the text of the prayer.","Añade al menos un pasaje para leer.":"Add at least one passage to read.","Texto completado. Revísalo antes de guardar.":"Text completed. Check it before saving.",
+"Quedan indicaciones de rezo o repetición. Completa el texto o sustitúyelas por [PETICIÓN] si necesitas una pausa.":"There are still prayer or repetition instructions. Complete the text or replace them with [PETICIÓN] if you need a pause.",
+"Subir":"Move up","Bajar":"Move down","Quitar de la lista":"Remove from list",
+// Buscar
+"BUSCAR EN TODAS LAS ORACIONES":"SEARCH ALL PRAYERS","Buscar en todas las oraciones":"Search all prayers","Título o palabras del texto…":"Title or words from the text…","Buscar":"Search","Leer":"Read",
+// Tiempo con el Altísimo
+"TIEMPO CON EL ALTÍSIMO":"TIME WITH THE MOST HIGH","Habla con Dios.":"Speak with God.","Él te escucha.":"He is listening.",
+"«Cuando ores, entra en tu cuarto, cierra la puerta y ora a tu Padre, que está en lo secreto.» (Mt 6,6)":"“When you pray, go into your room, shut the door and pray to your Father who is in secret.” (Mt 6:6)",
+"Elige cuánto tiempo quieres dedicarle":"Choose how much time you want to give","Duración:":"Duration:","De 1 a 60 minutos":"From 1 to 60 minutes","▶ Comenzar":"▶ Begin","↺ Otra vez":"↺ Again","En oración… quédate en silencio con Él":"In prayer… stay in silence with Him",
+"Tiempo terminado. Que la paz de Dios te acompañe ✝":"Time is up. May the peace of God be with you ✝","Tu tiempo con el Altísimo ha terminado ✝":"Your time with the Most High is over ✝",
+"Al terminar verás «Tiempo terminado» en pantalla y, si la app sigue abierta, sonará una campana suave. Mantén la pantalla encendida o vuelve a la app para verlo.":"When it ends you will see “Time is up” on screen and, if the app is still open, a soft bell will ring. Keep the screen on or come back to the app to see it.",
+// Alarmas
+"Alarmas":"Alarms","Alarmas de oración":"Prayer alarms","Elige a qué hora quieres rezar y qué oración. Con la app abierta verás el aviso en pantalla. Para que te avise siempre (también en iPhone), pulsa":"Choose what time you want to pray and which prayer. With the app open you will see the reminder on screen. To always be reminded (iPhone too), tap",
+"📅 Añadir al calendario":"📅 Add to calendar",": se crea un evento diario con alarma que abre esta oración.":": a daily event with an alarm is created that opens this prayer.","＋ Añadir alarma":"＋ Add alarm","Permitir alarmas puntuales":"Allow exact alarms","Probar aviso":"Test reminder","Guardar alarmas":"Save alarms",
+"☀ Oración del día (cambia cada día)":"☀ Prayer of the day (changes daily)","Santo Rosario (misterios del día)":"Holy Rosary (mysteries of the day)","Santo Rosario completo":"Complete Holy Rosary","Tu oración":"Your prayer","Hora":"Time","Activa":"On","Eliminar alarma":"Delete alarm","Elegir hora":"Choose time",
+"Aún no tienes alarmas. Añade una, por ejemplo a las 8:00 o antes de dormir.":"You have no alarms yet. Add one, for example at 8:00 or before bed.","Alarmas guardadas ✓":"Alarms saved ✓","Alarmas eliminadas":"Alarms deleted",
+"Las notificaciones están desactivadas para la app: actívalas en Ajustes de Android.":"Notifications are off for the app: turn them on in Android Settings.","Sin permiso de «alarmas y recordatorios» el aviso puede retrasarse unos minutos.":"Without the “alarms & reminders” permission the reminder may be a few minutes late.",
+"Abre el archivo descargado y pulsa «Añadir» para guardar el evento diario en tu calendario.":"Open the downloaded file and tap “Add” to save the daily event in your calendar.","Abre el archivo descargado y pulsa «Añadir» para guardar el aviso diario en tu calendario.":"Open the downloaded file and tap “Add” to save the daily reminder in your calendar.",
+"Tu momento de oración":"Your prayer time","Es hora de rezar ✝":"Time to pray ✝",
+// Noche
+"Recordatorio de la noche":"Night reminder","Recordatorio diario de la oración de la noche. Al tocar el aviso se abrirá tu lista «☾ Mi noche».":"Daily reminder for your night prayer. Tapping it opens your “☾ My night” list.","Recordármelo cada día":"Remind me every day",
+"☾ Ver mi lista de la noche":"☾ See my night list","Te lo recordaré cada día a las 22:00 ☾":"I’ll remind you every day at 22:00 ☾","Recordatorio de la noche desactivado":"Night reminder turned off","Tu lista de la noche está vacía: abre una oración y marca «☾ Mi noche».":"Your night list is empty: open a prayer and tap “☾ My night”.",
+"☾ Oración de la noche":"☾ Night prayer","Es hora de tu oración de la noche":"Time for your night prayer","☾ Es hora de tu oración de la noche":"☾ Time for your night prayer","Oración de la noche · Mi noche":"Night prayer · My night",
+// Copia de seguridad
+"Copia de seguridad":"Backup","⇅ Copia de seguridad":"⇅ Backup","Guarda en un archivo tus oraciones añadidas, favoritas, listas «Mi día» y «Mi noche», alarmas y racha. Sirve para pasarlas entre la app de Android y la versión web.":"Save to a file your added prayers, favourites, “My day” and “My night” lists, alarms and streak. Use it to move them between the Android app and the web version.",
+"⇩ Exportar mis oraciones":"⇩ Export my prayers","Compartir copia…":"Share backup…","⇧ Importar desde archivo":"⇧ Import from file","…o pega aquí el contenido":"…or paste the content here","Texto de la copia":"Backup text","Importar texto pegado":"Import pasted text",
+"Elige dónde guardar el archivo…":"Choose where to save the file…","Elige el archivo de copia…":"Choose the backup file…","Copia guardada ✓":"Backup saved ✓","No se ha podido completar. Inténtalo de nuevo.":"Could not complete. Please try again.","Demasiadas oraciones (máximo 500).":"Too many prayers (maximum 500).",
+// Instalar
+"Instálala en tu móvil":"Install it on your phone","Pulsa el botón":"Tap the","Compartir":"Share","en la barra de Safari.":"button in the Safari toolbar.","Elige":"Choose","«Añadir a pantalla de inicio»":"“Add to Home Screen”","Pulsa":"Tap","Añadir":"Add",". Se abrirá como una app, también sin conexión.":". It will open like an app, even offline.",
+"menú":"menu","«Instalar aplicación»":"“Install app”","o «Añadir a pantalla de inicio».":"or “Add to Home screen”.","No necesitas cuenta. Tus oraciones, favoritas y ajustes se guardan solo en este dispositivo.":"No account needed. Your prayers, favourites and settings are stored only on this device.","Instalar ahora":"Install now","Entendido":"Got it",
+// Evangelio
+"No se ha podido cargar el Evangelio. Revisa tu conexión.":"Could not load the Gospel. Check your connection.","Sin conexión · toca para reintentar":"Offline · tap to retry"
+};
+const WD={domingo:'Sunday',lunes:'Monday',martes:'Tuesday','miércoles':'Wednesday',jueves:'Thursday',viernes:'Friday','sábado':'Saturday'};
+const MYS={Gozosos:'Joyful',Dolorosos:'Sorrowful',Gloriosos:'Glorious',Luminosos:'Luminous'};
+window.MO_I18N_RX=[
+[/^(\d+) oraciones$/,'$1 prayers'],[/^(\d+) oración$/,'$1 prayer'],[/^(\d+) minutos?$/,'$1 minutes'],[/^(\d+) segundos$/,'$1 seconds'],
+[/^≈ (\d+) min · Lectura y audio( · ♥)?$/,'≈ $1 min · Read & listen$2'],
+[/^≈ (\d+) minutos? · (.*)$/,(m,a,b)=>'≈ '+a+' min · '+b.replace(/Voz de tu teléfono/,'Your phone’s voice').replace(/Guiado paso a paso/,'Guided step by step').replace(/Fuente:/,'Source:')],
+[/^Escuchar ahora (.+)$/,'Listen now: $1'],
+[/^(Gozosos|Dolorosos|Gloriosos|Luminosos)( · hoy)?$/,(m,a,b)=>MYS[a]+(b?' · today':'')],
+[/^Hoy es (\w+)$/,(m,a)=>'Today is '+(WD[a]||a)],
+[/^día rezando( · .*)?$/,(m,b)=>'day praying'+(b||'').replace('hoy ya has rezado','you have prayed today').replace('reza hoy para seguir','pray today to keep it going')],
+[/^días seguidos rezando( · .*)?$/,(m,b)=>'days in a row praying'+(b||'').replace('hoy ya has rezado','you have prayed today').replace('reza hoy para seguir','pray today to keep it going')],
+[/^\(mejor racha: (\d+)\)$/,'(best streak: $1)'],
+[/^Escuchando · Pasaje (\d+) de (\d+)(?: · Oración (\d+) de (\d+))?$/,(m,a,b,c,d)=>'Listening · Passage '+a+' of '+b+(c?' · Prayer '+c+' of '+d:'')],
+[/^(\d+) de (\d+) · (.+)$/,'$1 of $2 · $3'],
+[/^(\d+) resultados?$/,(m,a)=>a+(a==='1'?' result':' results')],
+[/^Sin resultados para «(.*)»\. Prueba con otra palabra\.$/,'No results for “$1”. Try another word.'],
+[/^(\d+) oraciones\. Escribe para buscar en títulos y textos\.$/,'$1 prayers. Type to search titles and texts.'],
+[/^Te lo recordaré cada día a las (.+)$/,'I’ll remind you every day at $1'],
+[/^Tu lista está vacía\. Abre una oración y marca «Mi (día|noche)», o añade una nueva\.$/,(m,a)=>'Your list is empty. Open a prayer and tap “My '+(a==='día'?'day':'night')+'”, or add a new one.'],
+[/^⏰ Es hora de rezar · (.+)$/,'⏰ Time to pray · $1'],[/^Es hora de rezar · (.+)$/,'Time to pray · $1'],
+[/^Sin conexión · guardado del (.+)$/,'Offline · saved on $1'],
+[/^Inicio de (.+)$/,'Start of $1'],
+[/^Evangelio según (?:San|Santo) (\w+)(.*)$/,(m,a,b)=>'Gospel according to Saint '+({Lucas:'Luke',Mateo:'Matthew',Marcos:'Mark',Juan:'John'}[a]||a)+b],
+];

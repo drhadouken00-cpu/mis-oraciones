@@ -38,7 +38,7 @@ function runSearch(){
   b.onclick=()=>{window.visibleItems=lastResults.slice();$('searchView').hidden=true;openPrayer(r.p);window.visibleItems=lastResults.slice()};box.append(b)}
 }
 $('fullSearch').addEventListener('input',runSearch);
-const hints=document.querySelector('.searchHints');for(const w of ['Rosario','Sangre','Misericordia','María','San José','noche','Espíritu Santo']){const b=el('<button class="secondary"></button>');b.textContent=w;b.onclick=()=>{$('fullSearch').value=w;runSearch()};hints.append(b)}
+const hints=document.querySelector('.searchHints');for(const w of (window.MO_LANG==='en'?['Rosary','Blood','Mercy','Mary','Saint Joseph','night','Holy Spirit']:['Rosario','Sangre','Misericordia','María','San José','noche','Espíritu Santo'])){const b=el('<button class="secondary"></button>');b.textContent=w;b.onclick=()=>{$('fullSearch').value=w;runSearch()};hints.append(b)}
 function openSearch(){for(const id of ['home','reader','timerView'])if($(id))$(id).hidden=true;$('searchView').hidden=false;$('player').hidden=true;document.body.classList.remove('hasPlayer');window.scrollTo(0,0);runSearch();setTimeout(()=>$('fullSearch').focus(),60)}
 $('searchOpen').onclick=openSearch;$('searchBack').onclick=()=>goHome();
 drawerItem('⌕','Buscar',openSearch,drawerUl.firstChild);

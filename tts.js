@@ -4,7 +4,7 @@
 window.TTS=(()=>{
  const synth=window.speechSynthesis;let gen=0,q=[],qi=0,parts=[],pi=0,timerEnd=0,waitT=null,keepAlive=null,watch=null,lastActivity=0,lock=null,silent=null;
  const mobile=/Android|iPhone|iPad|Mobile/.test(navigator.userAgent);
- function voice(){const v=synth?synth.getVoices():[];return v.find(x=>/^es[-_]ES/i.test(x.lang)&&/m[oó]nica|paulina|google|helena|laura/i.test(x.name))||v.find(x=>/^es[-_]ES/i.test(x.lang))||v.find(x=>/^es/i.test(x.lang))}
+ function voice(){const v=synth?synth.getVoices():[];if(window.MO_LANG==='en')return v.find(x=>/^en[-_](US|GB)/i.test(x.lang)&&/samantha|daniel|google|karen|serena|aria|jenny|libby|sonia/i.test(x.name))||v.find(x=>/^en[-_](US|GB)/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang));return v.find(x=>/^es[-_]ES/i.test(x.lang)&&/m[oó]nica|paulina|google|helena|laura/i.test(x.name))||v.find(x=>/^es[-_]ES/i.test(x.lang))||v.find(x=>/^es/i.test(x.lang))}
  if(synth&&synth.onvoiceschanged!==undefined)synth.onvoiceschanged=()=>{};
  function set(o){state=Object.assign({},state,o);try{updatePlayer()}catch{}}
  function find(id){return prayers.find(p=>p.id===id)}
@@ -41,8 +41,8 @@ window.TTS=(()=>{
   if(!synth){set({error:'Tu navegador no permite leer en voz alta.',playing:false});return}
   bgOn();
   const sp=part.speech||part.text,list=chunks(sp),v=voice();let ci=0,pos=0;synth.cancel();
-  const next=()=>{if(my!==gen)return;lastActivity=Date.now();if(ci>=list.length){pi++;if(/^rosario-/.test(state.id||'')&&/^(?:[^·]*· )*Oh Jesús mío/.test(part.text)&&parts.slice(pi,pi+3).some(x=>/misterio/i.test(x.text.split(' · ')[0])||/^✧/.test(x.text))&&!parts.slice(pi,pi+2).some(x=>/^(Salve|✧ LETAN)/.test(x.text))){petitionWait(my);return}speakCurrent();return}
-   const txt=list[ci++],u=new SpeechSynthesisUtterance(txt);u.lang='es-ES';if(v)u.voice=v;u.rate=Math.max(.5,Math.min(1.6,rate));
+  const next=()=>{if(my!==gen)return;lastActivity=Date.now();if(ci>=list.length){pi++;if(/^rosario-/.test(state.id||'')&&/^(?:[^·]*· )*(?:Oh Jesús mío|O my Jesus)/.test(part.text)&&parts.slice(pi,pi+3).some(x=>/misterio|mystery/i.test(x.text.split(' · ')[0])||/^✧/.test(x.text))&&!parts.slice(pi,pi+2).some(x=>/^(Salve|✧ LETAN|Hail, Holy Queen|✧ LITANY)/.test(x.text))){petitionWait(my);return}speakCurrent();return}
+   const txt=list[ci++],u=new SpeechSynthesisUtterance(txt);u.lang=window.MO_LANG==='en'?((v&&v.lang)||'en-US'):'es-ES';if(v)u.voice=v;u.rate=Math.max(.5,Math.min(1.6,rate));
    let base=sp.indexOf(txt,pos);if(base<0)base=pos;pos=base+txt.length;let bseen=false,t0=0,fb=null;const ip=pi;
    // Palabra a palabra: eventos 'boundary' si la voz los da; si no, estimación por tiempo.
    u.onboundary=e=>{if(my!==gen||e.name==='sentence')return;bseen=true;clearTimeout(fb);try{Follow.halt(true);Follow.at(ip,sp,base+(e.charIndex|0))}catch{}};
