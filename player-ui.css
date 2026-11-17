@@ -1,0 +1,42 @@
+/* Mis oraciones v9: reproductor compacto (barra fina), desplegable y ocultable */
+#player.pui{padding:0 10px max(4px,env(safe-area-inset-bottom));border-radius:16px 16px 0 0;transition:none}
+#player.pui .progress{margin:0 -10px 0;height:3px}
+.puiBar{display:flex;align-items:center;gap:2px;height:44px;margin:0}
+.puiBar button{flex:none;width:40px;height:40px;min-height:0;padding:0;margin:0;border:0;border-radius:50%;background:transparent;color:var(--ink);font:20px/1 system-ui,sans-serif;display:inline-flex;align-items:center;justify-content:center;box-shadow:none}
+.puiBar button:active{background:#243b3514}
+.puiBar .puiPlay{width:42px;height:42px;background:var(--green);color:#fff;font-size:19px}
+html[data-theme=dark] .puiBar .puiPlay{background:#a9884f;color:#1b1713}
+.puiBar .puiMode{font-size:16px;width:34px;color:var(--muted)}
+.puiBar .puiExp,.puiBar .puiHide{font-size:15px;width:34px;color:var(--muted)}
+.puiInfo{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;line-height:1.15;padding:0 4px;cursor:pointer}
+.puiInfo b{font:700 12px/1.2 system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.puiInfo span{font:11px/1.2 system-ui,sans-serif;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.puiInfo .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#9a9a8c;margin-right:4px;vertical-align:1px}
+.puiInfo[data-s=play] .dot{background:#2f8f5b}.puiInfo[data-s=pet] .dot{background:#b18743}.puiInfo[data-s=pause] .dot{background:#d29b2a}
+.puiMore{padding:2px 8px 8px;border-top:1px solid var(--line);max-height:62vh;overflow:auto}
+#player.pui:not(.puiOpen) .puiMore{display:none}
+#player.puiOpen .puiBar .puiExp{transform:rotate(180deg)}
+/* Oculto: solo una pastilla pequeña abajo a la derecha */
+.puiPill{display:none}
+#player.puiHidden{left:auto;right:12px;bottom:max(12px,env(safe-area-inset-bottom));width:auto;padding:0;border-radius:999px;border:1px solid var(--line);box-shadow:0 4px 14px #243b3526;background:#fffdf6}
+#player.puiHidden>*:not(.puiPill){display:none!important}
+#player.puiHidden .puiPill{display:inline-flex;align-items:center;gap:6px;height:40px;min-height:0;padding:0 14px;margin:0;border:0;border-radius:999px;background:transparent;color:var(--ink);font:600 15px/1 system-ui,sans-serif}
+.puiPill .dot{width:8px;height:8px;border-radius:50%;background:#9a9a8c}
+.puiPill[data-s=play] .dot{background:#2f8f5b;animation:v8pulse 1.6s infinite}.puiPill[data-s=pause] .dot{background:#d29b2a}.puiPill[data-s=pet] .dot{background:#b18743}
+/* Espacio del texto: igual a la altura real del reproductor (lo calcula player-ui.js) */
+body.hasPlayer main{padding-bottom:calc(var(--puiH,56px) + 24px)}
+body.hasPlayer #toast{bottom:calc(var(--puiH,56px) + 14px)}
+@media (prefers-reduced-motion:no-preference){#player.pui.puiOpen .puiMore{animation:puiUp .18s ease-out}}
+@keyframes puiUp{from{transform:translateY(16px);opacity:.3}to{transform:none;opacity:1}}
+.puiMore .v8State,.puiMore #playerTitle{display:none}
+.puiMore .playerLabel{margin-top:6px}
+.puiBar .puiPlay svg{width:20px;height:20px}
+.puiMore .controls #prevPrayer,.puiMore .controls #toggle,.puiMore .controls #nextPrayer{display:none!important}
+.puiMore .controls{margin:6px 0 2px}
+.puiMore .controls #stop{width:auto;height:36px;flex-direction:row;gap:6px;padding:0 16px;border-radius:18px;font-size:14px}
+.puiMore .controls #stop .sym{font-size:14px}.puiMore .controls #stop small{font-size:12.5px}
+html[data-theme=dark] #player.puiHidden{background:#211c17;border-color:#3b332a}
+html[data-theme=dark] .puiBar button:active{background:#ffffff14}
+html[data-theme=dark] #player .puiBar button,html[data-theme=dark] #player .puiPill{background:transparent;color:var(--ink);border:0}
+html[data-theme=dark] #player .puiBar .puiPlay{background:#a9884f;color:#1b1713}
+html[data-theme=dark] #player .puiBar .puiMode,html[data-theme=dark] #player .puiBar .puiExp,html[data-theme=dark] #player .puiBar .puiHide{color:#b9ad97}
