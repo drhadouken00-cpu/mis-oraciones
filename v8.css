@@ -1,0 +1,55 @@
+/* Mis oraciones v8: controles claros, modo de lista, intenciones, registro, música */
+#player .controls{gap:10px;margin:8px 0 6px;flex-wrap:nowrap}
+#player .controls .ctl{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:64px;height:58px;padding:0;border-radius:14px;font-size:22px;line-height:1}
+#player .controls .ctl small{font:600 10.5px/1.1 system-ui,sans-serif;letter-spacing:.02em;opacity:.9}
+#player .controls .ctl .sym{font-size:22px}
+#player .controls .play{width:82px;height:72px;border-radius:22px;background:var(--green);color:#fff}
+#player .controls .play .sym{font-size:28px}
+html[data-theme=dark] #player .controls .play{background:#a9884f;color:#1b1713}
+.v8State{display:flex;align-items:center;justify-content:center;gap:6px;font:600 12.5px/1.2 system-ui,sans-serif;margin:8px 0 2px;color:var(--ink)}
+.v8State .dot{width:9px;height:9px;border-radius:50%;background:#9a9a8c}
+.v8State[data-s=play] .dot{background:#2f8f5b;box-shadow:0 0 0 3px #2f8f5b33;animation:v8pulse 1.6s infinite}
+.v8State[data-s=pet] .dot{background:#b18743}
+.v8State[data-s=pause] .dot{background:#d29b2a}
+@keyframes v8pulse{50%{box-shadow:0 0 0 6px #2f8f5b11}}
+.chipRow{display:flex;justify-content:center;margin:4px 0 0}
+.modeChip{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);font:13px/1.2 system-ui,sans-serif;min-height:34px}
+.modeChip .ic{font-size:15px}.modeChip .nm{font-weight:700;white-space:nowrap}
+.modeChip .sub{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:170px}
+.modeChip .chev{opacity:.6}
+.modeMenu{display:flex;flex-direction:column;gap:4px;margin:6px auto 0;max-width:300px;padding:6px;border:1px solid var(--line);border-radius:14px;background:var(--bg,#f8f5ed)}
+.modeMenu button{text-align:left;padding:10px 12px;border-radius:10px;background:transparent;color:var(--ink);font-size:14px}
+.modeMenu button[aria-checked=true]{background:var(--green);color:#fff;font-weight:700}
+html[data-theme=dark] .modeMenu button[aria-checked=true]{background:#a9884f;color:#1b1713}
+#player .options{flex-wrap:wrap;gap:8px;justify-content:center}
+.v8Rate{display:flex;align-items:center;gap:8px;font-size:12px}
+.v8Rate span{white-space:nowrap}.v8Rate input{width:110px;accent-color:var(--green)}
+#v8Settings .v8Rate input{width:100%;flex:1}
+.musicBtn,.restartBtn{font-size:12px;padding:7px 10px;border-radius:16px;min-height:32px}
+.musicBtn[aria-pressed=true]{background:var(--gold,#b18743);color:#171c17}
+.petIntents{font-size:13px;margin:4px 0 6px;line-height:1.35}
+.petIntents b{font-weight:700}
+.mysteryToday{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;margin:-8px 0 12px;color:var(--muted)}
+.mysteryToday button{font-size:12px;padding:6px 10px;min-height:32px}
+.swipeHint,#continuous{display:none!important}
+#v8Settings{border-top:1px solid var(--line);margin-top:14px;padding-top:6px}
+.v8sec{padding:10px 0;border-bottom:1px solid var(--line)}
+.v8sec h3{font-size:15px;margin:4px 0 8px}
+.v8sec .hint{font-size:12.5px;color:var(--muted);margin:4px 0 8px}
+.v8Row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.v8Row input{flex:1;min-width:150px;padding:9px 10px;border-radius:10px;border:1px solid var(--line);font-size:15px;background:transparent;color:var(--ink)}
+.v8IntentList{list-style:none;padding:0;margin:0 0 8px}
+.v8IntentList li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px dashed var(--line)}
+.v8IntentList li.empty{color:var(--muted);font-size:13px;border:0}
+.v8IntentList .icon{font-size:15px;min-width:36px}
+.v8credits p{font-size:12px;line-height:1.45;color:var(--muted);overflow-wrap:anywhere}
+.logDialog .logNav{display:flex;align-items:center;justify-content:space-between;margin:6px 0}
+.logDialog .logNav strong{text-transform:capitalize}
+.logGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.logGrid .wd{font-size:11px;color:var(--muted);font-weight:700}
+.logGrid .day{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:40px;border-radius:10px;font-size:13px}
+.logGrid .day.prayed{background:#2f8f5b22}
+.logGrid .day.today{outline:2px solid var(--gold,#b18743)}
+.logGrid .day small{font-size:10px;color:#2f8f5b;line-height:1}
+.logSum{font-weight:700;font-size:14px;margin:10px 0 2px}
+.v8IntentList li span{flex:1;font-size:15px}.v8IntentList li .icon{flex:none;width:36px;height:36px;padding:0;margin:0}

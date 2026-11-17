@@ -66,7 +66,7 @@ window.MO_I18N={
 "☾ Ver mi lista de la noche":"☾ See my night list","Te lo recordaré cada día a las 22:00 ☾":"I’ll remind you every day at 22:00 ☾","Recordatorio de la noche desactivado":"Night reminder turned off","Tu lista de la noche está vacía: abre una oración y marca «☾ Mi noche».":"Your night list is empty: open a prayer and tap “☾ My night”.",
 "☾ Oración de la noche":"☾ Night prayer","Es hora de tu oración de la noche":"Time for your night prayer","☾ Es hora de tu oración de la noche":"☾ Time for your night prayer","Oración de la noche · Mi noche":"Night prayer · My night",
 // Copia de seguridad
-"Copia de seguridad":"Backup","⇅ Copia de seguridad":"⇅ Backup","Guarda en un archivo tus oraciones añadidas, favoritas, listas «Mi día» y «Mi noche», alarmas y racha. Sirve para pasarlas entre la app de Android y la versión web.":"Save to a file your added prayers, favourites, “My day” and “My night” lists, alarms and streak. Use it to move them between the Android app and the web version.",
+"Copia de seguridad":"Backup","No reconozco este archivo. Usa una copia exportada desde Mis oraciones o el archivo prayers.xml.":"I don’t recognise this file. Use a backup exported from My Prayers or the prayers.xml file.","No se han podido guardar las oraciones importadas.":"The imported prayers could not be saved.","⇅ Copia de seguridad":"⇅ Backup","Guarda en un archivo tus oraciones añadidas, favoritas, listas «Mi día» y «Mi noche», alarmas y racha. Sirve para pasarlas entre la app de Android y la versión web.":"Save to a file your added prayers, favourites, “My day” and “My night” lists, alarms and streak. Use it to move them between the Android app and the web version.",
 "⇩ Exportar mis oraciones":"⇩ Export my prayers","Compartir copia…":"Share backup…","⇧ Importar desde archivo":"⇧ Import from file","…o pega aquí el contenido":"…or paste the content here","Texto de la copia":"Backup text","Importar texto pegado":"Import pasted text",
 "Elige dónde guardar el archivo…":"Choose where to save the file…","Elige el archivo de copia…":"Choose the backup file…","Copia guardada ✓":"Backup saved ✓","No se ha podido completar. Inténtalo de nuevo.":"Could not complete. Please try again.","Demasiadas oraciones (máximo 500).":"Too many prayers (maximum 500).",
 // Instalar
@@ -97,5 +97,6 @@ window.MO_I18N_RX=[
 [/^⏰ Es hora de rezar · (.+)$/,'⏰ Time to pray · $1'],[/^Es hora de rezar · (.+)$/,'Time to pray · $1'],
 [/^Sin conexión · guardado del (.+)$/,'Offline · saved on $1'],
 [/^Inicio de (.+)$/,'Start of $1'],
+[/^Importado \((.+?)\): (\d+) oraciones nuevas(.*)$/,(m,k,n,r)=>'Imported ('+({'copia de seguridad':'backup','lista de oraciones':'prayer list','biblioteca':'library'}[k]||k)+'): '+n+' new prayers'+r.replace(' ya estaban',' already there').replace(' favoritas',' favourites').replace(' en tus listas',' in your lists').replace(' alarmas',' alarms').replace(' datos y ajustes',' data & settings')],
 [/^Evangelio según (?:San|Santo) (\w+)(.*)$/,(m,a,b)=>'Gospel according to Saint '+({Lucas:'Luke',Mateo:'Matthew',Marcos:'Mark',Juan:'John'}[a]||a)+b],
 ];

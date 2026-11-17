@@ -55,7 +55,10 @@ window.TTS=(()=>{
  // Chrome de escritorio corta lecturas largas: pausa/reanuda periódica. Vigilante: si la voz se queda muda, retoma el pasaje.
  // Pausa de 8 s para peticiones personales tras «Oh Jesús mío» (el audio silencioso sigue sonando).
  const PETITION_SECONDS=8;
- function petitionWait(my){const end=Date.now()+PETITION_SECONDS*1000;lastActivity=Date.now();set({waiting:true,petWait:PETITION_SECONDS});
+ function petitionWait(my){const it=(window.MO&&MO.intentionsSpeech&&MO.intentionsSpeech())||'';
+  if(it&&synth){set({waiting:true,petWait:PETITION_SECONDS});lastActivity=Date.now();const u=new SpeechSynthesisUtterance(it),v=voice();u.lang=window.MO_LANG==='en'?((v&&v.lang)||'en-US'):'es-ES';if(v)u.voice=v;u.rate=Math.max(.5,Math.min(1.6,rate));let done=false;const go=()=>{if(done||my!==gen)return;done=true;petitionCount(my)};u.onend=go;u.onerror=go;waitT=setTimeout(go,Math.max(6000,it.length*120));synth.speak(u);return}
+  petitionCount(my)}
+ function petitionCount(my){const end=Date.now()+PETITION_SECONDS*1000;lastActivity=Date.now();set({waiting:true,petWait:PETITION_SECONDS});
   const tick=()=>{if(my!==gen)return;lastActivity=Date.now();const left=Math.ceil((end-Date.now())/1000);if(left<=0){set({waiting:false,petWait:0});speakCurrent();return}set({petWait:left});waitT=setTimeout(tick,Math.min(1000,end-Date.now()))};waitT=setTimeout(tick,1000)}
  function startKeep(){
   if(!keepAlive&&!mobile&&/Chrome/.test(navigator.userAgent))keepAlive=setInterval(()=>{if(synth.speaking&&!synth.paused){synth.pause();synth.resume()}},10000);

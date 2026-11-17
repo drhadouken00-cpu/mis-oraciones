@@ -1,6 +1,15 @@
-const CACHE='mis-oraciones-v7';
-const ASSETS=['./','index.html','style.css','v2.css','features.css','v3.css','pwa.css','library.js','prayer-text.js','tts.js','app-v2.js','features.js','v3.js','pwa.js','backup.js','v31b.js','v31b.css','rosary.js','rosary.css','follow.js','follow.css','continuous.js','prayer-audio.js','i18n.js','i18n.css','i18n-en.js','library-en.js','manifest.json','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png'];
+const CACHE='mis-oraciones-v8';
+const ASSETS=['./','index.html','style.css','v2.css','features.css','v3.css','pwa.css','library.js','prayer-text.js','tts.js','app-v2.js','features.js','v3.js','pwa.js','backup.js','v31b.js','v31b.css','rosary.js','rosary.css','follow.js','follow.css','continuous.js','prayer-audio.js','i18n.js','i18n.css','i18n-en.js','library-en.js','v8.js','v8.css','manifest.json','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
-self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==location.origin)return; // Evangelio: red (se guarda por día en la app)
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE&&x!=='mis-oraciones-music').map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
+self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==location.origin)return;
+ // Música: no se precachea; se guarda entera la primera vez que suena (sin respuestas parciales 206).
+ if(u.pathname.includes('/music/')){e.respondWith(music(e.request,u));return} // Evangelio: red (se guarda por día en la app)
  e.respondWith(caches.match(e.request,{ignoreSearch:true}).then(hit=>{const net=fetch(e.request).then(r=>{if(r.ok){const cp=r.clone();caches.open(CACHE).then(c=>c.put(e.request,cp))}return r}).catch(()=>hit||caches.match('index.html'));return hit||net}))});
+
+// Música de fondo: se guarda entera la primera vez y se sirve con rangos (206) para Safari/iPhone.
+async function music(req,u){const c=await caches.open('mis-oraciones-music');let r=await c.match(u.pathname);
+ if(!r){r=await fetch(u.pathname);if(r.status!==200)return r;await c.put(u.pathname,r.clone())}
+ const range=req.headers.get('range');if(!range)return r;const buf=await r.arrayBuffer(),n=buf.byteLength,m=/bytes=(\d*)-(\d*)/.exec(range)||[];
+ const s=Number(m[1]||0),e=Math.min(m[2]?Number(m[2]):n-1,n-1);
+ return new Response(buf.slice(s,e+1),{status:206,headers:{'Content-Type':'audio/mpeg','Content-Range':'bytes '+s+'-'+e+'/'+n,'Content-Length':String(e-s+1),'Accept-Ranges':'bytes'}})}

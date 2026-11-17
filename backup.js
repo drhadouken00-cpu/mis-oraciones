@@ -7,7 +7,16 @@ const el=h=>{const t=document.createElement('template');t.innerHTML=h.trim();ret
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 function alarmsNow(){try{if(window.AndroidAlarms){const a=JSON.parse(AndroidAlarms.get());if(Array.isArray(a)&&a.length)return a}}catch{}return stored('alarms',[])}
 function build(){return {app:'mis-oraciones',format:1,exported:new Date().toISOString(),
- prayers:custom.filter(p=>p.id!==GID),favorites,lists,alarms:alarmsNow(),streak:stored('streak',null)}}
+ prayers:custom.filter(p=>p.id!==GID),favorites,lists,alarms:alarmsNow(),streak:stored('streak',null),extra:extraOut()}}
+// v8: el resto de tus datos y ajustes (sin renombrar ninguna clave).
+const EXTRA=['intentions','intentionsSpeak','prayerLog','playMode','continuousPlayback','bgMusic','rosaryProgress','playlistSession','nightReminder','altisimo','rate','repeat','gap','theme','fontSize','moLang'];
+function extraOut(){const o={};for(const k of EXTRA){const v=localStorage.getItem(k);if(v!==null)o[k]=v}return o}
+function extraIn(x){if(!x||typeof x!=='object')return 0;let n=0;const J=v=>{try{return JSON.parse(v)}catch{return null}};
+ for(const k of EXTRA){const v=x[k];if(typeof v!=='string')continue;const cur=localStorage.getItem(k);
+  if(k==='intentions'){const a=J(cur)||[],b=J(v)||[];if(Array.isArray(b)){const m=[...a];for(const i of b)if(typeof i==='string'&&!m.includes(i))m.push(i);if(m.length!==a.length){localStorage.setItem(k,JSON.stringify(m.slice(0,30)));n++}}continue}
+  if(k==='prayerLog'){const a=J(cur)||{d:{}},b=J(v)||{};if(!a.d)a.d={};let ch=false;for(const [d,e] of Object.entries(b.d||{})){const o=a.d[d];if(!o||(e.p||0)>(o.p||0)){a.d[d]={p:Math.max(e.p||0,o?.p||0),r:Math.max(e.r||0,o?.r||0)};ch=true}}if(ch){localStorage.setItem(k,JSON.stringify(a));n++}continue}
+  if(cur===null){localStorage.setItem(k,v);n++}}
+ return n}
 document.body.append(el(`<dialog id="backupDialog"><h2>Copia de seguridad</h2>
 <p class="hint">Guarda en un archivo tus oraciones añadidas, favoritas, listas «Mi día» y «Mi noche», alarmas y racha. Sirve para pasarlas entre la app de Android y la versión web.</p>
 <button type="button" id="exportBackup">⇩ &nbsp; Exportar mis oraciones</button>
@@ -49,7 +58,7 @@ function parse(text){
  const out={prayers:[],favorites:[],lists:{day:[],night:[]},alarms:[],streak:null,kind:''};
  const t=text.replace(/^\uFEFF/,'').trim();
  let j=null;try{j=JSON.parse(t)}catch{}
- if(j&&j.app==='mis-oraciones'){Object.assign(out,{prayers:j.prayers||[],favorites:j.favorites||[],lists:j.lists||out.lists,alarms:j.alarms||[],streak:j.streak||null,kind:'copia de seguridad'});return out}
+ if(j&&j.app==='mis-oraciones'){Object.assign(out,{prayers:j.prayers||[],favorites:j.favorites||[],lists:j.lists||out.lists,alarms:j.alarms||[],streak:j.streak||null,extra:j.extra||null,kind:'copia de seguridad'});return out}
  if(Array.isArray(j)){out.prayers=j;out.kind='lista de oraciones';return out}
  if(j&&j.library){out.prayers=typeof j.library==='string'?JSON.parse(j.library):j.library;out.kind='biblioteca';return out}
  const x=/<string name="library">([\s\S]*?)<\/string>/.exec(t);
@@ -85,8 +94,8 @@ function doImport(text){
  const cur=alarmsNow();let alAdded=0;for(const a of d.alarms||[])if(a&&/^\d\d:\d\d$/.test(a.time)&&!cur.some(c=>c.time===a.time&&c.id===map(a.id))&&cur.length<20){cur.push({time:a.time,id:map(a.id),title:a.title,on:a.on!==false});alAdded++}
  if(alAdded){localStorage.alarms=JSON.stringify(cur);if(window.AndroidAlarms)AndroidAlarms.set(JSON.stringify(cur))}
  if(d.streak&&d.streak.count){const s=stored('streak',{last:'',count:0});if((d.streak.last||'')>(s.last||''))localStorage.streak=JSON.stringify({...d.streak,best:Math.max(d.streak.best||0,s.best||0,s.count||0)});else{s.best=Math.max(s.best||0,d.streak.best||0,d.streak.count||0);localStorage.streak=JSON.stringify(s)}}
- renderList();needsReload=alAdded>0;
- status('Importado ('+d.kind+'): '+added+' oraciones nuevas'+(same?', '+same+' ya estaban':'')+', '+favAdded+' favoritas, '+listAdded+' en tus listas'+(alAdded?', '+alAdded+' alarmas':'')+'.');
+ const exN=extraIn(d.extra);renderList();needsReload=alAdded>0||exN>0;
+ status('Importado ('+d.kind+'): '+added+' oraciones nuevas'+(same?', '+same+' ya estaban':'')+', '+favAdded+' favoritas, '+listAdded+' en tus listas'+(alAdded?', '+alAdded+' alarmas':'')+(exN?', '+exN+' datos y ajustes':'')+'.');
 }
 window.MO.openBackup=open;window.MO.importText=doImport;
 // Botón también en Ajustes
