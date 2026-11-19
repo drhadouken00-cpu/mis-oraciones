@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Rosario animado · prototipo</title>
+<link rel="stylesheet" href="rosary-anim.css">
+<style>html,body{margin:0;height:100%;background:#000}#ra{position:fixed;inset:0}</style>
+</head><body>
+<div id="ra"></div>
+<nav class="demo-bar">
+  <button id="prev" aria-label="Anterior"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+  <button id="demo" aria-label="Demo"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg></button>
+  <button id="next" aria-label="Siguiente"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+  <select id="set" aria-label="Misterios"></select>
+  <button id="lang" aria-label="Idioma">EN</button>
+</nav>
+<script src="data/rosary-seq.js"></script>
+<script src="data/mysteries.js"></script>
+<script src="frescos/credits.js"></script>
+<script src="rosary-map.js"></script>
+<script src="rosary-anim.js"></script>
+<script>
+(function(){
+  const q=new URLSearchParams(location.search);let lang=q.get('lang')||'es';
+  const ids=['rosario-gozosos','rosario-luminosos','rosario-dolorosos','rosario-gloriosos','rosario-completo'];
+  const ra=RosaryAnim.mount(document.getElementById('ra'),{lang});
+  const sel=document.getElementById('set');
+  function fillSel(){const v=sel.value;sel.innerHTML='';ids.forEach((id,i)=>{const o=new Option(ROSARY_STR[lang].short[i],id);sel.add(o)});sel.value=v||id0}
+  const id0=q.get('set')?('rosario-'+q.get('set')):ids[0];
+  // preload frescos so crossfades are instant
+  MYSTERIES.forEach(m=>{const i=new Image();i.src=m.src});
+  function load(id,step){ra.load(id,ROSARY_SEQ[lang][id].steps);if(step)ra.setStep(step)}
+  fillSel();load(id0,+q.get('step')||0);
+  sel.onchange=()=>load(sel.value);
+  let timer=null;const demoB=document.getElementById('demo');
+  function demo(on){clearInterval(timer);timer=null;demoB.innerHTML=`<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">${on?'<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>':'<path d="M7 4v16l13-8z"/>'}</svg>`;demoB.classList.toggle('on',on);
+    if(on)timer=setInterval(()=>{if(ra.idx>=ra.steps.length-1)return demo(false);ra.next()},+(q.get('ms')||1500))}
+  demoB.onclick=()=>demo(!timer);
+  document.getElementById('prev').onclick=()=>ra.prev();
+  document.getElementById('next').onclick=()=>ra.next();
+  addEventListener('keydown',e=>{if(e.key==='ArrowRight')ra.next();if(e.key==='ArrowLeft')ra.prev();if(e.key===' '){e.preventDefault();demo(!timer)}});
+  const lb=document.getElementById('lang');lb.textContent=lang==='es'?'EN':'ES';
+  lb.onclick=()=>{const i=ra.idx,id=sel.value;lang=lang==='es'?'en':'es';document.documentElement.lang=lang;lb.textContent=lang==='es'?'EN':'ES';fillSel();sel.value=id;ra.lang=lang;load(id,i)};
+  if(q.get('demo')==='1')demo(true);
+  window.__ra=ra;
+})();
+</script>
+</body></html>
