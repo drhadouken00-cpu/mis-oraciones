@@ -1,0 +1,94 @@
+/* Mis oraciones · Coronilla de la Preciosísima Sangre (vista inmersiva). Clases con prefijo sa- */
+.sa{position:fixed;inset:0;padding-bottom:var(--puiH,0px);box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr);
+ grid-template-rows:auto auto minmax(0,1fr) auto auto;grid-template-areas:"top" "cap" "art" "text" "nav";
+ background:#0d0908;color:#f6efe0;overflow:hidden;font-family:Georgia,'Times New Roman',serif}
+.sa>*{position:relative;z-index:1}
+.sa .sa-bg,.sa .sa-shade,.sa .sa-light{position:absolute;z-index:0}
+.sa-bg{inset:-30px;transition:opacity .9s ease}
+.sa-bgimg{position:absolute;inset:0;background:center/cover no-repeat;filter:blur(16px) brightness(.45) saturate(1.1);opacity:0;transition:opacity 1.4s ease}
+.sa-bgimg.on{opacity:1}
+.sa-shade{inset:0;background:linear-gradient(180deg,rgba(14,4,4,.86) 0,rgba(14,4,4,.4) 25%,rgba(14,4,4,.25) 55%,rgba(14,4,4,.86) 100%);transition:opacity .9s ease}
+/* fondo claro del modo lectura: el cuadro grande, muy lavado */
+.sa-light{inset:0;background:#f7f1e6;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.sa-lightimg{position:absolute;inset:-12px;background:center/cover no-repeat;opacity:.2;filter:saturate(.45) brightness(1.12) blur(1.5px)}
+.sa-veil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(250,246,238,.72) 0,rgba(250,246,238,.38) 60%,rgba(250,246,238,.12) 100%)}
+.sa-top{grid-area:top;display:flex;align-items:center;gap:8px;padding:calc(6px + env(safe-area-inset-top)) 10px 0;min-height:40px}
+.sa-title{flex:1;min-width:0;font:600 13px system-ui,sans-serif;letter-spacing:.06em;color:#D4AF5A;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sa-tools{display:flex;gap:6px}
+.sa button{background:rgba(24,12,10,.65);color:#f6efe0;border:1px solid rgba(212,175,90,.55);border-radius:20px;min-height:38px;min-width:38px;padding:0 12px;font:15px system-ui,sans-serif;cursor:pointer}
+.sa-cap{grid-area:cap;padding:4px 16px 0;text-align:center;text-shadow:0 1px 3px #000,0 0 12px rgba(0,0,0,.8)}
+.sa-set{font:600 11px/1.2 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#D4AF5A}
+.sa-mys{font-size:18px;line-height:1.25;margin-top:4px}
+.sa-pray{font:13px/1.3 system-ui,sans-serif;color:#e8c9a0;margin-top:3px;min-height:1.3em}
+.sa-art{grid-area:art;position:relative;min-height:0}
+.sa-stage{position:absolute;inset:4px 4px 16px;display:flex}
+.sa-svg{width:100%;height:100%;overflow:visible}
+.sa-credit{position:absolute;right:10px;bottom:0;font:10px system-ui,sans-serif;color:#d9ccb0;opacity:.6;text-decoration:none;max-width:70%;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sa-text{grid-area:text;margin:4px 12px 0;padding:10px 14px;background:rgba(14,6,5,.64);border:1px solid rgba(212,175,90,.25);border-radius:14px;max-height:26vh;overflow:auto;font-size:17px;line-height:1.45;-webkit-overflow-scrolling:touch}
+.sa-text small,.sa-list small{display:block;font:600 11px/1.3 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#D4AF5A;margin-bottom:4px}
+.sa-nav{grid-area:nav;display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+.sa-pos{font:13px system-ui,sans-serif;color:#d9ccb0;min-width:70px;text-align:center}
+/* cuentas */
+.sa-fresco{opacity:0;transition:opacity 1.4s ease}.sa-fresco.on{opacity:1}
+.sa-chain{stroke:#cbb488;stroke-opacity:.45;stroke-width:1.3;stroke-dasharray:2.2 1.6;fill:none}
+.sa-bead{cursor:pointer;outline:none}
+.sa-bead .sa-fill{fill:url(#saDim);transition:fill .6s ease}
+.sa-drop .sa-fill{fill:url(#saRubyDim)}
+.sa-bead .sa-spec{fill:#fff;opacity:.18;pointer-events:none;transition:opacity .6s}
+.sa-bead .sa-halo{opacity:0;transition:opacity .6s ease;pointer-events:none;transform-box:fill-box;transform-origin:center}
+.sa-bead .sa-body{transition:transform .5s ease;transform-box:fill-box;transform-origin:center}
+.sa-bead.done .sa-fill{fill:url(#saDone)}
+.sa-drop.done .sa-fill{fill:url(#saRuby);opacity:.8}
+.sa-bead.done .sa-spec{opacity:.35}
+.sa-bead.cur .sa-fill{fill:url(#saGold)}
+.sa-drop.cur .sa-fill{fill:url(#saRuby)}
+.sa-bead.cur .sa-spec{opacity:.7}
+.sa-bead.cur .sa-halo{opacity:1;animation:saPulse 2.4s ease-in-out infinite}
+.sa-bead.cur .sa-body{transform:scale(1.25);filter:url(#saGlow)}
+.sa-bead:focus-visible .sa-fill{stroke:#fff;stroke-width:1.5}
+.sa-arc{fill:none;stroke:#D4AF5A;stroke-width:24;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .6s ease}
+.sa-arcg{pointer-events:none}
+.sa-arcg.cur .sa-arc{opacity:.32;animation:saArc 2.4s ease-in-out infinite}
+@keyframes saPulse{0%,100%{transform:scale(.85);opacity:.75}50%{transform:scale(1.15);opacity:1}}
+@keyframes saArc{0%,100%{opacity:.22}50%{opacity:.4}}
+/* modo lectura (después de la cuenta 33): sin cuentas, fondo claro y texto oscuro */
+.sa-read{grid-area:read;display:none;min-height:0}
+.sa-readart{display:none}
+.sa-list{position:relative;-webkit-mask-image:linear-gradient(transparent 0,#000 22px,#000 calc(100% - 22px),transparent 100%);mask-image:linear-gradient(transparent 0,#000 22px,#000 calc(100% - 22px),transparent 100%);height:100%;overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 18px 40vh;box-sizing:border-box;max-width:760px;margin:0 auto}
+.sa-list p,.sa-list h3{margin:0 0 10px;padding:10px 14px;border-radius:12px;border-left:4px solid transparent;color:#24170f;cursor:pointer;transition:background .4s,border-color .4s,box-shadow .4s}
+.sa-list p{font-size:19px;line-height:1.6}
+.sa-list h3{font:600 13px/1.35 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7a1a1f;margin-top:18px;padding-bottom:4px}
+.sa-list small{color:#7a5a1f}
+.sa-list .cur{background:rgba(255,253,248,.92);border-left-color:#9b1b22;box-shadow:0 2px 14px rgba(90,40,10,.14)}
+.sa-list p:focus-visible{outline:2px solid #9b1b22}
+.sa.sa-reading{grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"top" "cap" "read" "nav";color:#24170f}
+.sa-reading .sa-bg,.sa-reading .sa-shade{opacity:0}
+.sa-reading .sa-light{opacity:1}
+.sa-reading .sa-art,.sa-reading .sa-text{display:none}
+.sa-reading .sa-read{display:block;animation:saIn .9s ease}
+.sa-reading .sa-cap{text-shadow:none}
+.sa-reading .sa-set,.sa-reading .sa-title{color:#8a6a1e}
+.sa-reading .sa-pray{color:#6b5640}
+.sa-reading button{background:rgba(255,252,246,.85);color:#3a2616;border-color:rgba(138,106,30,.55)}
+.sa-reading .sa-pos{color:#6b5640}
+@keyframes saIn{from{opacity:0}to{opacity:1}}
+.sa-instant .sa-bgimg,.sa-instant .sa-fresco{transition-duration:.01s}
+@media (prefers-reduced-motion:reduce){
+ .sa *,.sa-bgimg,.sa-fresco,.sa-bg,.sa-shade,.sa-light{transition-duration:.01s!important;animation:none!important}
+ .sa-bead.cur .sa-halo{opacity:.9}.sa-arcg.cur .sa-arc{opacity:.32}
+}
+/* pantalla ancha: cuadro a la izquierda, texto a la derecha */
+@media (orientation:landscape) and (min-aspect-ratio:23/20){
+ .sa{grid-template-columns:minmax(0,1fr) minmax(300px,38%);grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"top top" "art cap" "art text" "art nav"}
+ .sa-cap{text-align:left;padding:10px 16px 4px}
+ .sa-mys{font-size:22px}
+ .sa-text{align-self:start;max-height:100%;margin:6px 16px 0 4px;font-size:19px}
+ .sa-nav{justify-content:flex-start;padding-left:16px}
+ .sa.sa-reading{grid-template-columns:minmax(0,.85fr) minmax(0,1.2fr);grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"top top" "pic cap" "pic read" "pic nav"}
+ .sa-reading .sa-read{display:contents}
+ .sa-reading .sa-readart{grid-area:pic;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0;padding:8px 8px 20px 28px;min-height:0;animation:saIn .9s ease}
+ .sa-reading .sa-list{grid-area:read;animation:saIn .9s ease;margin:0;max-width:820px;height:auto;min-height:0}
+ .sa-readart img{max-width:100%;max-height:calc(100% - 30px);min-height:0;object-fit:contain;border-radius:180px 180px 10px 10px;box-shadow:0 10px 40px rgba(80,40,10,.25);opacity:.9;filter:saturate(.85)}
+ .sa-readart figcaption{font:11px system-ui,sans-serif;color:#7d6a52;margin-top:8px;text-align:center}
+ .sa-reading .sa-cap{padding-left:18px}
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d0908">
+<title>Coronilla de la Sangre de Cristo · prueba</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="sangre-anim.css">
+<style>html,body{margin:0;height:100%;background:#0d0908}
+.sa .demo.on{background:#9b1b22;border-color:#e0a0a0}
+.sa .demo{font-size:13px}</style>
+</head><body>
+<div id="sa"></div>
+<script src="data/sangre-seq.js"></script>
+<script src="data/sangre.js"></script>
+<script src="frescos/credits.js"></script>
+<script src="sangre-map.js"></script>
+<script src="sangre-anim.js"></script>
+<script>
+(function(){
+  // Página de prueba: la cuenta se mueve solo con ‹ ›, tocando una cuenta o un párrafo, o con el botón «Demo» (sin voz).
+  const q=new URLSearchParams(location.search);let lang=q.get('lang')==='en'?'en':'es';
+  const sa=SangreAnim.mount(document.getElementById('sa'),{lang});
+  SANGRE_MYSTERIES.forEach(m=>{const i=new Image();i.src=m.src});
+  const tools=sa.el.tools;tools.innerHTML='<button type="button" class="demo"></button><button type="button" class="lang"></button>';
+  const demoB=tools.querySelector('.demo'),lb=tools.querySelector('.lang');
+  const L=()=>SANGRE_SEQ[lang];
+  function labels(){demoB.textContent=timer?(lang==='es'?'⏸ Demo':'⏸ Demo'):(lang==='es'?'▶ Demo (sin voz)':'▶ Demo (no voice)');
+    demoB.setAttribute('aria-label',lang==='es'?'Demostración automática, sin voz':'Automatic demo, no voice');lb.textContent=lang==='es'?'EN':'ES';document.documentElement.lang=lang}
+  let timer=null;
+  function demo(on){clearInterval(timer);timer=null;demoB.classList.toggle('on',on);
+    if(on)timer=setInterval(()=>{if(sa.idx>=sa.steps.length-1)return demo(false);sa.next()},+(q.get('ms')||1400));labels()}
+  demoB.onclick=()=>demo(!timer);
+  lb.onclick=()=>{lang=lang==='es'?'en':'es';sa.setLang(lang,L().parts,L().title);labels()};
+  sa.load(L().parts,L().title);labels();
+  if(q.get('step'))sa.setStep(+q.get('step'));
+  addEventListener('keydown',e=>{if(e.key==='ArrowRight')sa.next();if(e.key==='ArrowLeft')sa.prev()});
+  if(q.get('demo')==='1')demo(true);
+  window.__sa=sa;
+})();
+</script>
+</body></html>
