@@ -1,0 +1,11 @@
+/* v14 · aviso de copia de seguridad */
+.bkNudge{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;width:min(420px,calc(100vw - 24px));box-sizing:border-box;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.14);padding:14px 16px;animation:bkIn .3s ease-out}
+body.hasPlayer .bkNudge{bottom:calc(var(--puiH,56px) + 12px)}
+.bkNudge p{margin:0 0 10px;font-size:14px;line-height:1.4;display:flex;flex-direction:column;gap:2px}
+.bkNudge p strong{font-family:Georgia,serif;font-weight:400;font-size:17px}
+.bkNudge p span{color:var(--muted)}
+.bkRow{display:flex;gap:8px;flex-wrap:wrap}
+.bkRow button{margin:0;padding:9px 16px;font-size:14px;min-height:0;width:auto}
+.bkLast{margin:6px 0 0}
+@keyframes bkIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){.bkNudge{animation:none}}
