@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f8f5ed">
+<link rel="icon" href="../icons/icon-192.png">
+<title>La Biblia · prueba · Mis oraciones</title>
+<link rel="stylesheet" href="biblia.css">
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <a class="brand" href="../" id="brandLink">Mis oraciones</a>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <!-- Inicio -->
+  <main id="vHome" class="view">
+    <section class="intro">
+      <div class="eyebrow" data-t="eyebrow"></div>
+      <h1 data-t="title" data-html></h1>
+      <p class="lead" data-t="lead"></p>
+    </section>
+
+    <div class="homeGrid">
+      <section class="palabraCard" aria-labelledby="pcTitle">
+        <div class="pcGlow" aria-hidden="true"></div>
+        <div class="pcCross" aria-hidden="true">✠</div>
+        <h2 id="pcTitle" data-t="pTitle"></h2>
+        <p data-t="pLead"></p>
+        <button type="button" class="pcBtn" id="openPalabra"><span class="pcBook" aria-hidden="true">📖</span><span data-t="pBtn"></span></button>
+        <small data-t="pNote"></small>
+      </section>
+
+      <section class="bibleCol">
+        <button type="button" class="resume" id="resume" hidden>
+          <span class="rsLabel" data-t="resume"></span><strong id="resumeWhere"></strong><span class="rsArrow" aria-hidden="true">›</span>
+        </button>
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" data-test="AT" data-t="ot"></button>
+          <button type="button" role="tab" data-test="NT" data-t="nt"></button>
+        </div>
+        <div id="bookList"></div>
+      </section>
+    </div>
+    <footer class="credit" data-t="credit" data-html></footer>
+  </main>
+
+  <!-- Capítulos -->
+  <main id="vBook" class="view" hidden>
+    <button type="button" class="back" data-go="home">‹ <span data-t="books"></span></button>
+    <h1 id="bookTitle"></h1>
+    <p class="muted" id="bookSub"></p>
+    <div class="chapters" id="chapterGrid"></div>
+  </main>
+
+  <!-- Lector -->
+  <main id="vRead" class="view" hidden>
+    <div class="readBar">
+      <button type="button" class="back" id="readBack">‹ <span id="readBackLabel"></span></button>
+      <div class="sizer" role="group" aria-label="Tamaño de letra">
+        <button type="button" id="fontDown" aria-label="A−">A−</button><button type="button" id="fontUp" aria-label="A+">A+</button>
+      </div>
+    </div>
+    <h1 id="readTitle"></h1>
+    <p class="arg" id="readArg"></p>
+    <article id="readText" class="scripture" aria-live="polite"></article>
+    <nav class="chapNav">
+      <button type="button" class="secondary" id="prevCh"></button>
+      <button type="button" class="secondary" id="nextCh"></button>
+    </nav>
+    <p class="credit small" id="readCredit"></p>
+  </main>
+</div>
+
+<!-- Palabra de hoy -->
+<div id="palabra" hidden>
+  <div class="pBackdrop"></div>
+  <div class="pBook" aria-hidden="true"><div class="leaf l"></div><div class="leaf r"></div></div>
+  <section class="pSheet" role="dialog" aria-modal="true" aria-labelledby="pHead">
+    <button type="button" class="pClose" id="pClose" aria-label="Cerrar">×</button>
+    <div class="eyebrow" id="pEyebrow"></div>
+    <h2 id="pHead"></h2>
+    <div class="pRef"><span id="pTitle2"></span> · <b id="pRef"></b></div>
+    <div class="orn" aria-hidden="true"></div>
+    <article id="pText" class="scripture"></article>
+    <div class="pActions">
+      <button type="button" class="primary" id="pAgain"></button>
+      <button type="button" class="secondary" id="pChapter"></button>
+    </div>
+  </section>
+</div>
+<script src="biblia.js"></script>
+</body>
+</html>

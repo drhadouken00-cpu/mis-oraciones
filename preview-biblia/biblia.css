@@ -1,0 +1,125 @@
+@font-face{font-family:'Cormorant Garamond';src:url(../fonts/cormorant.woff2) format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url(../fonts/cormorant-italic.woff2) format('woff2');font-weight:300 700;font-style:italic;font-display:swap}
+:root{--bg:#f8f5ed;--ink:#2a3a33;--green:#254f45;--muted:#7a7564;--gold:#a8864b;--gold-l:#c9ad78;--gold-s:rgba(168,134,75,.38);--line:#e6dcc6;--paper:#fffcf4;
+ --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;--body:Georgia,'Times New Roman',serif;--fs:19px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+
+body{margin:0;color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent;background-color:var(--bg);background-image:
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .36 0 0 0 0 .2 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+ radial-gradient(120% 80% at 50% 0,rgba(255,252,240,.9),transparent 60%),radial-gradient(140% 120% at 50% 50%,transparent 62%,rgba(168,134,75,.10));background-attachment:fixed}
+button{font:inherit;color:inherit;cursor:pointer}
+[hidden]{display:none!important}
+#app{max-width:1120px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) 20px calc(40px + env(safe-area-inset-bottom))}
+.top{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid var(--line);position:relative}
+.top::after{content:"✠";position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);font-size:12px;line-height:16px;padding:0 8px;color:var(--gold);background:var(--bg)}
+.brand{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--green);text-decoration:none}
+.lang{display:flex;border:1px solid var(--gold-s);border-radius:999px;overflow:hidden;background:var(--paper)}
+.lang button{background:none;border:0;padding:6px 13px;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.05em}
+.lang button[aria-pressed=true]{background:var(--green);color:#fff}
+.eyebrow{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+h1,h2{font-family:var(--serif);font-weight:500;letter-spacing:.005em;margin:0}
+.intro h1{font-size:40px;line-height:1.08;margin:6px 0 8px}
+.intro h1 em{font-style:italic;color:var(--green)}
+.lead{margin:0;color:var(--muted);font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.35}
+.intro::after{content:"";display:block;height:14px;margin:10px 0 20px;background:
+ linear-gradient(90deg,transparent,var(--gold-s)) left center/calc(50% - 16px) 1px no-repeat,linear-gradient(90deg,var(--gold-s),transparent) right center/calc(50% - 16px) 1px no-repeat,
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 14'%3E%3Cpath d='M12 1l2.2 6L12 13 9.8 7z' fill='%23a8864b'/%3E%3Ccircle cx='4' cy='7' r='1.3' fill='%23a8864b'/%3E%3Ccircle cx='20' cy='7' r='1.3' fill='%23a8864b'/%3E%3C/svg%3E") center/24px 14px no-repeat}
+.muted{color:var(--muted)}
+/* Palabra de hoy: tarjeta cálida */
+.palabraCard{position:relative;overflow:hidden;text-align:center;padding:30px 22px 22px;border-radius:22px;border:1px solid var(--gold-s);
+ background:radial-gradient(120% 90% at 50% 0,#fff8e6 0,#f6ead0 55%,#efdfbd 100%);
+ box-shadow:inset 0 0 0 5px rgba(255,253,247,.75),inset 0 0 0 6px rgba(168,134,75,.22),0 14px 30px -18px rgba(110,80,30,.5)}
+.pcGlow{position:absolute;left:50%;top:-60px;width:260px;height:260px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,236,180,.85),rgba(255,236,180,0) 70%);pointer-events:none}
+.pcCross{position:relative;color:var(--gold);font-size:14px;margin-bottom:6px}
+.palabraCard h2{position:relative;font-size:31px;line-height:1.1;color:var(--ink)}
+.palabraCard p{position:relative;font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.35;color:#5e5640;margin:10px auto 18px;max-width:30ch}
+.pcBtn{position:relative;display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 24px;background:var(--green);color:#fff;font-weight:600;font-size:16px;
+ box-shadow:inset 0 0 0 1px rgba(201,173,120,.55),0 0 0 4px rgba(255,248,230,.8),0 0 0 5px var(--gold-s),0 10px 22px -10px rgba(37,79,69,.8);transition:transform .2s}
+.pcBtn:active{transform:scale(.97)}
+.pcBook{font-size:18px}
+.palabraCard small{position:relative;display:block;margin-top:14px;color:var(--muted);font-size:12.5px}
+/* Biblia */
+.homeGrid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.resume{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--paper);border:1px solid var(--gold-s);border-radius:16px;padding:12px 16px;margin-bottom:14px;box-shadow:0 8px 18px -14px rgba(110,80,30,.45)}
+.rsLabel{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.resume strong{flex:1;font-family:var(--serif);font-size:20px;font-weight:600}
+.rsArrow{font-size:26px;color:var(--gold);line-height:1}
+.tabs{display:flex;gap:6px;background:var(--paper);border:1px solid var(--gold-s);border-radius:999px;padding:4px;margin-bottom:14px}
+.tabs button{flex:1;min-width:0;font-size:14.5px;border:0;background:none;border-radius:999px;padding:9px 6px;font-weight:600;color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--green);color:#fff;box-shadow:inset 0 0 0 1px rgba(201,173,120,.5)}
+.group h3{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:18px 2px 8px}
+.books{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.books button{display:flex;justify-content:space-between;align-items:baseline;gap:6px;text-align:left;background:var(--paper);border:1px solid var(--gold-s);border-radius:12px;padding:10px 12px;min-height:46px}
+.books b{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.1}
+.books small{color:var(--muted);font-size:11px;white-space:nowrap;flex:0 0 auto}
+.books b{min-width:0;overflow-wrap:anywhere}
+.back{border:0;background:none;color:var(--green);font-weight:600;padding:6px 0;font-size:15px}
+#vBook h1{font-size:40px;margin:6px 0 2px}
+.chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:8px;margin-top:18px}
+.chapters button{aspect-ratio:1;border:1px solid var(--gold-s);background:var(--paper);border-radius:12px;font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink)}
+.chapters button.here{background:var(--green);color:#fff;border-color:var(--green)}
+/* Lector */
+#vRead{max-width:720px;margin:0 auto}
+.readBar{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:8px 0;background:linear-gradient(var(--bg) 75%,rgba(248,245,237,0))}
+.sizer{display:flex;border:1px solid var(--gold-s);border-radius:999px;overflow:hidden;background:var(--paper)}
+.sizer button{border:0;background:none;padding:6px 14px;font-family:var(--serif);font-weight:700;font-size:16px;color:var(--green)}
+.sizer button+button{border-left:1px solid var(--gold-s)}
+#readTitle{font-size:42px;line-height:1.05;margin:4px 0 6px}
+.arg{font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.4;color:var(--muted);margin:0 0 6px}
+.arg:empty{display:none}
+#vRead .arg::after{content:"";display:block;height:14px;margin:10px 0 8px;background:linear-gradient(90deg,transparent,var(--gold-s),transparent) center/100% 1px no-repeat}
+.scripture{font-family:var(--body);font-size:var(--fs);line-height:1.62;color:#26332d}
+.scripture p{margin:0 0 .55em}
+.scripture sup{font-family:system-ui,sans-serif;font-size:.58em;font-weight:700;color:var(--gold);margin-right:.25em;vertical-align:.45em}
+.scripture i{color:#5b5a48}
+.scripture p.hl{background:linear-gradient(90deg,rgba(201,173,120,.24),rgba(201,173,120,.05));box-shadow:inset 3px 0 var(--gold);padding-left:8px;margin-left:-8px;border-radius:2px}
+.scripture.loading{opacity:.4}
+.chapNav{display:flex;justify-content:space-between;gap:10px;margin:22px 0 10px}
+.secondary{background:transparent;color:var(--green);border:1px solid var(--gold-s);border-radius:999px;padding:10px 16px;font-weight:600}
+.primary{background:var(--green);color:#fff;border:0;border-radius:999px;padding:11px 20px;font-weight:600;box-shadow:inset 0 0 0 1px rgba(201,173,120,.45),0 4px 10px -6px rgba(37,79,69,.6)}
+.chapNav button[disabled]{visibility:hidden}
+.credit{margin-top:30px;text-align:center;font-family:var(--serif);font-size:15px;color:var(--muted)}
+.credit a{color:var(--green)}
+.credit.small{font-size:14px}
+/* Palabra: libro que se abre */
+#palabra{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px}
+.pBackdrop{position:absolute;inset:0;background:rgba(40,30,15,.42);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;transition:opacity .7s ease}
+#palabra.on .pBackdrop{opacity:1}
+.pBook{position:absolute;width:min(560px,92vw);height:min(78vh,720px);perspective:1600px;display:flex;pointer-events:none}
+.leaf{flex:1;background:linear-gradient(90deg,#efe2c4,#fbf4e3);border:1px solid var(--gold-s);transition:transform 1.25s cubic-bezier(.45,.05,.2,1),opacity .5s ease 1.05s;box-shadow:0 20px 40px -20px rgba(60,40,10,.6)}
+.leaf.l{transform-origin:right center;border-radius:14px 0 0 14px;transform:rotateY(0)}
+.leaf.r{transform-origin:left center;border-radius:0 14px 14px 0;background:linear-gradient(270deg,#efe2c4,#fbf4e3);transform:rotateY(0)}
+#palabra.closedBook .leaf.l{transform:rotateY(0)}
+#palabra.on .leaf.l{transform:rotateY(-84deg);opacity:0}
+#palabra.on .leaf.r{transform:rotateY(84deg);opacity:0}
+.pSheet{position:relative;width:min(640px,100%);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;-webkit-overflow-scrolling:touch;background:radial-gradient(120% 60% at 50% 0,#fffaf0,#f8efda 70%,#f3e6c8);
+ border:1px solid var(--gold-s);border-radius:22px;padding:34px 24px 22px;text-align:center;box-shadow:inset 0 0 0 5px rgba(255,253,247,.7),inset 0 0 0 6px rgba(168,134,75,.2),0 30px 60px -24px rgba(50,35,10,.6);
+ opacity:0;transform:translateY(14px) scale(.985);transition:opacity 1s ease .75s,transform 1.2s cubic-bezier(.2,.7,.2,1) .7s}
+#palabra.on .pSheet{opacity:1;transform:none}
+#palabra.swap .pSheet>*:not(.pClose){opacity:0;transition:opacity .45s ease}
+.pSheet>*{transition:opacity .6s ease}
+.pClose{position:absolute;top:10px;right:12px;width:36px;height:36px;border-radius:50%;border:1px solid var(--gold-s);background:var(--paper);color:var(--green);font-size:22px;line-height:1}
+#pHead{font-size:32px;line-height:1.12;color:var(--ink);margin:8px auto 10px;max-width:22ch}
+.pRef{font-family:var(--serif);font-size:18px;color:var(--muted)}
+.pRef b{color:var(--green);font-weight:600}
+.orn{height:14px;margin:14px 0 16px;background:linear-gradient(90deg,transparent,var(--gold-s)) left center/calc(50% - 16px) 1px no-repeat,linear-gradient(90deg,var(--gold-s),transparent) right center/calc(50% - 16px) 1px no-repeat,
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 14'%3E%3Cpath d='M12 1l2.2 6L12 13 9.8 7z' fill='%23a8864b'/%3E%3Ccircle cx='4' cy='7' r='1.3' fill='%23a8864b'/%3E%3Ccircle cx='20' cy='7' r='1.3' fill='%23a8864b'/%3E%3C/svg%3E") center/24px 14px no-repeat}
+#pText{text-align:left;--fs:18px}
+#pText .gap{text-align:center;color:var(--gold);margin:.2em 0 .6em}
+.pActions{position:sticky;bottom:-22px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:18px -24px -22px;padding:14px 16px calc(16px + env(safe-area-inset-bottom));background:linear-gradient(rgba(246,236,212,0),#f5ead0 30%);}
+body.lock{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.leaf,.pSheet,.pBackdrop{transition-duration:.01s!important;transition-delay:0s!important}}
+/* Ordenador */
+@media (min-width:900px){
+ #app{padding-left:32px;padding-right:32px}
+ .intro{text-align:center}.intro h1{font-size:52px}.lead{max-width:46ch;margin:0 auto}
+ .homeGrid{grid-template-columns:minmax(300px,380px) 1fr;align-items:start;gap:32px}
+ .palabraCard{position:sticky;top:20px;padding:40px 28px 28px}
+ .palabraCard h2{font-size:36px}
+ .books{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .pSheet{padding:44px 44px 28px}
+ .pActions{margin:18px -44px -28px;bottom:-28px}
+ #pHead{font-size:38px}
+}
+.pActions button{font-size:14.5px;padding:10px 16px}
