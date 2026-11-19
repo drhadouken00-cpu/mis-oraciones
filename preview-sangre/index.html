@@ -27,9 +27,16 @@
   const L=()=>SANGRE_SEQ[lang];
   function labels(){demoB.textContent=timer?(lang==='es'?'⏸ Demo':'⏸ Demo'):(lang==='es'?'▶ Demo (sin voz)':'▶ Demo (no voice)');
     demoB.setAttribute('aria-label',lang==='es'?'Demostración automática, sin voz':'Automatic demo, no voice');lb.textContent=lang==='es'?'EN':'ES';document.documentElement.lang=lang}
-  let timer=null;
-  function demo(on){clearInterval(timer);timer=null;demoB.classList.toggle('on',on);
-    if(on)timer=setInterval(()=>{if(sa.idx>=sa.steps.length-1)return demo(false);sa.next()},+(q.get('ms')||1400));labels()}
+  // Demo sin voz: cada paso dura como una oración corta; la cuenta blanca (Gloria + Rogámoste) dura más
+  // y después hay una pausa de 4 s antes del misterio siguiente, como en la app.
+  let timer=null,base=+(q.get('ms')||1400);
+  const dur=s=>s.kind==='gloria'?base*2.2:s.kind==='meditation'?base*2:s.phase==='read'?base*1.5:base;
+  function step(){const s=sa.steps[sa.idx];if(sa.idx>=sa.steps.length-1)return demo(false);
+    if(SangreMap.gapAfter(sa.steps,sa.idx)){let left=Math.round(SangreMap.GAP_MS/1000);sa.showPause(left);
+      const tick=()=>{if(!timer)return;left--;if(left>0){sa.showPause(left);timer=setTimeout(tick,1000)}else{sa.showPause(0);sa.next();timer=setTimeout(step,dur(sa.steps[sa.idx]))}};
+      timer=setTimeout(tick,1000);return}
+    sa.next();timer=setTimeout(step,dur(sa.steps[sa.idx]))}
+  function demo(on){clearTimeout(timer);timer=null;demoB.classList.toggle('on',on);if(on)timer=setTimeout(step,dur(sa.steps[sa.idx]));else sa.showPause(0);labels()}
   demoB.onclick=()=>demo(!timer);
   lb.onclick=()=>{lang=lang==='es'?'en':'es';sa.setLang(lang,L().parts,L().title);labels()};
   sa.load(L().parts,L().title);labels();

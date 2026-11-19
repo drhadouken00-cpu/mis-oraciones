@@ -41,7 +41,7 @@ window.TTS=(()=>{
   if(!synth){set({error:'Tu navegador no permite leer en voz alta.',playing:false});return}
   bgOn();
   const sp=part.speech||part.text,list=chunks(sp),v=voice();let ci=0,pos=0;synth.cancel();
-  const next=()=>{if(my!==gen)return;lastActivity=Date.now();if(ci>=list.length){pi++;if(/^rosario-/.test(state.id||'')&&/^(?:[^·]*· )*(?:Oh Jesús mío|O my Jesus)/.test(part.text)&&parts.slice(pi,pi+3).some(x=>/misterio|mystery/i.test(x.text.split(' · ')[0])||/^✧/.test(x.text))&&!parts.slice(pi,pi+2).some(x=>/^(Salve|✧ LETAN|Hail, Holy Queen|✧ LITANY)/.test(x.text))){petitionWait(my);return}speakCurrent();return}
+  const next=()=>{if(my!==gen)return;lastActivity=Date.now();if(ci>=list.length){pi++;if(/^rosario-/.test(state.id||'')&&/^(?:[^·]*· )*(?:Oh Jesús mío|O my Jesus)/.test(part.text)&&parts.slice(pi,pi+3).some(x=>/misterio|mystery/i.test(x.text.split(' · ')[0])||/^✧/.test(x.text))&&!parts.slice(pi,pi+2).some(x=>/^(Salve|✧ LETAN|Hail, Holy Queen|✧ LITANY)/.test(x.text))){petitionWait(my);return}{const gm=+(window.MO&&MO.gapAfter&&MO.gapAfter(state.id,pi-1))||0;if(gm>0){set({waiting:true});lastActivity=Date.now();waitT=setTimeout(()=>{if(my===gen){set({waiting:false});speakCurrent()}},gm);return}}speakCurrent();return}
    const txt=list[ci++],u=new SpeechSynthesisUtterance(txt);u.lang=window.MO_LANG==='en'?((v&&v.lang)||'en-US'):'es-ES';if(v)u.voice=v;u.rate=Math.max(.5,Math.min(1.6,rate));
    let base=sp.indexOf(txt,pos);if(base<0)base=pos;pos=base+txt.length;let bseen=false,t0=0,fb=null;const ip=pi;
    // Palabra a palabra: eventos 'boundary' si la voz los da; si no, estimación por tiempo.

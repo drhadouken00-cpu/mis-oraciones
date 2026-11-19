@@ -14,12 +14,11 @@
     const idx=s=>{let lo=0,hi=N;while(lo<hi){const m=(lo+hi)>>1;len[m]<s?lo=m+1:hi=m}return lo};
     return {at:s=>pts[idx(s)],seg:(a,b)=>pts.slice(idx(a),idx(b)+1),total:len[N]}}
   function layout(){const E=ring(),G=window.SangreMap.GROUPS,B={},seq=[];
-    G.forEach((n,gi)=>{const M=gi+1;seq.push(['d'+M,gi?1.75:2.3]);for(let j=1;j<=n;j++)seq.push(['m'+M+'-'+j,j===1?1.45:1])});
+    G.forEach((n,gi)=>{const M=gi+1;seq.push(['d'+M,gi?1.75:2.3]);for(let j=1;j<=n;j++)seq.push(['m'+M+'-'+j,j===1?1.45:1]);seq.push(['g'+M,1.4])});
     const units=seq.reduce((a,b)=>a+b[1],0)+2.3,u=E.total/units;let s=0;const S={};
-    seq.forEach(([id,w])=>{s+=w*u;S[id]=s;const [x,y]=E.at(s);B[id]={x,y,r:id[0]==='d'?9.5:8.4,drop:id[0]==='d'}});
-    const arcs={};G.forEach((n,gi)=>{const M=gi+1;arcs['g'+M]=E.seg(S['m'+M+'-1']-u*.45,S['m'+M+'-'+n]+u*.45)});
+    seq.forEach(([id,w])=>{s+=w*u;S[id]=s;const [x,y]=E.at(s);B[id]={x,y,r:id[0]==='d'?8.6:id[0]==='g'?9.6:7.8,drop:id[0]==='d',white:id[0]==='g'}});
     const by=P.cy+P.ry;B.medal={x:P.cx,y:by+22,r:16,medal:true};B.cross={x:P.cx,y:by+92,r:26,cross:true};
-    return {B,arcs}}
+    return {B}}
 
   function mount(host,opt={}){
     const api={lang:opt.lang||'es',labels:[],steps:[],idx:0,onJump:null,onNav:null,title:''};
@@ -48,6 +47,9 @@
         <radialGradient id="saDim" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#8E8578"/><stop offset=".6" stop-color="#4A443C"/><stop offset="1" stop-color="#26221D"/></radialGradient>
         <radialGradient id="saRuby" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#F08A8A"/><stop offset=".45" stop-color="#B0222A"/><stop offset="1" stop-color="#4E0A0F"/></radialGradient>
         <radialGradient id="saRubyDim" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#9a6a6a"/><stop offset=".6" stop-color="#5a2328"/><stop offset="1" stop-color="#2a0e10"/></radialGradient>
+        <radialGradient id="saPearl" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#E9E3D8"/><stop offset="1" stop-color="#A89E8E"/></radialGradient>
+        <radialGradient id="saPearlDim" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#D9D4CB"/><stop offset=".6" stop-color="#9B958A"/><stop offset="1" stop-color="#5A564F"/></radialGradient>
+        <radialGradient id="saPearlLit" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#FFF6DC"/><stop offset="1" stop-color="#D4AF5A"/></radialGradient>
         <radialGradient id="saHalo"><stop offset="0" stop-color="#D4AF5A" stop-opacity=".95"/><stop offset=".45" stop-color="#D4AF5A" stop-opacity=".45"/><stop offset="1" stop-color="#D4AF5A" stop-opacity="0"/></radialGradient>
         <radialGradient id="saHaloR"><stop offset="0" stop-color="#E0505A" stop-opacity=".9"/><stop offset=".5" stop-color="#B0222A" stop-opacity=".4"/><stop offset="1" stop-color="#B0222A" stop-opacity="0"/></radialGradient>
         <filter id="saGlow" x="-150%" y="-150%" width="400%" height="400%"><feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -64,14 +66,11 @@
       frBox={BW,BH};
       mk('ellipse',{cx:P.cx,cy:P.cy,rx:P.rx-IN,ry:P.ry-IN,fill:'none',stroke:'#D4AF5A','stroke-opacity':'.6','stroke-width':'1.8'},g);
       mk('ellipse',{cx:P.cx,cy:P.cy,rx:P.rx-IN-5,ry:P.ry-IN-5,fill:'none',stroke:'#000','stroke-opacity':'.35','stroke-width':'6'},g);
-      const {B,arcs}=layout();ORD=window.SangreMap.order(window.SangreMap.GROUPS);
+      const {B}=layout();ORD=window.SangreMap.order(window.SangreMap.GROUPS);
       mk('ellipse',{cx:P.cx,cy:P.cy,rx:P.rx,ry:P.ry,class:'sa-chain'},g);
       mk('line',{x1:P.cx,y1:B.medal.y,x2:P.cx,y2:B.cross.y-30,class:'sa-chain'},g);
       beadEls={};
-      // arco de cada misterio: brilla durante el Gloria y el «Rogámoste» que lo cierran
-      for(const id in arcs){const a=mk('g',{class:'sa-bead sa-arcg','data-b':id},g);
-        mk('path',{d:'M'+arcs[id].map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L'),class:'sa-arc'},a);beadEls[id]=a}
-      for(const id in B){const b=B[id],el=mk('g',{class:'sa-bead'+(b.drop?' sa-drop':''),tabindex:'0',role:'button','data-b':id,transform:`translate(${b.x.toFixed(1)} ${b.y.toFixed(1)})`},g);
+      for(const id in B){const b=B[id],el=mk('g',{class:'sa-bead'+(b.drop?' sa-drop':'')+(b.white?' sa-white':''),tabindex:'0',role:'button','data-b':id,transform:`translate(${b.x.toFixed(1)} ${b.y.toFixed(1)})`},g);
         mk('circle',{r:b.r*(b.cross?1.5:3.2),class:'sa-halo',fill:b.drop?'url(#saHaloR)':'url(#saHalo)'},el);
         if(b.cross){const c=mk('g',{class:'sa-body',filter:'url(#saShadow)'},el);
           mk('path',{d:'M-4.5 -26 h9 v14 h13 v9 h-13 v33 h-9 v-33 h-13 v-9 h13 z',class:'sa-fill'},c);
@@ -117,18 +116,18 @@
       fresco(s.mystery);
       if(svg)for(const id in beadEls){const o=ORD[id],el=beadEls[id],isCur=id===s.bead,done=reading||(o<ORD[s.bead]&&!isCur);
         el.classList.toggle('cur',isCur);el.classList.toggle('done',done);if(el.hasAttribute('tabindex'))el.setAttribute('aria-current',isCur?'step':'false')}
-      if(svg&&s.kind==='gloria')for(let j=1;j<=6;j++){const e=beadEls['m'+s.mystery+'-'+j];if(e)e.classList.add('done')}
       const M=window.SANGRE_MYSTERIES[s.mystery],{head,body}=split(api.labels[s.i]);
-      const first=b=>{b=String(b||'').trim();return b.length<=52?b:b.slice(0,b.lastIndexOf(' ',48))+'…'};
+      const first=b=>{b=String(b||'').trim();return b.length<=52?b:b.slice(0,b.lastIndexOf(' ',48)).replace(/[,.;:]+$/,'')+'…'};
       if(reading){R.set.textContent=t.reading;R.mys.textContent=s.section||t.reading;R.pray.textContent=''}
       else if(s.phase==='intro'){R.set.textContent=t.intro;R.mys.textContent=s.kind==='header'?body:first(body);R.pray.textContent=''}
       else{R.set.textContent=`${t.mysteryCap} ${s.mystery} ${t.of} 7`;R.mys.textContent=`${t.ord[s.mystery]} ${t.mystery}: ${M[api.lang]}`;
-        R.pray.textContent=s.kind==='bead'?head.split(' · ').pop():s.kind==='gloria'?first(body):t.meditation}
+        R.pray.textContent=s.kind==='bead'?head.split(' · ').pop():s.kind==='gloria'?first(body):s.kind==='pause'?'⏸ '+t.pause+' · '+Math.round(SangreMap.GAP_MS/1000)+' s':t.meditation}
+      host.classList.remove('sa-paused');
       R.text.innerHTML=(head?'<small>'+esc(head)+'</small>':'')+esc(body);R.text.scrollTop=0;
       R.pos.textContent=(s.i+1)+' / '+api.steps.length;
       if(reading&&paras[s.i]&&lastRead!==s.i){paras.forEach(p=>p&&p.classList.remove('cur'));paras[s.i].classList.add('cur');paras[s.i].setAttribute('aria-current','true');
         const first=lastRead<0||!host.classList.contains('sa-was-reading');lastRead=s.i;host.classList.add('sa-was-reading');
-        requestAnimationFrame(()=>{const L=R.list,el=paras[s.i];if(!el)return;const top=el.offsetTop-(L.clientHeight-el.offsetHeight)/2;
+        requestAnimationFrame(()=>{const L=R.list,el=paras[s.i];if(!el)return;const top=el.offsetHeight>L.clientHeight*.7?el.offsetTop-16:el.offsetTop-(L.clientHeight-el.offsetHeight)/2;
           L.scrollTo({top:Math.max(0,top),behavior:(reduce()||first)?'auto':'smooth'})})}
       if(!reading){lastRead=-1;host.classList.remove('sa-was-reading')}
       api.onRender&&api.onRender(s)}
@@ -138,6 +137,8 @@
       if(svg)for(const s of frImgs)s.sl.classList.remove('on');render()};
     api.setStep=i=>{api.idx=Math.max(0,Math.min(api.steps.length-1,i));render()};
     api.setLang=(l,labels,title)=>{const i=api.idx;api.lang=l;svg&&svg.setAttribute('aria-label',T().view);if(labels){api.load(labels,title);api.setStep(i)}else{navTxt();render()}};
+    // Pausa entre misterios (la cuenta blanca sigue encendida): muestra «⏸ Pausa · 4 s» sin mover la cuenta.
+    api.showPause=sec=>{const s=api.steps[api.idx];if(!s||s.phase==='read')return;host.classList.toggle('sa-paused',sec>0);if(sec>0)R.pray.textContent=`⏸ ${T().pause} · ${sec} s`;else render()};
     api.next=()=>api.setStep(api.idx+1);api.prev=()=>api.setStep(api.idx-1);
     api.relayout=()=>{const w=stage.clientWidth,h=stage.clientHeight;if(w&&h&&(w>h*1.1)!==land){build()}};
     let rt;const relayout=()=>{clearTimeout(rt);rt=setTimeout(api.relayout,120)};

@@ -46,11 +46,12 @@
 .sa-bead.cur .sa-halo{opacity:1;animation:saPulse 2.4s ease-in-out infinite}
 .sa-bead.cur .sa-body{transform:scale(1.25);filter:url(#saGlow)}
 .sa-bead:focus-visible .sa-fill{stroke:#fff;stroke-width:1.5}
-.sa-arc{fill:none;stroke:#D4AF5A;stroke-width:24;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .6s ease}
-.sa-arcg{pointer-events:none}
-.sa-arcg.cur .sa-arc{opacity:.32;animation:saArc 2.4s ease-in-out infinite}
+.sa-white .sa-fill{fill:url(#saPearlDim)}
+.sa-white.done .sa-fill{fill:url(#saPearl)}
+.sa-white.cur .sa-fill{fill:url(#saPearlLit)}
+.sa-white .sa-spec{opacity:.5}
+.sa-paused .sa-pray{color:#D4AF5A}
 @keyframes saPulse{0%,100%{transform:scale(.85);opacity:.75}50%{transform:scale(1.15);opacity:1}}
-@keyframes saArc{0%,100%{opacity:.22}50%{opacity:.4}}
 /* modo lectura (después de la cuenta 33): sin cuentas, fondo claro y texto oscuro */
 .sa-read{grid-area:read;display:none;min-height:0}
 .sa-readart{display:none}
@@ -75,7 +76,7 @@
 .sa-instant .sa-bgimg,.sa-instant .sa-fresco{transition-duration:.01s}
 @media (prefers-reduced-motion:reduce){
  .sa *,.sa-bgimg,.sa-fresco,.sa-bg,.sa-shade,.sa-light{transition-duration:.01s!important;animation:none!important}
- .sa-bead.cur .sa-halo{opacity:.9}.sa-arcg.cur .sa-arc{opacity:.32}
+ .sa-bead.cur .sa-halo{opacity:.9}
 }
 /* pantalla ancha: cuadro a la izquierda, texto a la derecha */
 @media (orientation:landscape) and (min-aspect-ratio:23/20){

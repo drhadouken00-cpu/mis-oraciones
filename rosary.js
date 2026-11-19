@@ -21,7 +21,7 @@ function save(id,i){if(!isR(id))return;const p=find(id);if(!p)return;const set=(
 function jump(id,i){const p=find(id);if(!p)return;if(current?.id!==id){origOpen(p);fillPanel(p)}save(id,i);startQueue([id],i);const el=$('part-'+i);if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}
 // Barra de la pausa de peticiones (8 s)
 const pb=document.createElement('div');pb.id='petBox';pb.hidden=true;pb.innerHTML='<div class="petText">🙏 Tus peticiones <small>(ej.: Madre del Rosario, ruega por nosotros…)</small> <b id="petSec"></b></div><div class="petTrack"><div id="petFill"></div></div>';document.querySelector('#player .playerLabel').after(pb);
-let petTick=0,petOn=false,petStart=0;function petUI(){const sp=find(state.id)?.parts?.[state.index],nat=!!(state.playing&&sp&&sp.silenceMs>0);const on=!!(state.playing&&state.waiting&&state.petWait>0)||nat;
+let petTick=0,petOn=false,petStart=0;function petUI(){const sp=find(state.id)?.parts?.[state.index],nat=!!(state.playing&&sp&&sp.silenceMs>0&&!sp.gap);const on=!!(state.playing&&state.waiting&&state.petWait>0)||nat;
  if(on&&!petOn)petStart=Date.now();if(on){const left=state.petWait>0?state.petWait:Math.max(1,Math.ceil(((sp?.silenceMs||8000)-(Date.now()-petStart))/1000));$('status').textContent='Tus peticiones…';$('petSec').textContent=left+' s';if(nat&&!petTick)petTick=setInterval(()=>{try{updatePlayer()}catch{}},500)}
  if(!on&&petTick){clearInterval(petTick);petTick=0}
  if(on&&!petOn){pb.hidden=false;const f=$('petFill');f.style.transition='none';f.style.width='0%';void f.offsetWidth;f.style.transition='width 8s linear';f.style.width='100%'}if(!on&&petOn)pb.hidden=true;petOn=on}

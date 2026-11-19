@@ -13,7 +13,7 @@ const toast=m=>{try{MO.toast(m)}catch{}};
 const find=id=>prayers.find(p=>p.id===id);
 const onCur=()=>!!(current&&state.id===current.id);
 function speaking(){if(!state.playing||state.waiting||state.petition)return false;const sp=find(state.id)?.parts?.[state.index];return !(sp&&sp.silenceMs>0)}
-function inPetition(){const sp=find(state.id)?.parts?.[state.index];return !!(state.playing&&((state.waiting&&state.petWait>0)||(sp&&sp.silenceMs>0)))}
+function inPetition(){const sp=find(state.id)?.parts?.[state.index];return !!(state.playing&&((state.waiting&&state.petWait>0)||(sp&&sp.silenceMs>0&&!sp.gap)))}
 
 // ---------- 1. Controles del reproductor ----------
 const player=$('player'),controls=player.querySelector('.controls'),options=player.querySelector('.options'),label=player.querySelector('.playerLabel');

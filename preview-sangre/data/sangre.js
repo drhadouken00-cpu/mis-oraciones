@@ -13,9 +13,9 @@ window.SANGRE_MYSTERIES=[
 ];
 window.SANGRE_STR={
  es:{set:'Coronilla de la Preciosísima Sangre',ord:['','Primer','Segundo','Tercer','Cuarto','Quinto','Sexto','Séptimo'],mystery:'misterio',mysteryCap:'Misterio',of:'de',
-   intro:'Oraciones iniciales',meditation:'Meditación del misterio',reading:'Oraciones después de la coronilla',prev:'Anterior',next:'Siguiente',
+   intro:'Oraciones iniciales',meditation:'Meditación del misterio',pause:'Pausa',reading:'Oraciones después de la coronilla',prev:'Anterior',next:'Siguiente',
    view:'Coronilla de la Sangre de Cristo',tapHint:'Toca una cuenta para ir a esa oración',paragraph:'Toca un párrafo para ir a él'},
  en:{set:'Chaplet of the Most Precious Blood',ord:['','First','Second','Third','Fourth','Fifth','Sixth','Seventh'],mystery:'mystery',mysteryCap:'Mystery',of:'of',
-   intro:'Opening prayers',meditation:'Meditation on the mystery',reading:'Prayers after the chaplet',prev:'Previous',next:'Next',
+   intro:'Opening prayers',meditation:'Meditation on the mystery',pause:'Pause',reading:'Prayers after the chaplet',prev:'Previous',next:'Next',
    view:'Chaplet of the Precious Blood',tapHint:'Tap a bead to go to that prayer',paragraph:'Tap a paragraph to go to it'}
 };
