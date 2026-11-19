@@ -1,10 +1,12 @@
-const CACHE='mis-oraciones-v9';
-const ASSETS=['./','index.html','style.css','v2.css','features.css','v3.css','pwa.css','library.js','prayer-text.js','tts.js','app-v2.js','features.js','v3.js','pwa.js','backup.js','v31b.js','v31b.css','rosary.js','rosary.css','follow.js','follow.css','continuous.js','prayer-audio.js','i18n.js','i18n.css','i18n-en.js','library-en.js','v8.js','v8.css','player-ui.js','player-ui.css','manifest.json','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png'];
+const CACHE='mis-oraciones-v10';
+const ASSETS=['./','index.html','style.css','v2.css','features.css','v3.css','pwa.css','library.js','prayer-text.js','tts.js','app-v2.js','features.js','v3.js','pwa.js','backup.js','v31b.js','v31b.css','rosary.js','rosary.css','follow.js','follow.css','continuous.js','prayer-audio.js','i18n.js','i18n.css','i18n-en.js','library-en.js','v8.js','v8.css','player-ui.js','player-ui.css','rosary-anim.css','rosary-map.js','rosary-data.js','rosary-credits.js','rosary-anim.js','rosary-hook.js','manifest.json','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE&&x!=='mis-oraciones-music').map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE&&x!=='mis-oraciones-music'&&x!=='mis-oraciones-frescos').map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==location.origin)return;
  // Música: no se precachea; se guarda entera la primera vez que suena (sin respuestas parciales 206).
- if(u.pathname.includes('/music/')){e.respondWith(music(e.request,u));return} // Evangelio: red (se guarda por día en la app)
+ if(u.pathname.includes('/music/')){e.respondWith(music(e.request,u));return}
+ // Frescos del rosario: no se precachean; se guardan la primera vez que se ven (caché propia que sobrevive a las versiones).
+ if(u.pathname.includes('/frescos/')){e.respondWith(caches.open('mis-oraciones-frescos').then(c=>c.match(u.pathname).then(hit=>hit||fetch(e.request).then(r=>{if(r.status===200)c.put(u.pathname,r.clone());return r}))));return} // Evangelio: red (se guarda por día en la app)
  e.respondWith(caches.match(e.request,{ignoreSearch:true}).then(hit=>{const net=fetch(e.request).then(r=>{if(r.ok){const cp=r.clone();caches.open(CACHE).then(c=>c.put(e.request,cp))}return r}).catch(()=>hit||caches.match('index.html'));return hit||net}))});
 
 // Música de fondo: se guarda entera la primera vez y se sirve con rangos (206) para Safari/iPhone.

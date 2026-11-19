@@ -9,7 +9,7 @@ function alarmsNow(){try{if(window.AndroidAlarms){const a=JSON.parse(AndroidAlar
 function build(){return {app:'mis-oraciones',format:1,exported:new Date().toISOString(),
  prayers:custom.filter(p=>p.id!==GID),favorites,lists,alarms:alarmsNow(),streak:stored('streak',null),extra:extraOut()}}
 // v8: el resto de tus datos y ajustes (sin renombrar ninguna clave).
-const EXTRA=['intentions','intentionsSpeak','prayerLog','playMode','continuousPlayback','bgMusic','rosaryProgress','playlistSession','nightReminder','altisimo','rate','repeat','gap','theme','fontSize','moLang'];
+const EXTRA=['intentions','intentionsSpeak','prayerLog','playMode','continuousPlayback','bgMusic','rosaryProgress','playlistSession','nightReminder','altisimo','rate','repeat','gap','theme','fontSize','moLang','rosaryView'];
 function extraOut(){const o={};for(const k of EXTRA){const v=localStorage.getItem(k);if(v!==null)o[k]=v}return o}
 function extraIn(x){if(!x||typeof x!=='object')return 0;let n=0;const J=v=>{try{return JSON.parse(v)}catch{return null}};
  for(const k of EXTRA){const v=x[k];if(typeof v!=='string')continue;const cur=localStorage.getItem(k);
