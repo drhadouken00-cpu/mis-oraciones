@@ -1,0 +1,114 @@
+/* Mis oraciones v18 · La Biblia y «¿Qué tiene Dios para mí hoy?» (aprobado en preview-biblia). Todo va dentro de #bibliaView, #palabraView y #bibliaCard. */
+#bibliaView,#palabraView,#bibliaCard{--bpaper:var(--paper,#fffcf4);--bgold-s:var(--gold-s,rgba(168,134,75,.38));--bserif:var(--serif,'Cormorant Garamond',Georgia,'Times New Roman',serif);--bbtn:#254f45;--bbtnInk:#fff;--bwarm1:#fff8e6;--bwarm2:#f6ead0;--bwarm3:#efdfbd;--bverse:#26332d;--badd:#5b5a48}
+html[data-theme=dark] #bibliaView,html[data-theme=dark] #palabraView,html[data-theme=dark] #bibliaCard{--bpaper:#262019;--bgold-s:rgba(216,174,104,.32);--bbtn:#a9884f;--bbtnInk:#1b1713;--bwarm1:#3a2f22;--bwarm2:#2b231a;--bwarm3:#231c15;--bverse:#eee4d3;--badd:#cdbfa5}
+#bibliaView button,#palabraView button,#bibliaCard button{all:unset;box-sizing:border-box;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+#bibliaView button:focus-visible,#palabraView button:focus-visible,#bibliaCard button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#bibliaView .bPrimary,#palabraView .bPrimary,#bibliaCard .bPrimary{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--bbtn);color:var(--bbtnInk);border-radius:999px;padding:12px 22px;font-weight:600;font-size:15.5px;line-height:1.2;box-shadow:inset 0 0 0 1px rgba(201,173,120,.5),0 4px 10px -6px rgba(37,79,69,.6)}
+#bibliaView .bSecondary,#palabraView .bSecondary,#bibliaCard .bSecondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;color:var(--green);border:1px solid var(--bgold-s);border-radius:999px;padding:10px 18px;font-weight:600;font-size:15px;line-height:1.2;background:transparent}
+/* ---------- Tarjeta de inicio ---------- */
+#bibliaCard{position:relative;overflow:hidden;margin:16px 0 0;padding:26px 20px 18px;border-radius:22px;border:1px solid var(--bgold-s);text-align:center;color:var(--ink);
+ background:radial-gradient(120% 90% at 50% 0,var(--bwarm1) 0,var(--bwarm2) 55%,var(--bwarm3) 100%);
+ box-shadow:inset 0 0 0 5px rgba(255,253,247,.55),inset 0 0 0 6px rgba(168,134,75,.2),0 14px 30px -18px rgba(110,80,30,.5)}
+html[data-theme=dark] #bibliaCard{box-shadow:inset 0 0 0 5px rgba(0,0,0,.15),inset 0 0 0 6px rgba(216,174,104,.16),0 10px 24px -14px rgba(0,0,0,.6)}
+#bibliaCard .bcGlow{position:absolute;left:50%;top:-70px;width:280px;height:280px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,236,180,.8),rgba(255,236,180,0) 70%);pointer-events:none}
+html[data-theme=dark] #bibliaCard .bcGlow{background:radial-gradient(circle,rgba(216,174,104,.22),rgba(216,174,104,0) 70%)}
+#bibliaCard .bcPal{position:relative}
+#bibliaCard .bcEye{display:block;color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+#bibliaCard h2{font-family:var(--bserif);font-weight:500;font-size:30px;line-height:1.1;margin:8px 0 0;color:var(--ink)}
+#bibliaCard p{font-family:var(--bserif);font-style:italic;font-size:18.5px;line-height:1.35;color:var(--muted);margin:8px auto 16px;max-width:32ch}
+#bibliaCard .bPrimary{padding:13px 26px;font-size:16px;box-shadow:inset 0 0 0 1px rgba(201,173,120,.55),0 0 0 4px rgba(255,248,230,.55),0 0 0 5px var(--bgold-s),0 10px 22px -10px rgba(37,79,69,.8)}
+#bibliaCard .bcBible{position:relative;display:flex;align-items:center;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid var(--bgold-s);text-align:left}
+#bibliaCard .bcBible .bcIcon{flex:0 0 40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:18px;color:var(--gold);background:var(--bpaper);border:1px solid var(--bgold-s)}
+#bibliaCard .bcBible .bcTxt{flex:1;min-width:0}
+#bibliaCard .bcBible strong{display:block;font-family:var(--bserif);font-size:21px;font-weight:600;line-height:1.1;color:var(--ink)}
+#bibliaCard .bcBible small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+#bibliaCard .bcBible .bcGo{flex:0 0 auto;color:var(--gold);font-size:28px;line-height:1}
+html.desk #bibliaCard{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:center;gap:26px;padding:30px 32px;text-align:left}
+html.desk #bibliaCard p{margin-left:0}
+html.desk #bibliaCard .bcGlow{left:28%}
+html.desk #bibliaCard .bcBible{margin:0;padding:0 0 0 26px;border-top:0;border-left:1px solid var(--bgold-s);align-self:stretch}
+/* ---------- Vista Biblia ---------- */
+#bibliaView{max-width:760px;--bfs:19px}
+html.desk #bibliaView{max-width:1040px;padding-top:40px}
+#bibliaView .bTop{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:44px}
+#bibliaView .bBack{color:var(--green);font-weight:600;font-size:15.5px;padding:8px 2px}
+#bibliaView .bEye{display:block;color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-top:6px}
+#bibliaView h1{font-family:var(--bserif);font-weight:500;font-size:40px;line-height:1.06;margin:6px 0 6px;color:var(--ink)}
+#bibliaView h1 em{font-style:italic;color:var(--green)}
+#bibliaView .bLead{font-family:var(--bserif);font-style:italic;font-size:18.5px;line-height:1.35;color:var(--muted);margin:0 0 14px}
+#bibliaView .bOrn{height:14px;margin:6px 0 18px;background:linear-gradient(90deg,transparent,var(--bgold-s)) left center/calc(50% - 16px) 1px no-repeat,linear-gradient(90deg,var(--bgold-s),transparent) right center/calc(50% - 16px) 1px no-repeat,
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 14'%3E%3Cpath d='M12 1l2.2 6L12 13 9.8 7z' fill='%23a8864b'/%3E%3Ccircle cx='4' cy='7' r='1.3' fill='%23a8864b'/%3E%3Ccircle cx='20' cy='7' r='1.3' fill='%23a8864b'/%3E%3C/svg%3E") center/24px 14px no-repeat}
+#bibliaView .bPalBtn{width:100%;margin-bottom:14px;padding:14px 18px}
+#bibliaView .bResume{display:flex;align-items:center;gap:10px;width:100%;background:var(--bpaper);border:1px solid var(--bgold-s);border-radius:16px;padding:12px 16px;margin-bottom:14px;box-shadow:0 8px 18px -14px rgba(110,80,30,.45)}
+#bibliaView .bResume span{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+#bibliaView .bResume strong{flex:1;font-family:var(--bserif);font-size:20px;font-weight:600;color:var(--ink)}
+#bibliaView .bResume i{font-style:normal;font-size:26px;color:var(--gold);line-height:1}
+#bibliaView .bTabs{display:flex;gap:6px;background:var(--bpaper);border:1px solid var(--bgold-s);border-radius:999px;padding:4px;margin-bottom:6px}
+#bibliaView .bTabs button{flex:1;min-width:0;text-align:center;border-radius:999px;padding:9px 6px;font-weight:600;font-size:14.5px;color:var(--muted)}
+#bibliaView .bTabs button[aria-selected=true]{background:var(--bbtn);color:var(--bbtnInk);box-shadow:inset 0 0 0 1px rgba(201,173,120,.5)}
+#bibliaView h3{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:18px 2px 8px;font-family:inherit}
+#bibliaView .bBooks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+html.desk #bibliaView .bBooks{grid-template-columns:repeat(4,minmax(0,1fr))}
+#bibliaView .bBooks button{display:flex;justify-content:space-between;align-items:baseline;gap:6px;background:var(--bpaper);border:1px solid var(--bgold-s);border-radius:12px;padding:10px 12px;min-height:46px}
+#bibliaView .bBooks b{font-family:var(--bserif);font-size:18px;font-weight:600;line-height:1.1;color:var(--ink);min-width:0;overflow-wrap:anywhere}
+#bibliaView .bBooks small{color:var(--muted);font-size:11px;white-space:nowrap;flex:0 0 auto}
+#bibliaView .bChaps{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:8px;margin-top:16px}
+#bibliaView .bChaps button{aspect-ratio:1;display:grid;place-items:center;border:1px solid var(--bgold-s);background:var(--bpaper);border-radius:12px;font-family:var(--bserif);font-size:20px;font-weight:600;color:var(--ink)}
+#bibliaView .bChaps button.here{background:var(--bbtn);color:var(--bbtnInk);border-color:transparent}
+#bibliaView .bRead{max-width:720px;margin:0 auto}
+#bibliaView .bSizer{display:flex;border:1px solid var(--bgold-s);border-radius:999px;overflow:hidden;background:var(--bpaper)}
+#bibliaView .bSizer button{padding:6px 14px;font-family:var(--bserif);font-weight:700;font-size:16px;color:var(--green)}
+#bibliaView .bSizer button+button{border-left:1px solid var(--bgold-s)}
+#bibliaView .bArg{font-family:var(--bserif);font-style:italic;font-size:17px;line-height:1.4;color:var(--muted);margin:0 0 4px}
+#bibliaView .bArg:empty{display:none}
+#bibliaView .bRule{height:1px;margin:12px 0 14px;background:linear-gradient(90deg,transparent,var(--bgold-s),transparent)}
+#bibliaView .bScr,#palabraView .bScr{font-family:Georgia,'Times New Roman',serif;font-size:var(--bfs,19px);line-height:1.62;color:var(--bverse)}
+#bibliaView .bScr p,#palabraView .bScr p{margin:0 0 .55em}
+#bibliaView .bScr sup,#palabraView .bScr sup{font-family:system-ui,sans-serif;font-size:.58em;font-weight:700;color:var(--gold);margin-right:.25em;vertical-align:.45em}
+#bibliaView .bScr i,#palabraView .bScr i{color:var(--badd)}
+#bibliaView .bScr p.hl{background:linear-gradient(90deg,rgba(201,173,120,.26),rgba(201,173,120,.05));box-shadow:inset 3px 0 var(--gold);padding-left:8px;margin-left:-8px;border-radius:2px}
+#bibliaView .bScr.loading{opacity:.4}
+html.desk #bibliaView .bScr{font-size:calc(var(--bfs,19px) + 1px);line-height:1.72}
+#bibliaView .bNav{display:flex;justify-content:space-between;gap:10px;margin:22px 0 6px}
+#bibliaView .bNav button[disabled]{visibility:hidden}
+#bibliaView .bCredit{margin:26px 0 0;text-align:center;font-family:var(--bserif);font-size:15px;color:var(--muted)}
+#bibliaView .bCredit a{color:var(--green)}
+/* ---------- ¿Qué tiene Dios para mí hoy? ---------- */
+#palabraView{position:fixed;inset:0;z-index:1200;display:grid;place-items:center;padding:16px}
+#palabraView .pvBackdrop{position:absolute;inset:0;background:rgba(40,30,15,.42);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .7s ease}
+#palabraView.on .pvBackdrop{opacity:1}
+#palabraView .pvBook{position:absolute;width:min(560px,92vw);height:min(78vh,720px);perspective:1600px;display:flex;pointer-events:none}
+#palabraView .pvLeaf{flex:1;background:linear-gradient(90deg,#efe2c4,#fbf4e3);border:1px solid var(--bgold-s);transition:transform 1.25s cubic-bezier(.45,.05,.2,1),opacity .5s ease 1.05s;box-shadow:0 20px 40px -20px rgba(60,40,10,.6)}
+html[data-theme=dark] #palabraView .pvLeaf{background:linear-gradient(90deg,#2a231b,#3a3024)!important}
+#palabraView .pvLeaf.l{transform-origin:right center;border-radius:14px 0 0 14px}
+#palabraView .pvLeaf.r{transform-origin:left center;border-radius:0 14px 14px 0;background:linear-gradient(270deg,#efe2c4,#fbf4e3)}
+#palabraView.on .pvLeaf.l{transform:rotateY(-84deg);opacity:0}
+#palabraView.on .pvLeaf.r{transform:rotateY(84deg);opacity:0}
+#palabraView .pvSheet{position:relative;width:min(640px,100%);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+ background:radial-gradient(120% 60% at 50% 0,#fffaf0,#f8efda 70%,#f3e6c8);border:1px solid var(--bgold-s);border-radius:22px;padding:34px 24px 0;text-align:center;color:var(--ink);
+ box-shadow:inset 0 0 0 5px rgba(255,253,247,.7),inset 0 0 0 6px rgba(168,134,75,.2),0 30px 60px -24px rgba(50,35,10,.6);
+ opacity:0;transform:translateY(14px) scale(.985);transition:opacity 1s ease .75s,transform 1.2s cubic-bezier(.2,.7,.2,1) .7s}
+html[data-theme=dark] #palabraView .pvSheet{background:radial-gradient(120% 60% at 50% 0,#30281e,#241e17 70%,#1f1a14);box-shadow:inset 0 0 0 5px rgba(0,0,0,.2),inset 0 0 0 6px rgba(216,174,104,.18),0 30px 60px -24px rgba(0,0,0,.8)}
+#palabraView.on .pvSheet{opacity:1;transform:none}
+#palabraView .pvSheet>*{transition:opacity .5s ease}
+#palabraView.swap .pvSheet>*:not(.pvClose){opacity:0}
+#palabraView .pvClose{position:absolute;top:10px;right:12px;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--bgold-s);background:var(--bpaper);color:var(--green);font-size:22px;line-height:1}
+#palabraView .pvEye{display:block;color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+#palabraView h2{font-family:var(--bserif);font-weight:500;font-size:32px;line-height:1.12;color:var(--ink);margin:8px auto 10px;max-width:22ch}
+#palabraView .pvRef{font-family:var(--bserif);font-size:18px;color:var(--muted)}
+#palabraView .pvRef b{color:var(--green);font-weight:600}
+#palabraView .pvOrn{height:14px;margin:14px 0 16px;background:linear-gradient(90deg,transparent,var(--bgold-s)) left center/calc(50% - 16px) 1px no-repeat,linear-gradient(90deg,var(--bgold-s),transparent) right center/calc(50% - 16px) 1px no-repeat,
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 14'%3E%3Cpath d='M12 1l2.2 6L12 13 9.8 7z' fill='%23a8864b'/%3E%3Ccircle cx='4' cy='7' r='1.3' fill='%23a8864b'/%3E%3Ccircle cx='20' cy='7' r='1.3' fill='%23a8864b'/%3E%3C/svg%3E") center/24px 14px no-repeat}
+#palabraView .bScr{text-align:left;--bfs:18px}
+#palabraView .bScr .gap{text-align:center;color:var(--gold);margin:.2em 0 .6em}
+#palabraView .pvActions{position:sticky;bottom:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:14px -24px 0;padding:14px 16px calc(16px + env(safe-area-inset-bottom));background:linear-gradient(rgba(246,236,212,0),#f5ead0 30%)}
+html[data-theme=dark] #palabraView .pvActions{background:linear-gradient(rgba(31,26,20,0),#211b15 30%)}
+#palabraView .pvActions button{font-size:14.5px;padding:10px 16px}
+body.palabraOn{overflow:hidden}
+@media (min-width:900px){#palabraView .pvSheet{padding:44px 44px 0}#palabraView .pvActions{margin:14px -44px 0}#palabraView h2{font-size:38px}}
+@media (prefers-reduced-motion:reduce){#palabraView .pvLeaf,#palabraView .pvSheet,#palabraView .pvBackdrop{transition-duration:.01s!important;transition-delay:0s!important}}
+
+/* nav escritorio: hueco para «Biblia» */
+html.desk #siteNav .snLinks{gap:0}
+html.desk #siteNav .snLinks button{padding-left:7px;padding-right:7px}
+@media (max-width:1240px){html.desk #siteNav .snLinks button{padding-left:5px;padding-right:5px}}

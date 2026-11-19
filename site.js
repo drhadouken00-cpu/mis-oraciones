@@ -34,7 +34,7 @@ if(showDl){
  <p class="gaLead">${T('La app tiene todo lo de la web y además:','The app has everything on the web, plus:')}</p>
  <ul class="gaList">${extras.map(([i,t])=>`<li><span aria-hidden="true">${i}</span><span>${t}</span></li>`).join('')}</ul>
  <div class="gaFoot"><div class="gaRow"><a class="gaBtn" href="${APK}" download="MisOraciones.apk" rel="noopener">⬇ &nbsp;${T('Descargar para Android','Download for Android')}</a>
- <span class="gaMeta">${T('Gratis · versión 3.1 (17) · 16 MB','Free · version 3.1 (17) · 16 MB')}</span></div>
+ <span class="gaMeta">${T('Gratis · versión 3.1 (18) · 19 MB','Free · version 3.1 (18) · 19 MB')}</span></div>
  <div class="gaQr"><img src="icons/apk-qr.svg" width="112" height="112" alt="${T('Código QR para descargar la app','QR code to download the app')}"><span>${T('O escanéalo con tu Android','Or scan it with your Android phone')}</span></div></div>
  <details class="gaHow"><summary>${T('Cómo instalarla','How to install it')}</summary><ol>
   <li>${T('Pulsa «Descargar» en tu Android y abre el archivo <b>MisOraciones.apk</b>.','Tap “Download” on your Android phone and open the file <b>MisOraciones.apk</b>.')}</li>
