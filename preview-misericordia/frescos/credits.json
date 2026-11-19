@@ -1,0 +1,80 @@
+[
+ {
+  "key": "mise-jesus",
+  "file": "mise-jesus.webp",
+  "title": "Divine Mercy (original image, Vilnius)",
+  "artist": "Eugeniusz Kazimirowski",
+  "year": "1934",
+  "medium": "oil on canvas",
+  "source": "https://commons.wikimedia.org/wiki/File:Divina_Misericordia_(Eugeniusz_Kazimirowski,_1934).jpg",
+  "commons_file": "Divina Misericordia (Eugeniusz Kazimirowski, 1934).jpg",
+  "license": "Public domain (PD-Art; PD-old-auto-1996, Poland, painter died 1939)",
+  "width": 854,
+  "height": 1440
+ },
+ {
+  "key": "mise-1",
+  "file": "mise-1.webp",
+  "title": "The Agony in the Garden",
+  "artist": "El Greco",
+  "year": "c. 1590",
+  "medium": "oil on canvas",
+  "source": "https://commons.wikimedia.org/wiki/File:El_Greco_-_The_Agony_in_the_Garden_-_WGA10484.jpg",
+  "commons_file": "El Greco - The Agony in the Garden - WGA10484.jpg",
+  "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work; artist died more than 100 years ago)",
+  "width": 1080,
+  "height": 957
+ },
+ {
+  "key": "mise-2",
+  "file": "mise-2.webp",
+  "title": "Ecce Homo (detail)",
+  "artist": "Antonio Ciseri",
+  "year": "1871–1891",
+  "medium": "oil on canvas",
+  "source": "https://commons.wikimedia.org/wiki/File:Antonio_Ciseri_-_Ecce_Homo_(detail).jpg",
+  "commons_file": "Antonio Ciseri - Ecce Homo (detail).jpg",
+  "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work; artist died more than 100 years ago)",
+  "width": 958,
+  "height": 1440
+ },
+ {
+  "key": "mise-3",
+  "file": "mise-3.webp",
+  "title": "Christ Carrying the Cross",
+  "artist": "El Greco",
+  "year": "1580s",
+  "medium": "oil on canvas",
+  "source": "https://commons.wikimedia.org/wiki/File:Christ_Carrying_the_Cross_1580.jpg",
+  "commons_file": "Christ Carrying the Cross 1580.jpg",
+  "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work; artist died more than 100 years ago)",
+  "width": 1030,
+  "height": 1440
+ },
+ {
+  "key": "mise-4",
+  "file": "mise-4.webp",
+  "title": "Christ Crucified",
+  "artist": "Diego Velázquez",
+  "year": "c. 1632",
+  "medium": "oil on canvas",
+  "source": "https://commons.wikimedia.org/wiki/File:Cristo_crucificado.jpg",
+  "commons_file": "Cristo crucificado.jpg",
+  "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work; artist died more than 100 years ago)",
+  "width": 966,
+  "height": 1440
+ },
+ {
+  "key": "mise-5",
+  "file": "mise-5.webp",
+  "title": "The Incredulity of Saint Thomas",
+  "artist": "Caravaggio",
+  "year": "1601–1602",
+  "medium": "oil on canvas",
+  "source": "https://commons.wikimedia.org/wiki/File:Caravaggio_incredulity.jpg",
+  "commons_file": "Caravaggio incredulity.jpg",
+  "license": "Public domain (PD-Art: faithful reproduction of a public-domain 2D work; artist died more than 100 years ago)",
+  "width": 1080,
+  "height": 802
+ }
+]

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d0908">
+<title>Coronilla de la Divina Misericordia · prueba</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="sangre-anim.css">
+<link rel="stylesheet" href="mise-anim.css">
+<style>html,body{margin:0;height:100%;background:#0d0908}.sa .demo.on{background:#9b1b22;border-color:#e0a0a0}.sa .demo{font-size:13px}</style>
+</head><body>
+<div id="mi"></div>
+<script src="data/mise-seq.js"></script>
+<script src="data/mise.js"></script>
+<script src="frescos/credits.js"></script>
+<script src="mise-map.js"></script>
+<script src="mise-anim.js"></script>
+<script>
+(function(){
+  // Página de prueba: la cuenta se mueve solo con ‹ ›, tocando una cuenta o un párrafo, o con «Demo» (sin voz).
+  const q=new URLSearchParams(location.search);let lang=q.get('lang')==='en'?'en':'es';
+  const mi=MiseAnim.mount(document.getElementById('mi'),{lang});
+  MISE_IMAGES.forEach(m=>{const i=new Image();i.src=m.src});
+  const tools=mi.el.tools;tools.innerHTML='<button type="button" class="demo"></button><button type="button" class="lang"></button>';
+  const demoB=tools.querySelector('.demo'),lb=tools.querySelector('.lang'),L=()=>MISE_SEQ[lang];
+  let timer=null;const base=+(q.get('ms')||1100);
+  const dur=s=>s.kind==='small'?base:s.phase==='read'?base*2.2:base*2;
+  function labels(){demoB.textContent=timer?'⏸ Demo':(lang==='es'?'▶ Demo (sin voz)':'▶ Demo (no voice)');lb.textContent=lang==='es'?'EN':'ES';document.documentElement.lang=lang}
+  function step(){if(mi.idx>=mi.steps.length-1)return demo(false);mi.next();timer=setTimeout(step,dur(mi.steps[mi.idx]))}
+  function demo(on){clearTimeout(timer);timer=null;demoB.classList.toggle('on',on);if(on)timer=setTimeout(step,dur(mi.steps[mi.idx]));labels()}
+  demoB.onclick=()=>demo(!timer);
+  lb.onclick=()=>{lang=lang==='es'?'en':'es';mi.setLang(lang,L().parts,L().title);labels()};
+  mi.load(L().parts,L().title);labels();
+  if(q.get('step'))mi.setStep(+q.get('step'));
+  addEventListener('keydown',e=>{if(e.key==='ArrowRight')mi.next();if(e.key==='ArrowLeft')mi.prev()});
+  window.__mi=mi;
+})();
+</script>
+</body></html>

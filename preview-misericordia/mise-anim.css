@@ -1,0 +1,13 @@
+/* Mis oraciones · Coronilla de la Divina Misericordia: mismos estilos que la Sangre (sangre-anim.css),
+   con los degradados propios (#mi*) dentro de .mi. Cargar después de sangre-anim.css. */
+.mi .sa-bead .sa-fill{fill:url(#miDim);transition:fill .6s ease}
+.mi .sa-drop .sa-fill{fill:url(#miRubyDim)}
+.mi .sa-bead.done .sa-fill{fill:url(#miDone)}
+.mi .sa-drop.done .sa-fill{fill:url(#miRuby);opacity:.8}
+.mi .sa-bead.cur .sa-fill{fill:url(#miGold)}
+.mi .sa-drop.cur .sa-fill{fill:url(#miRuby)}
+.mi .sa-bead.cur .sa-body{transform:scale(1.25);filter:url(#miGlow)}
+.mi .sa-white .sa-fill{fill:url(#miPearlDim)}
+.mi .sa-white.done .sa-fill{fill:url(#miPearl)}
+.mi .sa-white.cur .sa-fill{fill:url(#miPearlLit)}
+.mi .sa-pray{font-family:Georgia,serif;font-size:14px;color:#e8d9bf}
