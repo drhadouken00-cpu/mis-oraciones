@@ -121,9 +121,9 @@ const music=(()=>{let cfg=Object.assign({on:false,track:'cello',vol:0.15},J('bgM
   cur=0;audio.loop=l.length===1;if(!audio.src||!audio.src.endsWith(l[0]))audio.src=l[0];audio.volume=0;vol=0;
   audio.play().then(()=>{active=true;need=false;rampTo(wanted())}).catch(()=>{need=true})}
  function halt(){active=false;need=false;if(ramp){clearInterval(ramp);ramp=0}if(nat){try{Android.musicStop()}catch{}}else if(audio)audio.pause()}
- function tick(){if(!cfg.on){if(active)halt();return}if(document.hidden&&!state.playing){if(active)halt();return}if(!active)start();else rampTo(wanted())}
+ function tick(){if(!cfg.on||document.body.classList.contains('santiOn')){if(active)halt();return}if(document.hidden&&!state.playing){if(active)halt();return}if(!active)start();else rampTo(wanted())}
  document.addEventListener('visibilitychange',tick);addEventListener('pagehide',()=>{if(!state.playing)halt()});
- addEventListener('pointerdown',()=>{if(cfg.on&&!active&&!(document.hidden))start()},{capture:true});
+ addEventListener('pointerdown',()=>{if(cfg.on&&!active&&!(document.hidden)&&!document.body.classList.contains('santiOn'))start()},{capture:true});
  return {tick,cfg:()=>cfg,status:()=>({active,vol:Math.round(vol*1000)/1000,paused:audio?audio.paused:null,src:audio?audio.src.split('/').pop():null,native:nat}),set(p){const tr=p.track&&p.track!==cfg.track;Object.assign(cfg,p);save();if(tr&&active){halt()}tick();renderMusic()},toggle(){this.set({on:!cfg.on});toast(cfg.on?T('♫ Música de fondo activada','♫ Background music on'):T('Música de fondo apagada','Background music off'))}}})();
 const musicBtn=mk('<button id="musicBtn" type="button" class="musicBtn"></button>');options.append(musicBtn);musicBtn.onclick=()=>music.toggle();
 function renderMusic(){const c=music.cfg();musicBtn.setAttribute('aria-pressed',String(c.on));musicBtn.textContent='♫ '+(c.on?T('Música: sí','Music: on'):T('Música: no','Music: off'));

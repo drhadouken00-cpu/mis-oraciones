@@ -77,7 +77,7 @@ $('timerPause').onclick=()=>{T.remaining=Math.max(1,left());T.state='paused';sav
 $('timerCancel').onclick=()=>{T.state='idle';save();if(AN)AndroidAlarms.timerCancel();renderTimer()};
 let ctx;function unlockAudio(){try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();ctx.resume()}catch{}}
 function chime(){try{unlockAudio();[0,1.2,2.4].forEach(t=>{for(const f of [528,792]){const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=f;o.connect(g);g.connect(ctx.destination);const s=ctx.currentTime+t;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.18,s+.05);g.gain.exponentialRampToValueAtTime(.001,s+1.6);o.start(s);o.stop(s+1.7)}})}catch{}}
-setInterval(()=>{if(T.state==='running'&&left()<=0){T.state='done';save();if(!document.hidden)chime();MO.toast('Tu tiempo con el Altísimo ha terminado ✝')}
+setInterval(()=>{if(T.state==='running'&&left()<=0){T.state='done';save();if(!document.hidden&&!document.body.classList.contains('santiOn'))chime();MO.toast('Tu tiempo con el Altísimo ha terminado ✝')}
  if(!$('timerView').hidden||T.state!=='idle')renderTimer()},250);
 function openTimer(){$('home').hidden=true;$('reader').hidden=true;$('timerView').hidden=false;$('player').hidden=true;document.body.classList.remove('hasPlayer');window.scrollTo(0,0);renderTimer()}
 const baseHome=goHome;window.goHome=goHome=function(){if(nav.classList.contains('open')){closeDrawer();return}if($('alarmsDialog')?.open){$('alarmsDialog').close();return}

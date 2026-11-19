@@ -1,0 +1,110 @@
+/* Mis oraciones v15 · estilo «libro de oraciones» (aprobado en preview-estilo). Solo apariencia: no toca datos ni el texto de las oraciones
+   (el cuerpo de lectura mantiene su letra y tamaño). Se activa con la clase html.libro. */
+@font-face{font-family:'Cormorant Garamond';src:url(fonts/cormorant.woff2) format('woff2');font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Cormorant Garamond';src:url(fonts/cormorant-italic.woff2) format('woff2');font-weight:300 700;font-style:italic;font-display:swap}
+html.libro{--gold-l:#c9ad78;--gold-s:rgba(168,134,75,.38);--paper:#fffcf4;--serif:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+html.libro:not([data-theme=dark]){--ink:#2a3a33;--line:#e6dcc6;--muted:#7a7564}
+/* Papel: marfil con grano muy sutil y bordes apenas tostados */
+html.libro body{background-color:var(--bg);background-image:
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .36 0 0 0 0 .2 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+ radial-gradient(120% 80% at 50% 0,rgba(255,252,240,.9),transparent 60%),
+ radial-gradient(140% 120% at 50% 50%,transparent 62%,rgba(168,134,75,.10));background-attachment:fixed}
+/* Títulos con serifa clásica */
+html.libro h1,html.libro h2,html.libro .tile strong,html.libro #reader h1{font-family:var(--serif);font-weight:500;letter-spacing:.005em}
+html.libro .intro h1{font-size:40px;line-height:1.08;margin:6px 0 10px;color:var(--ink)}
+html.libro .intro h1 em{font-style:italic;color:var(--green)}
+html.libro .intro::after,html.libro #reader .readerMeta::before{content:"";display:block;height:14px;margin:4px 0 22px;background:
+ linear-gradient(90deg,transparent,var(--gold-s)) left center/calc(50% - 16px) 1px no-repeat,
+ linear-gradient(90deg,var(--gold-s),transparent) right center/calc(50% - 16px) 1px no-repeat,
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 14'%3E%3Cpath d='M12 1l2.2 6L12 13 9.8 7z' fill='%23a8864b'/%3E%3Ccircle cx='4' cy='7' r='1.3' fill='%23a8864b'/%3E%3Ccircle cx='20' cy='7' r='1.3' fill='%23a8864b'/%3E%3C/svg%3E") center/24px 14px no-repeat}
+html.libro .eyebrow{color:var(--gold);letter-spacing:.2em}
+/* Cabecera */
+html.libro .brand{color:var(--green)}
+html.libro #home header{padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid var(--line);position:relative}
+html.libro #home header::after{content:"✠";position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);font-size:12px;line-height:16px;padding:0 8px;color:var(--gold);background:var(--bg)}
+html.libro .menuButton span{background:var(--green)}
+html.libro .langToggle{border-color:var(--gold-s)!important}
+/* Tarjeta principal: pergamino con doble filete dorado */
+html.libro .featured.daily{background:linear-gradient(170deg,#fffdf7 0%,#f7f0df 100%);border:1px solid var(--gold-s);border-radius:20px;box-shadow:inset 0 0 0 5px rgba(255,253,247,.9),inset 0 0 0 6px rgba(168,134,75,.18),0 10px 24px -14px rgba(110,80,30,.35),0 2px 6px rgba(110,80,30,.06)}
+html.libro .featured h2{font-size:31px;color:var(--ink)}
+html.libro .featured p{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.4;color:#5e5640}
+html.libro .featured .flower{color:rgba(168,134,75,.20)}
+/* Botones: verde con reflejo dorado; secundarios con filete dorado */
+html.libro button:not(.icon):not(.back):not(.tile):not(.prayerRow):not(.secondary):not([class^=pui]):not(.rowPlay):not(.menuButton):not([lang]){border-radius:999px;box-shadow:inset 0 0 0 1px rgba(201,173,120,.45),0 4px 10px -6px rgba(37,79,69,.6)}
+html.libro .cardButtons .secondary,html.libro #dailyRead,html.libro .secondary{background:transparent;color:var(--green);border:1px solid var(--gold-s);border-radius:999px}
+html.libro .streak{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--muted)}
+/* Accesos del día: pequeñas ventanas a los frescos */
+html.libro .tiles{gap:12px}
+html.libro .tile{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--gold-s);border-radius:18px;padding:86px 14px 14px;min-height:160px;box-shadow:0 8px 18px -14px rgba(110,80,30,.45)}
+html.libro .tile::before{content:"";position:absolute;left:0;right:0;top:0;height:66px;background:var(--art,none) var(--pos,center 30%)/cover no-repeat;-webkit-mask:linear-gradient(#000 45%,transparent);mask:linear-gradient(#000 45%,transparent);filter:saturate(.9) sepia(.12)}
+html.libro .tile::after{content:"";position:absolute;left:14px;right:14px;top:65px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-s),transparent)}
+html.libro .tileIcon{position:absolute;top:49px;left:12px;width:32px;height:32px;display:grid;place-items:center;font-size:17px;margin:0;background:var(--paper);border:1px solid var(--gold-s);border-radius:50%;z-index:1;color:var(--gold)}
+html.libro .tile strong{font-size:20px;line-height:1.1;color:var(--ink);margin-top:2px}
+html.libro .tile small{color:var(--muted)}
+html.libro #tileGospel{--art:url(frescos/luminosos-3.webp);--pos:center 18%}
+html.libro #tileRosary{--art:url(frescos/luminosos-1.webp);--pos:center 30%}
+html.libro #tileChaplet{--art:url(frescos/mise-jesus.webp);--pos:center 20%}
+html.libro #tileTimer{--art:url(frescos/santi-custodia.webp);--pos:center 35%}
+/* Aviso de la noche y Android: mismo papel */
+html.libro .nightTip,html.libro .getApk{background:var(--paper);border:1px solid var(--gold-s);border-radius:20px;box-shadow:0 8px 18px -14px rgba(110,80,30,.4)}
+html.libro .installTip{border-radius:16px}
+html.libro .getApk h2{font-size:27px}
+/* Biblioteca */
+html.libro .row h2{font-size:30px}
+html.libro .search{background:var(--paper);border-color:var(--gold-s);border-radius:999px}
+html.libro .tabs button{border:1px solid transparent;border-radius:999px}
+html.libro .tabs .selected{background:var(--green);box-shadow:inset 0 0 0 1px rgba(201,173,120,.5)}
+html.libro .libraryItem{border-bottom:1px solid transparent;border-image:linear-gradient(90deg,transparent,var(--gold-s) 20%,var(--gold-s) 80%,transparent) 1}
+html.libro .prayerRow strong{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink)}
+html.libro .prayerRow .mark{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fffaf0,#efe3c8);border:1px solid var(--gold-s);color:var(--gold)}
+html.libro .rowPlay{color:var(--green)!important;border:1px solid var(--gold-s)!important;border-radius:50%!important;background:var(--paper)!important}
+html.libro footer{font-family:var(--serif);font-size:17px}
+/* Lectura */
+html.libro #reader header{border-bottom:1px solid var(--line);padding-bottom:6px}
+html.libro #reader h1{font-size:42px;line-height:1.05;color:var(--ink)}
+html.libro #reader .readerMeta{color:var(--muted)}
+html.libro #reader .readerMeta::before{margin:0 0 10px}
+html.libro .membership .secondary{min-height:38px;padding:6px 16px}
+html.libro article{color:#26332d}
+html.libro article p.active{background:linear-gradient(90deg,rgba(201,173,120,.24),rgba(201,173,120,.06));box-shadow:inset 3px 0 var(--gold)}
+/* Reproductor compacto: papel con filete dorado */
+html.libro #player{background:linear-gradient(#fffcf4,#f7f0e0);border-top:1px solid var(--gold-s);box-shadow:0 -10px 24px -12px rgba(110,80,30,.28)}
+html.libro #player .progress{background:rgba(168,134,75,.15)}
+html.libro #player .progress div{background:linear-gradient(90deg,var(--gold),var(--gold-l))}
+html.libro .puiBar button{color:var(--green)}
+html.libro .puiBar .puiPlay{background:var(--green);color:#fff;box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--gold-s)}
+html.libro .puiInfo b{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink)}
+html.libro .puiBar .puiMode,html.libro .puiBar .puiExp,html.libro .puiBar .puiHide{color:var(--gold)}
+/* Rosario: los frescos se quedan como están; se calienta el marco y el reproductor deja de ser una franja blanca */
+html.libro #raView{background:#17110a}
+html.libro #raView .ra-shade{background:linear-gradient(180deg,rgba(28,19,9,.86) 0,rgba(28,19,9,.38) 25%,rgba(28,19,9,.22) 55%,rgba(24,16,8,.9) 100%)}
+html.libro #raView .ra-mys{font-family:var(--serif);font-size:24px;font-weight:500}
+html.libro #raView .ra-mys::after{content:"";display:block;width:120px;height:10px;margin:2px auto 0;background:linear-gradient(90deg,transparent,rgba(212,175,90,.7),transparent) center/100% 1px no-repeat,radial-gradient(circle,#D4AF5A 2px,transparent 2.5px) center/10px 10px no-repeat}
+html.libro .raTop .raTitle{font-family:var(--serif);font-size:17px;font-weight:600;letter-spacing:.02em}
+html.libro .raText{background:linear-gradient(170deg,rgba(40,29,15,.78),rgba(22,15,8,.78));border-color:rgba(212,175,90,.42);border-radius:18px;box-shadow:inset 0 0 0 4px rgba(22,15,8,.4),inset 0 0 0 5px rgba(212,175,90,.14)}
+html.libro .raTop button,html.libro .raNav button{background:rgba(32,23,12,.7);border-color:rgba(212,175,90,.6);color:#f3e7cc}
+html.libro body.raOn #player,html.libro body.saOn #player,html.libro body.miOn #player{background:linear-gradient(#21180d,#160f08);border-top:1px solid rgba(212,175,90,.45);box-shadow:0 -10px 24px -10px rgba(0,0,0,.6)}
+html.libro body.raOn .puiBar button,html.libro body.saOn .puiBar button,html.libro body.miOn .puiBar button{color:#e9dcc0}
+html.libro body.raOn .puiBar .puiPlay,html.libro body.saOn .puiBar .puiPlay,html.libro body.miOn .puiBar .puiPlay{background:#a8864b;color:#1b130a;box-shadow:0 0 0 2px #1c140b,0 0 0 3px rgba(212,175,90,.5)}
+html.libro body.raOn .puiInfo b,html.libro body.saOn .puiInfo b,html.libro body.miOn .puiInfo b{color:#f3e7cc}
+html.libro body.raOn .puiInfo span,html.libro body.saOn .puiInfo span,html.libro body.miOn .puiInfo span{color:#cbb488}
+html.libro body.raOn .puiBar .puiMode,html.libro body.saOn .puiBar .puiMode,html.libro body.miOn .puiBar .puiMode,html.libro body.raOn .puiBar .puiExp,html.libro body.saOn .puiBar .puiExp,html.libro body.miOn .puiBar .puiExp,html.libro body.raOn .puiBar .puiHide,html.libro body.saOn .puiBar .puiHide,html.libro body.miOn .puiBar .puiHide{color:#D4AF5A}
+html.libro body.raOn #player .progress,html.libro body.saOn #player .progress,html.libro body.miOn #player .progress{background:rgba(212,175,90,.15)}
+
+/* v15 · Modo oscuro: mismo estilo con papel oscuro */
+html.libro[data-theme=dark]{--paper:#262019;--gold-s:rgba(216,174,104,.32);--gold-l:#d8ae68}
+html.libro[data-theme=dark] body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .9 0 0 0 0 .8 0 0 0 0 .6 0 0 0 .035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(140% 120% at 50% 50%,transparent 62%,rgba(0,0,0,.25))}
+html.libro[data-theme=dark] .featured.daily{background:linear-gradient(170deg,#2a231b 0%,#211b15 100%);box-shadow:inset 0 0 0 5px rgba(0,0,0,.18),inset 0 0 0 6px rgba(216,174,104,.16),0 10px 24px -14px rgba(0,0,0,.6)}
+html.libro[data-theme=dark] .featured p{color:#cdbfa5}
+html.libro[data-theme=dark] .prayerRow .mark{background:radial-gradient(circle at 35% 30%,#3a3127,#2a231b)}
+html.libro[data-theme=dark] article{color:var(--ink)}
+html.libro[data-theme=dark] #player{background:linear-gradient(#241e18,#1d1813)}
+html.libro[data-theme=dark] .puiBar .puiPlay,html.libro[data-theme=dark] .tabs .selected{background:#a9884f;color:#1b1713}
+html.libro[data-theme=dark] .tile::before{filter:saturate(.85) sepia(.12) brightness(.85)}
+html.libro #tileSangre{--art:url(frescos/sangre-1.webp);--pos:center 30%}
+html.libro #saView .sa-mys,html.libro #miView .sa-mys{font-family:var(--serif);font-weight:500;font-size:21px}
+html.libro #timerView .dial{background:linear-gradient(170deg,var(--paper),color-mix(in srgb,var(--paper) 88%,var(--gold)));border:1px solid var(--gold-s);border-radius:22px;box-shadow:0 10px 24px -16px rgba(110,80,30,.4)}
+html.libro #timerView .ring{background:rgba(168,134,75,.18)}html.libro #timerView #timerRing{background:linear-gradient(90deg,var(--gold),var(--gold-l))}
+html.libro #timerView h1{font-family:var(--serif);font-weight:500;font-size:40px;line-height:1.08}
+html.libro .secondary.chosen{background:var(--green);color:#fff;border-color:var(--green)}
+html.libro[data-theme=dark] .secondary.chosen{background:#a9884f;color:#1b1713}
