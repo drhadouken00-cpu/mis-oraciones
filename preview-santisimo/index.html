@@ -51,12 +51,15 @@ select{background:#1a1510;color:var(--ivory);border:1px solid #3a3122;border-rad
 #pic{position:absolute;background-repeat:no-repeat;background-size:100% 100%;transform-origin:var(--fx) var(--fy);animation:drift 90s ease-in-out infinite alternate;will-change:transform;filter:brightness(.7) saturate(.92)}
 @keyframes drift{from{transform:scale(1)}to{transform:scale(1.045)}}
 .fx{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);margin:calc(var(--s)/-2) 0 0 calc(var(--s)/-2);pointer-events:none;mix-blend-mode:screen;will-change:transform,opacity}
-#glow{background:radial-gradient(circle,rgba(255,248,222,.95) 0,rgba(255,226,158,.62) 6%,rgba(236,186,96,.40) 17%,rgba(214,162,72,.20) 33%,rgba(200,150,60,.07) 50%,transparent 68%);animation:breathe 7s ease-in-out infinite}
-#core{--s:calc(var(--h) * 3.2);background:radial-gradient(circle,rgba(255,255,248,.9) 0,rgba(255,248,225,.45) 35%,transparent 70%);animation:breathe 7s ease-in-out infinite}
-#rays{background:repeating-conic-gradient(from 0deg,rgba(255,228,165,.28) 0deg 1.6deg,transparent 1.4deg 15deg);-webkit-mask:radial-gradient(circle,#000 6%,rgba(0,0,0,.55) 30%,transparent 64%);mask:radial-gradient(circle,#000 6%,rgba(0,0,0,.55) 30%,transparent 64%);animation:spin 160s linear infinite,raysB 7s ease-in-out infinite}
-#rays2{background:repeating-conic-gradient(from 7deg,rgba(255,238,196,.18) 0deg .9deg,transparent .8deg 22deg);-webkit-mask:radial-gradient(circle,#000 5%,transparent 55%);mask:radial-gradient(circle,#000 5%,transparent 55%);animation:spin 240s linear infinite reverse}
-@keyframes breathe{0%,100%{transform:scale(.86);opacity:.62}50%{transform:scale(1.08);opacity:1}}
-@keyframes raysB{0%,100%{opacity:.55}50%{opacity:1}}
+#glow{background:radial-gradient(circle,rgba(255,248,222,.95) 0,rgba(255,226,158,.62) 6%,rgba(236,186,96,.40) 17%,rgba(214,162,72,.20) 33%,rgba(200,150,60,.07) 50%,transparent 68%);animation:breathe 10s infinite}
+#core{--s:calc(var(--h) * 3.2);background:radial-gradient(circle,rgba(255,255,248,.9) 0,rgba(255,248,225,.45) 35%,transparent 70%);animation:breatheCore 10s infinite}
+#rays{background:repeating-conic-gradient(from 0deg,rgba(255,228,165,.28) 0deg 1.6deg,transparent 1.4deg 15deg);-webkit-mask:radial-gradient(circle,#000 6%,rgba(0,0,0,.55) 30%,transparent 64%);mask:radial-gradient(circle,#000 6%,rgba(0,0,0,.55) 30%,transparent 64%);animation:spin 160s linear infinite,raysB 10s infinite}
+#rays2{background:repeating-conic-gradient(from 7deg,rgba(255,238,196,.18) 0deg .9deg,transparent .8deg 22deg);-webkit-mask:radial-gradient(circle,#000 5%,transparent 55%);mask:radial-gradient(circle,#000 5%,transparent 55%);animation:spin 240s linear infinite reverse,raysB2 10s infinite}
+/* Respiración tranquila (~6 por minuto): inspirar ~3,8 s, pausa breve, espirar ~5,4 s, pausa breve. Nunca se apaga (mín. ≈45 %). */
+@keyframes breathe{0%,4%{transform:scale(.9);opacity:.45;animation-timing-function:cubic-bezier(.45,0,.55,1)}42%,46%{transform:scale(1.06);opacity:1;animation-timing-function:cubic-bezier(.45,0,.55,1)}100%{transform:scale(.9);opacity:.45}}
+@keyframes breatheCore{0%,4%{transform:scale(.94);opacity:.55;animation-timing-function:cubic-bezier(.45,0,.55,1)}42%,46%{transform:scale(1.04);opacity:1;animation-timing-function:cubic-bezier(.45,0,.55,1)}100%{transform:scale(.94);opacity:.55}}
+@keyframes raysB{0%,4%{opacity:.4;animation-timing-function:cubic-bezier(.45,0,.55,1)}42%,46%{opacity:.95;animation-timing-function:cubic-bezier(.45,0,.55,1)}100%{opacity:.4}}
+@keyframes raysB2{0%,4%{opacity:.5;animation-timing-function:cubic-bezier(.45,0,.55,1)}42%,46%{opacity:1;animation-timing-function:cubic-bezier(.45,0,.55,1)}100%{opacity:.5}}
 @keyframes spin{to{transform:rotate(360deg)}}
 #dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
 #vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 70% at var(--x) var(--y),transparent 30%,rgba(0,0,0,.55) 72%,rgba(0,0,0,.92) 100%)}
@@ -72,7 +75,7 @@ select{background:#1a1510;color:var(--ivory);border:1px solid #3a3122;border-rad
 #adore.reveal #dot{opacity:0}
 /* ---------- Final ---------- */
 #end{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:30px;text-align:center;background:radial-gradient(circle at 50% 42%,#2a2010 0,#0b0907 62%)}
-#end .mono{width:76px;height:76px;border-radius:50%;background:radial-gradient(circle,#fff8e6 0,#f1d9a0 30%,rgba(212,175,90,.25) 60%,transparent 72%);animation:breathe 7s ease-in-out infinite}
+#end .mono{width:76px;height:76px;border-radius:50%;background:radial-gradient(circle,#fff8e6 0,#f1d9a0 30%,rgba(212,175,90,.25) 60%,transparent 72%);animation:breathe 10s infinite}
 #end p.big{font-family:Georgia,serif;font-size:27px;line-height:1.3;margin:0;max-width:520px}
 #end p.sub{margin:0;color:var(--gold);font-family:Georgia,serif;font-style:italic;font-size:19px}
 #end button{margin-top:14px;background:none;border:1px solid var(--gold2);border-radius:999px;padding:11px 26px;color:var(--ivory)}
@@ -125,8 +128,8 @@ const TX={
   exit:'Finish',praise:'Praised be the Most Blessed Sacrament of the altar.',praise2:'Forever blessed and praised.',back:'‹ Back',
   pics:{custodia:'Exposed monstrance',disputa:'Raphael · The Disputation',juanes:'Juan de Juanes · The Saviour'},
   credit:'Images: monstrance at St. Gabriel (Connersville), photo by Nheyob, CC0 · Raphael, “Disputation of the Holy Sacrament” (1509–1510), public domain · Juan de Juanes, “The Saviour” (Prado Museum), public domain. Music: “Ave Maria” (Bach-Gounod), cello by John Michel, CC BY-SA 3.0; “Ave Maria” (Schubert), violin by Katy Adelson, CC BY 3.0 — Wikimedia Commons.'}};
-// fx, fy: centro de la Hostia (fracción de la imagen); hr: radio de la Hostia (fracción del ancho); g: tamaño del aura
-const IMGS={custodia:{src:'img/custodia.webp',w:1100,h:1410,fx:.5,fy:.5,hr:.032,g:1},disputa:{src:'img/disputa.webp',w:1000,h:1614,fx:.5,fy:.601,hr:.022,g:1},juanes:{src:'img/juanes.webp',w:1200,h:1605,fx:.2267,fy:.5053,hr:.065,g:.8}};
+// fx, fy: origen de la luz (la Hostia; en Rafael, el Espíritu Santo) como fracción de la imagen; hr: radio de la Hostia (fracción del ancho); g: tamaño del aura
+const IMGS={custodia:{src:'img/custodia.webp',w:1100,h:1410,fx:.5,fy:.5,hr:.032,g:1},disputa:{src:'img/disputa.webp',w:1000,h:1614,fx:.502,fy:.452,hr:.05,g:.95,c:.5},juanes:{src:'img/juanes.webp',w:1200,h:1605,fx:.2267,fy:.5053,hr:.065,g:.8}};
 const TRACKS={cello:'../music/john-michel-ave-maria.mp3',violin:'../music/katy-adelson-ave-maria.mp3'};
 const qs=new URLSearchParams(location.search);
 let lang=qs.get('lang')||(()=>{try{return localStorage.getItem('moLang')}catch{return null}})()||((navigator.language||'').startsWith('es')?'es':'en');if(!TX[lang])lang='es';
@@ -164,6 +167,7 @@ function layout(){
  const hx=x+I.fx*w,hy=y+I.fy*h,hr=I.hr*w,a=$('adore').style;
  a.setProperty('--x',hx+'px');a.setProperty('--y',hy+'px');a.setProperty('--h',hr+'px');
  const g=Math.max(hr*14,Math.min(W,H)*.9)*I.g;
+ $('core').style.filter=I.c?`opacity(${I.c})`:'';  // c: intensidad del núcleo (en Rafael más suave para que se vea la paloma)
  for(const [id,k] of [['glow',1],['rays',1.25],['rays2',1.5]])$(id).style.setProperty('--s',g*k+'px');
  dustOrigin={x:hx,y:hy,r:g*.45};sizeCanvas();
 }
@@ -174,8 +178,13 @@ function seed(p){const a=Math.random()*Math.PI*2,r=Math.sqrt(Math.random())*dust
 function frame(ts){raf=requestAnimationFrame(frame);if(ts-last<41)return;const dt=Math.min(3,(ts-last)/41);last=ts;
  cx.clearRect(0,0,innerWidth,innerHeight);
  for(const p of parts){p.life+=dt*1;p.x+=p.vx*dt*4;p.y+=p.vy*dt*4;const k=p.life/p.max;if(k>=1){seed(p);continue}
-  const al=Math.sin(Math.PI*k)*.5;cx.globalAlpha=al;const gr=cx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.s*3);gr.addColorStop(0,'rgba(255,240,200,1)');gr.addColorStop(1,'rgba(255,220,150,0)');cx.fillStyle=gr;cx.beginPath();cx.arc(p.x,p.y,p.s*3,0,7);cx.fill()}
+  const al=Math.sin(Math.PI*k)*.5*(.6+.4*breath());cx.globalAlpha=al;const gr=cx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.s*3);gr.addColorStop(0,'rgba(255,240,200,1)');gr.addColorStop(1,'rgba(255,220,150,0)');cx.fillStyle=gr;cx.beginPath();cx.arc(p.x,p.y,p.s*3,0,7);cx.fill()}
  cx.globalAlpha=1}
+// Fase de la respiración (0 = espirado, 1 = inspirado), leída de la animación CSS del aura para ir sincronizados
+function breath(){try{const an=$('glow').getAnimations().find(a=>a.animationName==='breathe');const t=((an?an.currentTime:performance.now())%10000)/1000,E=u=>.5-.5*Math.cos(Math.PI*u);
+ return t<.4?0:t<4.2?E((t-.4)/3.8):t<4.6?1:E(1-(t-4.6)/5.4)}catch{return .5}}
+// Para capturas/pruebas: congela la respiración en una fase (0 o 1) o la reanuda (null)
+function hold(b){const ms=b==null?null:(b?4400:200);for(const id of ['glow','core','rays','rays2'])for(const an of $(id).getAnimations()){if(!/^(breathe|breatheCore|raysB|raysB2)$/.test(an.animationName))continue;if(ms==null)an.play();else{an.currentTime=ms;an.pause()}}}
 function startDust(){if(reduce||raf)return;if(!parts.length)parts=Array.from({length:Math.round(Math.min(46,innerWidth*innerHeight/9000))},()=>{const p=seed({});p.life=Math.random()*p.max;return p});last=performance.now();raf=requestAnimationFrame(frame)}
 function stopDust(){cancelAnimationFrame(raf);raf=0}
 addEventListener('resize',()=>{if(running)layout()});
@@ -206,7 +215,7 @@ function finish(natural){
 }
 $('again').onclick=()=>{const e=$('end');e.classList.remove('on');e.hidden=true;$('setup').hidden=false;try{document.fullscreenElement&&document.exitFullscreen()}catch{}scrollTo(0,0)};
 $('start').onclick=start;
-window.SANTI={start,finish,layout,state:()=>({running,endAt,wake:!!wake,pick,mins,lang,reduce})};
+window.SANTI={start,finish,layout,hold,breath,state:()=>({running,endAt,wake:!!wake,pick,mins,lang,reduce})};
 </script>
 </body>
 </html>
