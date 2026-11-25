@@ -88,8 +88,8 @@ async function loadGospel(){
 const baseOpen=openPrayer;
 window.openPrayer=openPrayer=function(p){if(!p)return;baseOpen(p);markPrayed();
  $('editPrayer').hidden=GENERATED.test(p.id);
- if(p.id===GID)$('readerMeta').textContent='≈ '+p.minutes+' minutos · '+(p.ref||'')+' · Fuente: evangeliodeldia.org';
- else if(p.subtitle)$('readerMeta').textContent='≈ '+p.minutes+' minutos · '+p.subtitle+' · Guiado paso a paso';
+ if(p.id===GID)$('readerMeta').textContent='≈ '+p.minutes+(p.minutes===1?' minuto':' minutos')+' · '+(p.ref||'')+' · Fuente: evangeliodeldia.org';
+ else if(p.subtitle)$('readerMeta').textContent='≈ '+p.minutes+(p.minutes===1?' minuto':' minutos')+' · '+p.subtitle+' · Guiado paso a paso';
 };
 function sequence(){const v=(window.visibleItems||[]).filter(Boolean);return v.some(p=>p.id===current?.id)?v:prayers.filter(p=>!p.hidden)}
 function step(delta){

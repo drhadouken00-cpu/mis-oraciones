@@ -4,7 +4,7 @@
 const cr=document.querySelector('.v8credits');if(!cr||document.getElementById('textCredits'))return;
 const EN=window.MO_LANG==='en',T=(es,en)=>EN?en:es;
 const ES_ITEMS=[
- ['Salmo 91 (90)','Sagrada Biblia, traducción católica de Félix Torres Amat (1823-1825), dominio público; es el mismo texto de la Biblia de esta app (en la numeración de la Vulgata es el Salmo 90). En inglés: Douay-Rheims, revisión de Challoner (1899), dominio público.'],
+ ['Salmo 91 (90); Salmo 92 (91)','Sagrada Biblia, traducción católica de Félix Torres Amat (1823-1825), dominio público; es el mismo texto de la Biblia de esta app (en la numeración de la Vulgata son el Salmo 90 y el Salmo 91). En inglés: Douay-Rheims, revisión de Challoner (1899), dominio público.'],
  ['Magníficat','cántico de María (Lc 1, 46-55), según la Liturgia de las Horas de la Conferencia Episcopal Española, con el Gloria al Padre.'],
  ['Consagración a la Virgen María','fórmula de san Luis María Grignion de Montfort, del Tratado de la verdadera devoción a la Santísima Virgen (texto abreviado).'],
  ['Oración de Santa Gertrudis','oración tradicional atribuida a santa Gertrudis de Helfta, la Grande. La atribución no consta en sus escritos conservados; se difundió en la piedad popular.'],
@@ -15,7 +15,7 @@ const ES_ITEMS=[
  ['Guárdanos, Señor; Oración de la noche; Oración para la noche; Oración infantil antes de dormir; Antes de dormir; Oración a los ángeles','oraciones y jaculatorias de devoción popular y de la tradición oral, sin autor conocido, en la forma habitual en que se rezan en español.'],
  ['Versiones en inglés','se usa la forma inglesa tradicional cuando existe (por ejemplo, «Jesus, Mary and Joseph…» o la Biblia Douay-Rheims); las demás son traducciones fieles hechas para esta app.']];
 const EN_ITEMS=[
- ['Psalm 91 (90)','Douay-Rheims Bible, Challoner revision (1899), public domain; the same text as this app’s Bible (Psalm 90 in the Vulgate numbering). In Spanish: Torres Amat translation (1823–1825), public domain.'],
+ ['Psalm 91 (90); Psalm 92 (91)','Douay-Rheims Bible, Challoner revision (1899), public domain; the same text as this app’s Bible (Psalms 90 and 91 in the Vulgate numbering). In Spanish: Torres Amat translation (1823–1825), public domain.'],
  ['Magnificat','Canticle of Mary (Lk 1:46-55), as in the Liturgy of the Hours, with the Glory Be.'],
  ['Consecration to the Virgin Mary','formula of St Louis de Montfort, from the Treatise on the True Devotion to the Blessed Virgin (abridged).'],
  ['Prayer of Saint Gertrude','traditional prayer attributed to St Gertrude of Helfta, the Great. The attribution is not found in her surviving writings; the text spread in popular devotion.'],

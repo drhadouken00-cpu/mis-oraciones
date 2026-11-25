@@ -28,7 +28,7 @@ function renderList(){
  updateResume();
 }
 function openPrayer(p){
- current=p;$('home').hidden=true;$('reader').hidden=false;$('readerTitle').textContent=p.title;$('readerMeta').textContent='≈ '+p.minutes+' minutos · Voz de tu teléfono';$('passages').replaceChildren();
+ current=p;$('home').hidden=true;$('reader').hidden=false;$('readerTitle').textContent=p.title;$('readerMeta').textContent='≈ '+p.minutes+(p.minutes===1?' minuto':' minutos')+' · Voz de tu teléfono';$('passages').replaceChildren();
  p.parts.forEach((part,i)=>{const el=document.createElement('p');el.textContent=part.text;el.id='part-'+i;if(part.pause)el.className='petition';$('passages').append(el)});
  $('inDay').checked=lists.day.includes(p.id);$('inNight').checked=lists.night.includes(p.id);favoriteUI();showPlayer();updatePlayer();window.scrollTo(0,0);
 }

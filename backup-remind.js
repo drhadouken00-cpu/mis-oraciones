@@ -48,7 +48,7 @@ function show(reason){
  const n=sigs().n;
  box=document.createElement('div');box.className='bkNudge';box.setAttribute('role','status');box.dataset.reason=reason;
  box.innerHTML=`<p><strong>${T('Guarda una copia de lo tuyo','Save a copy of your things')}</strong><span></span></p><div class="bkRow"><button type="button" class="bkSave">⇩ ${T('Guardar copia','Save backup')}</button><button type="button" class="bkLater secondary">${T('Ahora no','Not now')}</button></div>`;
- box.querySelector('span').textContent=n?T(`Así no pierdes tus ${n===1?'oración propia':n+' oraciones propias'} si cambias de móvil o borras el navegador.`,`So you never lose your ${n===1?'own prayer':n+' own prayers'} if you change phone or clear the browser.`):T('Tus listas e intenciones quedan a salvo en un archivo.','Your lists and intentions stay safe in a file.');
+ box.querySelector('span').textContent=n?T(`Así no pierdes ${n===1?'tu oración propia':'tus '+n+' oraciones propias'} si cambias de móvil o borras el navegador.`,`So you never lose your ${n===1?'own prayer':n+' own prayers'} if you change phone or clear the browser.`):T('Tus listas e intenciones quedan a salvo en un archivo.','Your lists and intentions stay safe in a file.');
  box.querySelector('.bkSave').onclick=()=>{hide();if(window.MO&&MO.openBackup){MO.openBackup();setTimeout(()=>$('exportBackup')?.click(),60)}};
  box.querySelector('.bkLater').onclick=()=>{LS.set('backupSnoozeUntil',Date.now()+7*DAY);hide()};
  document.body.append(box);
