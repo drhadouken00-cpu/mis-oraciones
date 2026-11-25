@@ -1,7 +1,7 @@
 // Mis oraciones v7: textos de la interfaz en inglés (solo se carga con el idioma EN).
 window.MO_I18N={
 // Inicio
-"Mis oraciones":"My Prayers","✝ MIS ORACIONES":"✝ MY PRAYERS","UN MOMENTO PARA TI Y PARA DIOS":"A MOMENT FOR YOU AND FOR GOD","Un momento para ti y para Dios":"A moment for you and for God",
+"Mis oraciones":"My Prayers","Mis Oraciones":"My Prayers","✝ MIS ORACIONES":"✝ MY PRAYERS","UN MOMENTO PARA TI Y PARA DIOS":"A MOMENT FOR YOU AND FOR GOD","Un momento para ti y para Dios":"A moment for you and for God",
 "Encuentra tu paz.":"Find your peace.","Una oración a la vez.":"One prayer at a time.","Lee, escucha y reza a tu ritmo.":"Read, listen and pray at your own pace.",
 "PARA EMPEZAR":"TO BEGIN","Oración a Dios":"Prayer to God","«Dios mío, creo, adoro,":"“My God, I believe, I adore,","espero y te amo».":"I hope and I love Thee.”",
 "▶ Escuchar oración":"▶ Listen to prayer","Escuchar oración":"Listen to prayer","▶ Retomar mi última oración":"▶ Resume my last prayer","Tu biblioteca":"Your library",

@@ -28,7 +28,7 @@ const ITEMS=[
  ['⌂','Inicio · Mi biblioteca',()=>{goHome();setTimeout(()=>document.querySelector('.collection').scrollIntoView({behavior:'smooth'}),50)}],
  ['⚙','Ajustes de lectura',()=>$('settingsDialog').showModal()],
  ['⇅','Copia de seguridad',()=>MO.openBackup()]];
-const nav=el('<nav id="drawer" aria-label="Menú" aria-hidden="true"><div class="drawerHead"><span class="brand">✝ &nbsp; MIS ORACIONES</span><small>Un momento para ti y para Dios</small></div><ul></ul></nav>');
+const nav=el('<nav id="drawer" aria-label="Menú" aria-hidden="true"><div class="drawerHead"><span class="brand"><img class="brandIcon" src="icons/brand-96.png" alt="" width="32" height="32" decoding="async"><span class="brandName">Mis Oraciones</span></span><small>Un momento para ti y para Dios</small></div><ul></ul></nav>');
 for(const it of ITEMS){const li=document.createElement('li');if(it==='-'){li.className='sep';nav.querySelector('ul').append(li);continue}
  const b=document.createElement('button');b.innerHTML='<span class="dIcon" aria-hidden="true"></span><span></span>';b.firstChild.textContent=it[0];b.lastChild.textContent=it[1];b.onclick=()=>{closeDrawer();it[2]()};li.append(b);nav.querySelector('ul').append(li)}
 document.body.append(nav);

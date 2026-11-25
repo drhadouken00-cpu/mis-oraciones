@@ -1,0 +1,54 @@
+/* Mis oraciones v22 · logo nuevo: icono + nombre en texto vivo (cabecera) y logo completo (bienvenida).
+   Solo apariencia: no toca datos ni textos de oraciones. */
+/* ---- Marca: icono + «Mis Oraciones» en Cormorant Garamond ---- */
+.brand{display:inline-flex;align-items:center;gap:9px;letter-spacing:0;font-size:inherit;font-weight:inherit;min-width:0}
+.brand.centerBrand{display:flex;justify-content:center}
+.brandIcon{width:32px;height:32px;flex:none;display:block}
+.brandName{font:600 23px/1 var(--serif,'Cormorant Garamond',Georgia,serif);letter-spacing:.01em;color:var(--green);white-space:nowrap}
+html[data-theme=dark] .brandName{color:var(--gold-l,#d8ae68)}
+/* Móvil estrecho: la marca ocupa su propia fila y los controles quedan debajo, a la derecha */
+@media (max-width:519px){
+ #home>header{flex-wrap:wrap;row-gap:4px}
+ #home>header .brand.centerBrand{order:-1;flex:0 0 100%}
+ #home>header #menuButton{margin-right:auto}
+}
+#drawer .drawerHead .brand{gap:10px}
+#drawer .drawerHead .brandIcon{width:38px;height:38px}
+#drawer .drawerHead .brandName{font-size:26px}
+/* Barra de ordenador */
+html.desk .snBrand{display:flex;align-items:center;gap:9px;font:inherit;letter-spacing:0;flex:none}
+html.desk .snIn .snBrand{box-shadow:none!important;border-radius:0!important;background:none!important}
+html.desk .snBrand .brandIcon{width:34px;height:34px}
+html.desk .snBrand .brandName{font-size:23px}
+html.desk .snIn{gap:10px}
+html.desk .snLinks{min-width:0}
+html.desk .snLinks button{padding:9px 8px}
+html.desk .sfBrand strong.sfName{display:flex;align-items:center;gap:9px;letter-spacing:0;font-size:inherit}
+html.desk .sfBrand .brandIcon{width:28px;height:28px}
+html.desk .sfBrand .brandName{font-size:22px}
+/* ---- Bienvenida: logo completo (ES) / emblema + texto vivo (EN) ---- */
+.wlogo{display:block;margin:2px auto 6px;text-align:center}
+.wlogo img{display:block;margin:0 auto;height:auto}
+.wEs img{width:min(300px,80%);filter:drop-shadow(0 8px 16px rgba(110,80,30,.22))}
+html[data-theme=dark] .wEs img,html[data-theme=dark] .wEn img{filter:drop-shadow(0 8px 18px rgba(0,0,0,.5))}
+.wEn img{width:112px;filter:drop-shadow(0 8px 16px rgba(110,80,30,.22))}
+.wEn b{display:block;margin-top:8px;font:600 44px/1.02 var(--serif,'Cormorant Garamond',Georgia,serif);color:var(--green);letter-spacing:.005em}
+html[data-theme=dark] .wEn b{color:var(--gold-l,#d8ae68)}
+.wEn span{display:block;margin-top:8px;font:700 11px/1.3 system-ui,-apple-system,sans-serif;letter-spacing:.22em;color:var(--gold)}
+.wEn em{display:block;margin-top:8px;font:italic 500 20px/1.3 var(--serif,'Cormorant Garamond',Georgia,serif);color:var(--muted)}
+html[lang=en] .wEs,html:not([lang=en]) .wEn{display:none}
+/* Móvil: el logo ya lleva el nombre y la frase; el título queda solo para lectores de pantalla */
+html:not(.desk) .intro h1{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+html:not(.desk) .intro{text-align:center}
+html:not(.desk) .intro::after{margin-top:10px}
+/* Ordenador: logo a la izquierda del texto de inicio */
+html.desk #home>.intro{display:grid;grid-template-columns:176px minmax(0,1fr);column-gap:26px;align-items:center}
+html.desk .intro .wlogo{grid-column:1;grid-row:1/span 5;margin:0}
+html.desk .intro .wEs img{width:176px}
+html.desk .intro .wEn img{width:110px}
+html.desk .intro .wEn b{font-size:36px}
+html.desk .intro .wEn span{letter-spacing:.14em;font-size:10px}
+html.desk .intro .wEn em{font-size:18px}
+html.desk .intro>:not(.wlogo){grid-column:2}
+html.desk .intro::after{grid-column:1/-1;grid-row:6}
+html.desk #home>.intro h1{font-size:40px}

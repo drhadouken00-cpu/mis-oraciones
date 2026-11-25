@@ -34,7 +34,7 @@ if(showDl){
  <p class="gaLead">${T('La app tiene todo lo de la web y además:','The app has everything on the web, plus:')}</p>
  <ul class="gaList">${extras.map(([i,t])=>`<li><span aria-hidden="true">${i}</span><span>${t}</span></li>`).join('')}</ul>
  <div class="gaFoot"><div class="gaRow"><a class="gaBtn" href="${APK}" download="MisOraciones.apk" rel="noopener">⬇ &nbsp;${T('Descargar para Android','Download for Android')}</a>
- <span class="gaMeta">${T('Gratis · versión 3.1 (21) · 19 MB','Free · version 3.1 (21) · 19 MB')}</span></div>
+ <span class="gaMeta">${T('Gratis · versión 3.1 (22) · 20 MB','Free · version 3.1 (22) · 20 MB')}</span></div>
  <div class="gaQr"><img src="icons/apk-qr.svg" width="112" height="112" alt="${T('Código QR para descargar la app','QR code to download the app')}"><span>${T('O escanéalo con tu Android','Or scan it with your Android phone')}</span></div></div>
  <details class="gaHow"><summary>${T('Cómo instalarla','How to install it')}</summary><ol>
   <li>${T('Pulsa «Descargar» en tu Android y abre el archivo <b>MisOraciones.apk</b>.','Tap “Download” on your Android phone and open the file <b>MisOraciones.apk</b>.')}</li>
@@ -67,7 +67,7 @@ function build(){
   ['lib',T('Biblioteca','Library'),()=>toHomeSel('.collection')]];
  if(showDl)L.push(['apk','Android',()=>MO_SITE.goDl()]);
  nav=mk(`<header id="siteNav" class="siteNav" aria-label="${T('Navegación','Navigation')}"><div class="snIn">
-  <button type="button" class="snBrand">✝ &nbsp;MIS ORACIONES</button><nav class="snLinks"></nav><div class="snTools"></div>
+  <button type="button" class="snBrand"><img class="brandIcon" src="icons/brand-96.png" alt="" width="34" height="34" decoding="async"><span class="brandName">Mis Oraciones</span></button><nav class="snLinks"></nav><div class="snTools"></div>
   <button type="button" class="snMore" aria-label="${T('Más opciones','More options')}">☰ <span>${T('Más','More')}</span></button></div></header>`);
  const links=nav.querySelector('.snLinks');
  for(const [k,t,f] of L){const b=document.createElement('button');b.type='button';b.dataset.k=k;b.textContent=t;b.onclick=f;if(k==='apk')b.className='snApk';links.append(b)}
@@ -77,7 +77,7 @@ function build(){
  const F=[[T('Créditos de textos, cuadros y música','Credits for texts, paintings and music'),()=>{$('settingsDialog')?.showModal();setTimeout(()=>document.querySelector('#settingsDialog .v8credits')?.scrollIntoView({block:'start'}),60)}],
   [T('Ajustes','Settings'),()=>$('settingsDialog')?.showModal()],[T('Alarmas','Alarms'),()=>MO.openAlarms&&MO.openAlarms()],[T('Copia de seguridad','Backup'),()=>MO.openBackup&&MO.openBackup()]];
  if(showDl)F.unshift([T('App para Android','Android app'),()=>MO_SITE.goDl()]);
- foot=mk(`<footer id="siteFoot" class="siteFoot"><div class="sfBrand"><strong>✝ &nbsp;MIS ORACIONES</strong><span>${T('Un momento para ti y para Dios. Lee, escucha y reza a tu ritmo.','A moment for you and for God. Read, listen and pray at your own pace.')}</span></div><div class="sfLinks"></div><p class="sfNote">${T('Cuadros de dominio público (Wikimedia Commons). Gratis y sin anuncios.','Public-domain paintings (Wikimedia Commons). Free and ad-free.')}</p></footer>`);
+ foot=mk(`<footer id="siteFoot" class="siteFoot"><div class="sfBrand"><strong class="sfName"><img class="brandIcon" src="icons/brand-96.png" alt="" width="26" height="26" decoding="async"><span class="brandName">Mis Oraciones</span></strong><span>${T('Un momento para ti y para Dios. Lee, escucha y reza a tu ritmo.','A moment for you and for God. Read, listen and pray at your own pace.')}</span></div><div class="sfLinks"></div><p class="sfNote">${T('Cuadros de dominio público (Wikimedia Commons). Gratis y sin anuncios.','Public-domain paintings (Wikimedia Commons). Free and ad-free.')}</p></footer>`);
  const fl=foot.querySelector('.sfLinks');for(const [t,f] of F){const b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=f;fl.append(b)}
  home.append(foot);
  const intro=home.querySelector('.intro');
