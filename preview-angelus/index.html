@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es" class="libro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f8f5ed">
+<title>Mis oraciones · prueba del Ángelus</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../v2.css">
+<link rel="stylesheet" href="../features.css">
+<link rel="stylesheet" href="../v3.css">
+<link rel="stylesheet" href="../pwa.css">
+<link rel="stylesheet" href="../v31b.css">
+<link rel="stylesheet" href="../i18n.css">
+<link rel="stylesheet" href="../estilo.css">
+<link rel="stylesheet" href="../logo.css">
+<link rel="stylesheet" href="angelus.css">
+</head>
+<body>
+<aside class="pvBanner">
+  <p><strong id="pvTitle">Prueba · Ángelus</strong> <span id="pvSub">Página sin enlazar: no cambia la app ni tus datos.</span></p>
+  <details class="pvDbg">
+    <summary id="dbgSum">Opciones de prueba</summary>
+    <div class="dbgGrid">
+      <label><span id="dbgSeason">Temporada</span>
+        <select id="dbgSeasonSel"><option value="auto"></option><option value="angelus"></option><option value="regina"></option></select></label>
+      <label><span id="dbgDate">Fecha</span><input type="date" id="dbgDateIn"></label>
+      <label><span id="dbgClock">Hora</span>
+        <select id="dbgClockSel"></select></label>
+    </div>
+    <p class="dbgInfo" id="dbgInfo"></p>
+  </details>
+</aside>
+
+<main id="home">
+  <header>
+    <button class="icon menuButton" aria-label="Menú" tabindex="-1"><span></span><span></span><span></span></button>
+    <span class="brand centerBrand"><img class="brandIcon" src="../icons/brand-96.png" alt="" width="32" height="32"><span class="brandName">Mis Oraciones</span></span>
+    <div class="topIcons">
+      <button class="icon" aria-label="Buscar" tabindex="-1">⌕</button>
+      <button class="icon" id="themeToggle" aria-label="Tema">☾</button>
+      <div class="langToggle" role="group" aria-label="Idioma" data-noi18n="1"><button type="button" lang="es" aria-pressed="true" title="Español">ES</button><button type="button" lang="en" aria-pressed="false" title="English">EN</button></div>
+      <button class="icon" aria-label="Ajustes" tabindex="-1">⚙</button>
+    </div>
+  </header>
+
+  <p class="ctxNote" id="ctxNote">Así se vería el panel de inicio con el Ángelus junto a las coronillas.</p>
+
+  <div class="tiles" id="tiles">
+    <button class="tile" id="tileGospel" tabindex="-1"><span class="tileIcon" aria-hidden="true">✠</span><strong data-k="tGospel">Evangelio del día</strong><small data-k="tGospelSub">Evangelio según San Lucas 21,20-28.</small></button>
+    <button class="tile" id="tileRosary" tabindex="-1" style="--art:url(../frescos/luminosos-1.webp)"><span class="tileIcon" aria-hidden="true">✿</span><strong data-k="tRosary">Rosario del día</strong><small data-k="tRosarySub">Misterios luminosos</small></button>
+    <button class="tile" id="tileChaplet" tabindex="-1" style="--art:url(../frescos/mise-jesus.webp);--pos:center 20%"><span class="tileIcon" aria-hidden="true">♱</span><strong data-k="tChaplet">Coronilla</strong><small data-k="tChapletSub">Divina Misericordia</small></button>
+    <button class="tile" id="tileTimer" tabindex="-1" style="--art:url(../frescos/santi-custodia.webp);--pos:center 35%"><span class="tileIcon" aria-hidden="true">◷</span><strong data-k="tTimer">Tiempo con el Altísimo</strong><small data-k="tTimerSub">De 1 a 60 minutos</small></button>
+
+    <!-- NUEVO: tarjeta del Ángelus (ancho completo, junto a las coronillas) -->
+    <article class="tile angTile" id="tileAngelus" aria-labelledby="angName">
+      <span class="tileIcon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17h12l-1.5-2.2V10a4.5 4.5 0 0 0-9 0v4.8z"/><path d="M10 20a2 2 0 0 0 4 0"/><path d="M12 3.5V5"/></svg></span>
+      <strong id="angName">Ángelus</strong>
+      <small id="angSub">Tres veces al día</small>
+      <span class="angChips" id="angChips" role="list"></span>
+      <span class="angStatus" id="angStatus" role="status"></span>
+      <span class="angActions">
+        <button type="button" class="angPray" id="angPray">Rezar</button>
+        <button type="button" class="secondary angRem" id="angRem">Avisos</button>
+      </span>
+    </article>
+  </div>
+  <p class="streak" id="streak">Empieza hoy tu racha de oración ✧</p>
+
+  <details class="pvNotes" id="credits">
+    <summary id="credSum">Créditos de esta prueba</summary>
+    <div id="credBody"></div>
+  </details>
+</main>
+
+<!-- Avisos (solo maqueta) -->
+<dialog id="remDlg">
+  <h2 id="remH">Avisos del Ángelus</h2>
+  <p class="remLead" id="remLead"></p>
+  <div id="remRows"></div>
+  <p class="remNote" id="remNote"></p>
+  <div class="remBtns"><button type="button" id="remClose" class="secondary">Cerrar</button></div>
+</dialog>
+
+<!-- Pantalla de oración -->
+<section id="angView" hidden aria-label="Ángelus">
+  <div class="av-bg" id="avBg"></div>
+  <div class="av-shade"></div>
+  <div class="avTop">
+    <button type="button" id="avBack" aria-label="Volver"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <span class="avTitle" id="avTitle">ÁNGELUS</span>
+    <button type="button" id="avMode" aria-pressed="true"></button>
+  </div>
+  <div class="avCap"><div class="avSet" id="avSet"></div><div class="avMys" id="avMys"></div></div>
+  <div class="avArt"><div class="avStage" id="avStage"></div><a class="avCredit" id="avCredit" target="_blank" rel="noopener"></a></div>
+  <div class="avBeads" id="avBeads" aria-hidden="true"><i></i><i></i><i></i><i class="cross"></i></div>
+  <div class="avText" id="avText"></div>
+  <div class="avNav">
+    <button type="button" id="avPrev" aria-label="Anterior">⏮</button>
+    <button type="button" id="avPlay" class="main" aria-label="Escuchar">▶</button>
+    <button type="button" id="avNext" aria-label="Siguiente">⏭</button>
+  </div>
+  <div class="avFoot">
+    <label class="avGl"><input type="checkbox" id="avGloria"> <span id="avGloriaT">Añadir Gloria</span></label>
+    <a id="avVatican" target="_blank" rel="noopener"></a>
+  </div>
+</section>
+
+<script src="angelus.js"></script>
+</body>
+</html>
