@@ -86,8 +86,8 @@ es:{pvTitle:'Prueba · Ángelus',pvSub:'Página sin enlazar: no cambia la app ni
  remRowSub:{6:'Al amanecer',12:'Mediodía',18:'Atardecer'},
  streak:'Empieza hoy tu racha de oración ✧',
  title:'ÁNGELUS',titleR:'REGINA CAELI',set:'La Anunciación del Señor',setR:'Tiempo de Pascua',
- mysA:['El anuncio del ángel','«Hágase en mí»','El Verbo se hizo carne','Oremos'],mysR:['Reina del cielo, alégrate','Alégrate, Virgen María','Ha resucitado el Señor','Oremos'],
- modeVoice:'🔊 Con voz',modeManual:'👆 Manual',play:'Escuchar',pause:'Pausa',gloria:'Añadir Gloria',
+ mysA:['El anuncio del ángel','«Hágase en mí»','El Verbo se hizo carne','Oremos','Gloria 1.ª','Gloria 2.ª','Gloria 3.ª','Por los fieles difuntos'],mysR:['Reina del cielo, alégrate','Alégrate, Virgen María','Ha resucitado el Señor','Oremos','Gloria 1.ª','Gloria 2.ª','Gloria 3.ª','Por los fieles difuntos'],
+ modeVoice:'🔊 Con voz',modeManual:'👆 Manual',play:'Escuchar',pause:'Pausa',
  vatican:'Escuchar el Ángelus del Papa en Vatican News ↗',vaticanR:'Escuchar el Regina Caeli del Papa en Vatican News ↗',vaturl:'https://www.vaticannews.va/es/papa.pagelist.angelus.html',
  noVoice:'Este navegador no tiene voz: usa el modo Manual.',
  V:'V.',R:'R.',credSum:'Créditos de esta prueba',
@@ -104,8 +104,8 @@ en:{pvTitle:'Preview · Angelus',pvSub:'Unlinked page: it does not change the ap
  remRowSub:{6:'Dawn',12:'Noon',18:'Evening'},
  streak:'Start your prayer streak today ✧',
  title:'THE ANGELUS',titleR:'REGINA CAELI',set:'The Annunciation of the Lord',setR:'Eastertide',
- mysA:['The angel’s message','“Be it done unto me”','The Word made flesh','Let us pray'],mysR:['Queen of heaven, rejoice','Rejoice, O Virgin Mary','The Lord is risen','Let us pray'],
- modeVoice:'🔊 Voice',modeManual:'👆 Manual',play:'Listen',pause:'Pause',gloria:'Add Glory Be',
+ mysA:['The angel’s message','“Be it done unto me”','The Word made flesh','Let us pray','Glory Be 1','Glory Be 2','Glory Be 3','For the faithful departed'],mysR:['Queen of heaven, rejoice','Rejoice, O Virgin Mary','The Lord is risen','Let us pray','Glory Be 1','Glory Be 2','Glory Be 3','For the faithful departed'],
+ modeVoice:'🔊 Voice',modeManual:'👆 Manual',play:'Listen',pause:'Pause',
  vatican:'Listen to the Pope’s Angelus on Vatican News ↗',vaticanR:'Listen to the Pope’s Regina Caeli on Vatican News ↗',vaturl:'https://www.vaticannews.va/en/pope.pagelist.angelus.html',
  noVoice:'This browser has no voice: use Manual mode.',
  V:'V.',R:'R.',credSum:'Credits for this preview',
@@ -117,7 +117,7 @@ const pad=n=>String(n).padStart(2,'0'),today=()=>{const d=new Date();return d.ge
 let LS={};try{LS={theme:localStorage.getItem('theme'),lang:localStorage.getItem('moLang')}}catch(e){}   // solo lectura
 const st={lang:Q.get('lang')||(LS.lang==='en'?'en':'es'),theme:Q.get('theme')||LS.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'),
  season:Q.get('season')||'auto',date:Q.get('date')||today(),clock:Q.get('t')||'',rem:{6:Q.get('rem')==='1',12:Q.get('rem')==='1',18:Q.get('rem')==='1'},
- gloria:Q.get('gloria')==='1',mode:Q.get('mode')||'voice',idx:0,playing:false};
+ mode:Q.get('mode')||'voice',idx:0,playing:false};
 
 /* ---------- Pascua ---------- */
 function easter(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;return new Date(y,mo-1,da)}
@@ -174,7 +174,7 @@ function paintCredits(){
   <ul>
    <li>Estructura y versículos: <a href="https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_sp.html" target="_blank" rel="noopener">Compendio del Catecismo de la Iglesia Católica, Apéndice «Oraciones comunes» (vatican.va)</a> y <i>Enchiridion Indulgentiarum</i>.</li>
    <li>Texto español de la oración final y del Regina Caeli: versión litúrgica en uso en las diócesis de España (p. ej. Diócesis de Asidonia-Jerez, <a href="https://familiayvidajerez.org/rezo-del-angelus/" target="_blank" rel="noopener">«Rezo del Ángelus»</a>).</li>
-   <li>Ave María y Gloria: los mismos textos que ya tiene la app.</li>
+   <li>Ave María y Gloria: los mismos textos que ya tiene la app. Tras la oración final se recitan tres Glorias y, a continuación, el responso por los fieles difuntos («Dale, Señor, el descanso eterno…»), según la costumbre del Ángelus del Papa (también en el Regina Caeli de Pascua). El responso es devoción tradicional.</li>
    <li>Horas (6:00, 12:00 y 18:00) y cambio de Pascua: <a href="https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20020513_vers-direttorio_sp.html" target="_blank" rel="noopener">Directorio sobre la piedad popular y la liturgia, nn. 195–196 (vatican.va)</a>.</li>
   </ul>
   <h3>Imágenes</h3><ul>${['gab','vir','c3','c8','noli'].map(li).join('')}</ul>
@@ -185,7 +185,7 @@ function paintCredits(){
   <ul>
    <li>Structure and versicles: <a href="https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html" target="_blank" rel="noopener">Compendium of the Catechism of the Catholic Church, Appendix “Common Prayers” (vatican.va)</a>, and the <i>Enchiridion of Indulgences</i>.</li>
    <li>English wording of the Angelus: the traditional text, as in the <a href="https://usccb.org/sites/default/files/flipbooks/uscca/files/assets/basic-html/page-563.html" target="_blank" rel="noopener">United States Catholic Catechism for Adults, Appendix B (USCCB)</a>.</li>
-   <li>Hail Mary and Glory Be: the same texts the app already has.</li>
+   <li>Hail Mary and Glory Be: the same texts the app already has. After the closing prayer come three Glory Bes and then the responsory for the faithful departed (“Eternal rest grant unto them, O Lord…”), following the custom of the Pope’s Angelus (also with the Regina Caeli in Eastertide). The responsory is a traditional devotion.</li>
    <li>Hours (6:00, 12:00 and 18:00) and the Easter change: <a href="https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20020513_vers-direttorio_en.html" target="_blank" rel="noopener">Directory on Popular Piety and the Liturgy, nn. 195–196 (vatican.va)</a>.</li>
   </ul>
   <h3>Images</h3><ul>${['gab','vir','c3','c8','noli'].map(li).join('')}</ul>
@@ -194,7 +194,17 @@ function paintCredits(){
 
 /* ---------- Pantalla de oración ---------- */
 let steps=[],gen=0,synth=window.speechSynthesis||null;
-function buildSteps(){const R=regina();let s=(R?reginaSteps:angelusSteps)(st.lang);if(st.gloria)s=s.concat([{k:'gl',t:GLORIA[st.lang],img:s[s.length-1].img,bead:3}]);steps=s}
+function gloriaParts(lg){const t=String(GLORIA[lg]||'').trim(),i=t.search(/\.\s+/);return i>0?[t.slice(0,i+1).trim(),t.slice(i+1).trim()]:(t?[t]:[])}
+function closingSteps(img){
+  const S=[],G=gloriaParts(st.lang);
+  for(let n=0;n<3;n++)G.forEach(p=>S.push({k:'gl',t:p,img,bead:4+n}));
+  const d=st.lang==='es'
+    ?[['V','Dale, Señor, el descanso eterno.'],['R','Y brille para ellos la luz perpetua.'],['V','Descansen en paz.'],['R','Amén.']]
+    :[['V','Eternal rest grant unto them, O Lord.'],['R','And let perpetual light shine upon them.'],['V','May they rest in peace.'],['R','Amen.']];
+  d.forEach(([k,t])=>S.push({k,t,img,bead:7}));
+  return S;
+}
+function buildSteps(){const R=regina();let s=(R?reginaSteps:angelusSteps)(st.lang);steps=s.concat(closingSteps(s[s.length-1].img))}
 const KB=[[1.04,-1.2,.6],[1.07,1,-.8],[1.05,-.6,1],[1.08,.8,.4],[1.045,-1,-.5],[1.075,.5,-1]];   // zoom/pan sutil por frase
 function ensureSlides(){
   const keys=regina()?['c8','noli']:['gab','vir','c3'],bg=$('avBg'),stg=$('avStage');
@@ -207,7 +217,6 @@ function paintPrayer(keep){
   $('angView').classList.toggle('regina',R);
   $('avTitle').textContent=R?L.titleR:L.title;$('avSet').textContent=R?L.setR:L.set;
   $('avMode').textContent=st.mode==='voice'?L.modeVoice:L.modeManual;$('avMode').setAttribute('aria-pressed',st.mode==='voice');
-  $('avGloria').checked=st.gloria;$('avGloriaT').textContent=L.gloria;
   const v=$('avVatican');v.textContent=R?L.vaticanR:L.vatican;v.href=L.vaturl;
   ensureSlides();
   const box=$('avText');box.innerHTML='';
@@ -227,7 +236,7 @@ function show(scroll=true){
   const kb=KB[st.idx%KB.length];
   document.querySelectorAll('#avStage img').forEach(im=>{const on=im.dataset.k===s.img;im.classList.toggle('on',on);if(on){im.style.setProperty('--s',kb[0]);im.style.setProperty('--x',kb[1]+'%');im.style.setProperty('--y',kb[2]+'%')}});
   const m=IMG[s.img];const c=$('avCredit');c.textContent=m.artist+' · '+m[st.lang].split(' (')[0];c.href=m.src;
-  $('avMys').textContent=(R?L.mysR:L.mysA)[Math.min(s.bead,3)];
+  $('avMys').textContent=(R?L.mysR:L.mysA)[s.bead]||'';
   document.querySelectorAll('#avBeads i').forEach((b,i)=>{b.classList.toggle('done',i<s.bead);b.classList.toggle('cur',i===s.bead)});
   $('avPlay').innerHTML=st.playing?ICO.pause:ICO.play;$('avPrev').innerHTML=ICO.prev;$('avPlay').setAttribute('aria-label',st.playing?L.pause:L.play);
   $('angView').classList.toggle('manual',st.mode!=='voice');$('avPlay').hidden=st.mode!=='voice';
@@ -249,7 +258,6 @@ function go(i){st.idx=Math.max(0,Math.min(steps.length-1,i));show();if(st.playin
 $('avPlay').onclick=()=>{if(st.playing){stopVoice();return}if(st.idx>=steps.length-1&&0)st.idx=0;st.playing=true;show(false);speak()};
 $('avNext').onclick=()=>go(st.idx+1);$('avPrev').onclick=()=>go(st.idx-1);
 $('avMode').onclick=()=>{if(st.playing)stopVoice();st.mode=st.mode==='voice'?'manual':'voice';paintPrayer(true)};
-$('avGloria').onchange=e=>{if(st.playing)stopVoice();st.gloria=e.target.checked;paintPrayer(true)};
 $('avText').addEventListener('click',()=>{});
 function open(){$('angView').hidden=false;document.body.classList.add('avOn');paintPrayer(false);$('avBack').focus({preventScroll:true})}
 function close(){stopVoice();$('angView').hidden=true;document.body.classList.remove('avOn')}
