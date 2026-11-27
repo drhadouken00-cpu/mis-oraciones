@@ -30,11 +30,11 @@ function renderList(){
 function openPrayer(p){
  current=p;$('home').hidden=true;$('reader').hidden=false;$('readerTitle').textContent=p.title;$('readerMeta').textContent='≈ '+p.minutes+(p.minutes===1?' minuto':' minutos')+' · Voz de tu teléfono';$('passages').replaceChildren();
  p.parts.forEach((part,i)=>{const el=document.createElement('p');el.textContent=part.text;el.id='part-'+i;if(part.pause)el.className='petition';$('passages').append(el)});
- $('inDay').checked=lists.day.includes(p.id);$('inNight').checked=lists.night.includes(p.id);favoriteUI();showPlayer();updatePlayer();window.scrollTo(0,0);
+ const cid=window.moCanonId?window.moCanonId(p.id):p.id;$('inDay').checked=lists.day.includes(cid);$('inNight').checked=lists.night.includes(cid);favoriteUI();showPlayer();updatePlayer();window.scrollTo(0,0);
 }
 function showPlayer(){$('player').hidden=false;document.body.classList.add('hasPlayer')}
 function goHome(){if($('editorDialog').open){$('editorDialog').close();return}if($('settingsDialog').open){$('settingsDialog').close();return}$('home').hidden=false;$('reader').hidden=true;renderList();window.scrollTo(0,0)}
-function favoriteUI(){$('favorite').textContent=favorites.includes(current.id)?'♥':'♡';$('favorite').setAttribute('aria-label',favorites.includes(current.id)?'Quitar de favoritas':'Guardar en favoritas')}
+function favoriteUI(){const c=window.moCanonId?window.moCanonId(current.id):current.id;$('favorite').textContent=favorites.includes(c)?'♥':'♡';$('favorite').setAttribute('aria-label',favorites.includes(c)?'Quitar de favoritas':'Guardar en favoritas')}
 function startQueue(ids,index=0){
  if(!ids.length)return;
  PrayerAudio.play(ids,index,(q,i)=>TTS.play(q,i));
@@ -74,8 +74,8 @@ function savePrayer(event){
 }
 $('search').addEventListener('input',renderList);
 document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;$('search').value='';document.querySelectorAll('[data-filter]').forEach(t=>t.classList.toggle('selected',t===b));renderList()});
-$('favorite').onclick=()=>{if(!current)return;favorites=favorites.includes(current.id)?favorites.filter(id=>id!==current.id):[...favorites,current.id];localStorage.favorites=JSON.stringify(favorites);favoriteUI()};
-for(const [id,key] of [['inDay','day'],['inNight','night']])$(id).onchange=()=>{lists[key]=lists[key].filter(p=>p!==current.id);if($(id).checked)lists[key].push(current.id);saveLists()};
+$('favorite').onclick=()=>{if(!current)return;const c=window.moCanonId?window.moCanonId(current.id):current.id;favorites=favorites.includes(c)?favorites.filter(id=>id!==c):[...favorites,c];localStorage.favorites=JSON.stringify(favorites);favoriteUI()};
+for(const [id,key] of [['inDay','day'],['inNight','night']])$(id).onchange=()=>{const c=window.moCanonId?window.moCanonId(current.id):current.id;lists[key]=lists[key].filter(p=>p!==c);if($(id).checked)lists[key].push(c);saveLists()};
 $('back').onclick=goHome;$('featuredPlay').onclick=()=>{openPrayer(prayers[0]);play()};
 $('toggle').onclick=()=>{if(state.playing)TTS.pause();else if(state.paused)TTS.resume();else play()};
 $('restart').onclick=play;$('stop').onclick=()=>{TTS.stop()};

@@ -23,7 +23,7 @@ function kind(p){if(/^rosario-/.test(p.id))return 'Rosario';if(/^coronilla-/.tes
 let lastResults=[];
 function runSearch(){
  const raw=$('fullSearch').value.trim(),q=fold(raw);const box=$('searchResults');box.replaceChildren();
- const all=prayers.filter(p=>p.id!=='evangelio-del-dia'||p.date);
+ const all=prayers.filter(p=>p.id==='evangelio-del-dia'?p.date:!p.hidden);
  if(!q){$('searchCount').textContent=all.length+' oraciones. Escribe para buscar en títulos y textos.';lastResults=all;}
  const res=[];
  for(const p of all){if(!q){res.push({p,score:0});continue}

@@ -125,8 +125,8 @@ const tgl=document.createElement('button');tgl.type='button';tgl.id='angToggle';
 if(reader)(($('readerMeta')||$('readerTitle'))||reader).after(tgl);
 let idx=0,loaded='',moved=false,lastKey='';
 const curId=()=>(typeof current!=='undefined'&&current)?current.id:null;
-const isA=()=>A.ids.includes(curId());
-const meta=()=>A.meta[curId()]||[];
+const isA=()=>A.ids.includes(curId())||curId()==='angelus';
+const meta=()=>A.meta[curId()==='angelus'?'angelus-diario':curId()]||[];
 const sessionHere=()=>typeof state!=='undefined'&&state.id===curId()&&(state.playing||state.paused)&&Number.isInteger(state.index);
 const KB=[[1.04,-1.2,.6],[1.07,1,-.8],[1.05,-.6,1],[1.08,.8,.4],[1.045,-1,-.5],[1.075,.5,-1]];
 function build(){const id=curId(),R=id==='regina-caeli',M=meta();view.classList.toggle('regina',R);
@@ -160,14 +160,14 @@ function follow(force){if(view.hidden)return;
   following=false;return}
  following=true;const key=state.index+':'+(state.playing?1:0);
  if(force||key!==lastKey){lastKey=key;if(state.playing||!moved){moved=false;if(idx!==state.index||force){idx=Math.min(state.index,current.parts.length-1);paint()}else paint(false)}}}
-function refresh(){const a=isA(),want=a&&pref==='on'&&reader&&!reader.hidden;tgl.hidden=!(a&&!want||(curId()==='angelus'&&reader&&!reader.hidden));
+function refresh(){const a=isA(),want=a&&pref==='on'&&reader&&!reader.hidden;tgl.hidden=!(a&&!want);
  if(want){const key=curId()+':'+current.parts.length;if(key!==loaded){loaded=key;idx=0;moved=false;lastKey='';build();if(!view.hidden){if(sessionHere())idx=Math.min(state.index,current.parts.length-1);paint(false)}}
   if(view.hidden){view.hidden=false;document.body.classList.add('avOn');if(sessionHere())idx=Math.min(state.index,current.parts.length-1);paint();
    q('.avBack').focus({preventScroll:true})}}
  else if(!view.hidden){view.hidden=true;document.body.classList.remove('avOn')}}
 q('.avBack').onclick=()=>$('back')?.click();
 q('.avTextBtn').onclick=()=>{const i=idx;pref='off';ls.set('angelusView','off');refresh();const el=$('part-'+i);if(el)setTimeout(()=>el.scrollIntoView({block:'center'}),30)};
-tgl.onclick=()=>{if(curId()==='angelus'){openToday();pref='on';ls.set('angelusView','on');refresh();return}pref='on';ls.set('angelusView','on');refresh();follow(true)};
+tgl.onclick=()=>{pref='on';ls.set('angelusView','on');refresh();follow(true)};
 q('.avPlay').onclick=()=>{if(sessionHere()&&state.playing){$('toggle')?.click();return}
  if(sessionHere()&&state.paused&&!moved){$('toggle')?.click();return}
  moved=false;startQueue([curId()],idx)};
@@ -179,6 +179,7 @@ document.addEventListener('click',e=>{const t=e.target.closest?.('#toggle');if(!
 addEventListener('keydown',e=>{if(view.hidden)return;if(e.key==='ArrowRight')go(idx+1);if(e.key==='ArrowLeft')go(idx-1)});
 function playIcon(){if(view.hidden)return;const playing=sessionHere()&&state.playing;q('.avPlay').innerHTML=playing?ICO.pause:ICO.play;q('.avPlay').setAttribute('aria-label',playing?L.pause:L.play)}
 document.addEventListener('mo-player',()=>{refresh();follow(false);playIcon()});
+{const o=window.openPrayer;if(typeof o==='function')window.openPrayer=openPrayer=function(p){if(p&&p.id==='angelus'&&A.isEaster()){const r=byIdP('regina-caeli');if(r)p=r}return o.call(this,p)}}
 if(reader){try{new MutationObserver(()=>{refresh();follow(true)}).observe(reader,{attributes:true,attributeFilter:['hidden']})}catch(e){}}
 try{new MutationObserver(()=>{if(!view.hidden){loaded='';refresh()}}).observe($('readerTitle'),{childList:true})}catch(e){}
 
