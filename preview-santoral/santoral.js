@@ -23,7 +23,7 @@ es:{pvTitle:'Prueba · Santoral',pvSub:'Página sin enlazar: no cambia la app ni
  rank:{S:'Solemnidad',F:'Fiesta',M:'Memoria obligatoria',m:'Memoria libre',C:'Conmemoración','':''},
  cal:{R:'Calendario romano general',E:'Calendario propio de España',M:'Martirologio romano · sin celebración en el calendario de España'},
  also:'Hoy también (calendario de España)',loc:'Devoción local',
- pat:'Patrón de',patF:'Patronazgo',pray:'Para rezar en la app',prev:'Día anterior',next:'Día siguiente',fresco:'Fresco',icon:'Dibujo',
+ pat:'Patrón de',patF:'Patronazgo',pray:'Para rezar en la app',prev:'Día anterior',next:'Día siguiente',fresco:'Fresco',paint:'Pintura',rep:'Imagen representativa',repNote:'Imagen representativa: santos juntos en un fresco o pintura; no es un retrato de este santo en concreto.',pd:'Dominio público',icon:'Dibujo',
  leap:'solo en años bisiestos',noRes:'Sin resultados.',res:n=>n+' resultado'+(n===1?'':'s'),
  mov:'Hoy, además',credSum:'Créditos y fuentes',
  note:'Si coincide con domingo, Semana Santa u otra celebración mayor, la liturgia de ese día puede cambiar.',
@@ -34,7 +34,7 @@ en:{pvTitle:'Preview · Saints',pvSub:'Unlinked page: it does not change the app
  rank:{S:'Solemnity',F:'Feast',M:'Obligatory memorial',m:'Optional memorial',C:'Commemoration','':''},
  cal:{R:'General Roman Calendar',E:'Proper calendar of Spain',M:'Roman Martyrology · no celebration in the Spanish calendar'},
  also:'Also today (calendar of Spain)',loc:'Local devotion',
- pat:'Patron of',patF:'Patronage',pray:'To pray in the app',prev:'Previous day',next:'Next day',fresco:'Fresco',icon:'Drawing',
+ pat:'Patron of',patF:'Patronage',pray:'To pray in the app',prev:'Previous day',next:'Next day',fresco:'Fresco',paint:'Painting',rep:'Representative image',repNote:'Representative image: saints together in a fresco or painting; it is not a portrait of this particular saint.',pd:'Public domain',icon:'Drawing',
  leap:'leap years only',noRes:'No results.',res:n=>n+' result'+(n===1?'':'s'),
  mov:'Also today',credSum:'Credits and sources',
  note:'If it falls on a Sunday, in Holy Week or on a greater celebration, that day’s liturgy may change.',
@@ -169,7 +169,9 @@ function iconSVG(k,small){const e=S[k],n=e.n[st.lang==='en'?1:0];
 ${small?'':`<path d="M92 404H170M230 404H308" stroke="#d9b45e" stroke-width="2.5"/><path d="M200 392l7 12-7 12-7-12z" fill="#d9b45e"/>
 <text x="200" y="476" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#f3e3b8" opacity=".95">${initial(n)}</text>`}
 </svg>`}
-function art(k,small){const e=S[k];if(e.f){const f=F[k];return `<img src="img/${k}.webp" alt="${(f?f.t[st.lang==='en'?1:0]:'').replace(/"/g,'')}" loading="lazy" decoding="async">`}return iconSVG(k,small)}
+function kindL(k){const f=F[k];return !f?'':f.k==='g'?L().rep:f.k==='p'?L().paint:L().fresco}
+function credTx(f){const w=f.w[ix()];return `${f.t[ix()]} · ${f.ar}${f.dt?', '+f.dt:''}${w?' · '+w:''}`}
+function art(k,small){const e=S[k];if(e.f){const f=F[k];return `<img src="img/${f&&f.img?f.img:k}.webp" alt="${(f?f.t[st.lang==='en'?1:0]:'').replace(/"/g,'')}" loading="lazy" decoding="async">`}return iconSVG(k,small)}
 
 /* ---------- pintar ---------- */
 const L=()=>T[st.lang],ix=()=>st.lang==='en'?1:0;
@@ -182,7 +184,7 @@ function tile(){const k=key(st.date),e=S[k],mv=movable(st.date);const T=transfer
  $('stTile').innerHTML=`<span class="stFr stFrS">${art(k,false)}</span><span class="stTileTx"><small class="stKick">${L().today} · ${dayLabel(k)}</small><strong>${e.n[ix()]}</strong><small class="stRank">${rankLine(e)}</small>${mv.length?`<small class="stMov">✦ ${L().mov}: ${mv.map(x=>x[ix()]).join(' · ')}</small>`:''}<span class="stGo">${L().see} ›</span></span>`;
  $('stTile').onclick=$('stTile').onkeydown=ev=>{if(ev.type==='keydown'&&ev.key!=='Enter')return;select(k,true)}}
 function view(){const k=st.sel,e=S[k],f=e.f&&F[k],yn=yearNote(k,st.date.getFullYear());
- const credit=f?`<a class="stCredit" href="${f.url}" target="_blank" rel="noopener">${f.t[ix()]} · ${f.ar} · ${f.w[ix()]} · ${st.lang==='en'?'Public domain':'Dominio público'}</a>`:`<span class="stCredit">${L().icon} · ${st.lang==='en'?'Mis Oraciones, generated':'Mis Oraciones, generado'}</span>`;
+ const credit=f?`<a class="stCredit" href="${f.url}" target="_blank" rel="noopener">${credTx(f)} · ${L().pd}</a>${f.k==='g'?`<span class="stRep">${L().repNote}</span>`:''}`:`<span class="stCredit">${L().icon} · ${st.lang==='en'?'Mis Oraciones, generated':'Mis Oraciones, generado'}</span>`;
  $('stView').innerHTML=`<div class="stHero"><span class="stFr stFrL">${art(k,false)}</span>${credit}</div>
 <p class="stDate">${dayLabel(k)}${k==='02-29'?` · <i>${L().leap}</i>`:''}</p><h2 class="stName">${e.n[ix()]}</h2><p class="stRank">${rankLine(e)}</p>
 <p class="stBio">${e.b[ix()]}</p>${patron(e)}${others(e)}${e.loc?`<p class="stLoc"><b>${L().loc}:</b> ${e.loc[ix()]}</p>`:''}${prayers(e)}${yn?`<p class="stYear">✦ ${yn}</p>`:''}
@@ -191,14 +193,17 @@ function view(){const k=st.sel,e=S[k],f=e.f&&F[k],yn=yearNote(k,st.date.getFullY
  $('vPrev').onclick=()=>select(ks[(i+365)%366]);$('vNext').onclick=()=>select(ks[(i+1)%366])}
 const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 function row(k){const e=S[k],[m,d]=k.split('-');const today=k===key(st.date);
- return `<li><button type="button" data-k="${k}" class="${k===st.sel?'sel':''}${today?' today':''}"><span class="stDay">${st.q?dayLabel(k):+d}</span><span class="stFr stFrXS">${art(k,true)}</span><span class="stRowTx"><b>${e.n[ix()]}</b><small>${rankLine(e)}${e.o?' · +'+e.o.length:''}${e.f?' · '+L().fresco:''}</small></span></button></li>`}
+ return `<li><button type="button" data-k="${k}" class="${k===st.sel?'sel':''}${today?' today':''}"><span class="stDay">${st.q?dayLabel(k):+d}</span><span class="stFr stFrXS">${art(k,true)}</span><span class="stRowTx"><b>${e.n[ix()]}</b><small>${rankLine(e)}${e.o?' · +'+e.o.length:''}${e.f?' · '+kindL(k):''}</small></span></button></li>`}
 function list(){const q=norm(st.q.trim());let ks=Object.keys(S).sort();
  $('stMonthBar').hidden=!!q;
  if(q){ks=ks.filter(k=>{const e=S[k];return norm(e.n.join(' ')+' '+(e.p?e.p.join(' '):'')+' '+(e.o?e.o.map(o=>o[2]+' '+o[3]).join(' '):'')).includes(q)});$('stList').innerHTML=(ks.length?`<li class="stRes">${L().res(ks.length)}</li>`:`<li class="stRes">${L().noRes}</li>`)+ks.slice(0,60).map(row).join('')}
  else{$('mName').textContent=L().months[st.month-1].replace(/^./,c=>c.toUpperCase());ks=ks.filter(k=>+k.slice(0,2)===st.month);$('stList').innerHTML=ks.map(row).join('')}
  $('stList').querySelectorAll('button[data-k]').forEach(b=>b.onclick=()=>select(b.dataset.k,true))}
 function select(k,scroll){st.sel=k;st.month=+k.slice(0,2);view();list();if(scroll)$('stView').scrollIntoView({behavior:'smooth',block:'start'})}
-function credits(){const es=st.lang==='es';const fr=Object.keys(F).sort();
+function credits(){const es=st.lang==='es';const ks=Object.keys(F).sort();
+ const fr={fresco:ks.filter(k=>F[k].k==='f'),paint:ks.filter(k=>F[k].k==='p'),group:ks.filter(k=>F[k].k==='g')};
+ const li=k=>{const f=F[k];return `<li><b>${dayLabel(k)}</b> · ${credTx(f)}. <a href="${f.url}" target="_blank" rel="noopener">${f.file}</a> · ${es?'Dominio público':'Public domain'}</li>`};
+ const gm={};fr.group.forEach(k=>{(gm[F[k].file]=gm[F[k].file]||{f:F[k],days:[]}).days.push(k)});const grp=Object.values(gm);
  $('credBody').innerHTML=`<h3>${es?'Calendario':'Calendar'}</h3><ul>
 <li>${es?'Todas las solemnidades, fiestas y memorias (obligatorias y libres) siguen el calendario litúrgico vigente en España, con sus fechas propias:':'All solemnities, feasts and memorials (obligatory and optional) follow the liturgical calendar in force in Spain, with its own dates:'} <a href="https://www.conferenciaepiscopal.es/wp-content/uploads/2026/01/Calendario-Liturgico-CEE-2026.pdf" target="_blank" rel="noopener">${es?'Conferencia Episcopal Española, Calendario Litúrgico-Pastoral 2025-2026':'Spanish Bishops’ Conference, Liturgical-Pastoral Calendar 2025-2026'}</a> ${es?'(elaborado según el <i>Calendarium Romanum</i> y el Calendario propio de España), contrastado año a año con':'(prepared according to the <i>Calendarium Romanum</i> and the Proper Calendar of Spain), checked year by year against'} <a href="https://gcatholic.org/calendar/2026/ES-es" target="_blank" rel="noopener">GCatholic · ${es?'calendario de España':'calendar of Spain'} 2025-2028</a>.</li>
 <li>${es?'Rangos y precedencias: <i>Missale Romanum</i> (editio typica tertia) y Misal Romano en español (3.ª ed., CEE), con las Normas universales sobre el año litúrgico y el calendario. La ficha avisa cuando, en el año elegido, la celebración cae en domingo, Cuaresma o Semana Santa, o se traslada (San José, la Anunciación).':'Ranks and precedence: <i>Missale Romanum</i> (editio typica tertia) and the Spanish Roman Missal (3rd ed., CEE), with the Universal Norms on the Liturgical Year and the Calendar. The page warns when, in the chosen year, a celebration falls on a Sunday, in Lent or Holy Week, or is transferred (Saint Joseph, the Annunciation).'}</li>
@@ -206,8 +211,12 @@ function credits(){const es=st.lang==='es';const fr=Object.keys(F).sort();
 <li>${es?'Las devociones locales (San Fermín en Navarra, la Medalla Milagrosa, la Virgen de la Esperanza) aparecen solo como nota, no como celebración del calendario.':'Local devotions (Saint Fermin in Navarre, the Miraculous Medal, Our Lady of Hope) appear only as a note, not as a calendar celebration.'}</li>
 <li>${es?'Las fiestas móviles (Pascua, Pentecostés, Corpus…) se calculan cada año y se indican como nota.':'Movable feasts (Easter, Pentecost, Corpus Christi…) are computed each year and shown as a note.'}</li>
 <li>${es?'Las biografías son textos breves redactados para esta app a partir de datos históricos comunes; no son citas de ninguna obra. Las oraciones enlazadas son las que ya tiene la app, con sus propias fuentes.':'The biographies are short texts written for this app from common historical facts; they are not quotations from any work. The linked prayers are the app’s own, with their own sources.'}</li></ul>
-<h3>${es?'Frescos':'Frescoes'} (${fr.length}) · ${es?'dominio público, vía Wikimedia Commons':'public domain, via Wikimedia Commons'}</h3><ul class="stCredList">${fr.map(k=>{const f=F[k];return `<li><b>${dayLabel(k)}</b> · ${f.t[ix()]} — ${f.ar}, ${f.w[ix()]}. <a href="${f.url}" target="_blank" rel="noopener">${f.file}</a> · ${es?'Dominio público':'Public domain'}</li>`}).join('')}</ul>
-<h3>${es?'Dibujos':'Drawings'} (${366-fr.length})</h3><ul><li>${es?'Medallones generados para esta app (SVG): fondo en tonos de fresco, nimbo dorado y el atributo tradicional del santo. Sin imágenes de terceros.':'Medallions generated for this app (SVG): fresco-toned background, golden halo and the saint’s traditional attribute. No third-party images.'}</li></ul>`}
+<h3>${es?'Frescos':'Frescoes'} (${fr.fresco.length}) · ${es?'dominio público, vía Wikimedia Commons':'public domain, via Wikimedia Commons'}</h3><ul class="stCredList">${fr.fresco.map(li).join('')}</ul>
+<h3>${es?'Pinturas':'Paintings'} (${fr.paint.length}) · ${es?'dominio público, vía Wikimedia Commons':'public domain, via Wikimedia Commons'}</h3><ul class="stCredList">${fr.paint.map(li).join('')}</ul>
+<h3>${es?'Imágenes representativas':'Representative images'} (${fr.group.length} ${es?'días':'days'}) · ${es?'dominio público, vía Wikimedia Commons':'public domain, via Wikimedia Commons'}</h3>
+<p class="stCredNote">${es?'Cuando no hay una imagen antigua de ese santo en concreto, se muestra un detalle de santos juntos en un fresco o una pintura. Es una imagen representativa, no un retrato:':'When there is no old image of that particular saint, a detail of saints together in a fresco or painting is shown. It is a representative image, not a portrait:'}</p>
+<ul class="stCredList">${grp.map(g=>`<li>${credTx(g.f)}. <a href="${g.f.url}" target="_blank" rel="noopener">${g.f.file}</a> · ${es?'Dominio público':'Public domain'}<br><small>${es?'Se usa en':'Used on'}: ${g.days.map(dayLabel).join(' · ')}</small></li>`).join('')}</ul>
+<h3>${es?'Dibujos':'Drawings'} (${366-Object.keys(F).length})</h3><ul><li>${es?'Medallones generados para esta app (SVG): fondo en tonos de fresco, nimbo dorado y el atributo tradicional del santo. Sin imágenes de terceros. Solo se usan donde no hay una imagen adecuada.':'Medallions generated for this app (SVG): fresco-toned background, golden halo and the saint’s traditional attribute. No third-party images. Used only where no suitable image exists.'}</li></ul>`}
 function paint(){const l=L(),h=document.documentElement;h.lang=st.lang;h.dataset.theme=st.theme;
  document.querySelector('meta[name=theme-color]').content=st.theme==='dark'?'#16130f':'#f8f5ed';
  $('themeToggle').textContent=st.theme==='dark'?'☀':'☾';

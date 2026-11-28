@@ -98,3 +98,6 @@ html .stList li button.sel{background:color-mix(in srgb,var(--gold) 16%,transpar
 .stLoc b{color:var(--green)}html[data-theme=dark] .stLoc b{color:var(--gold-l,#d8ae68)}
 .stYear{text-align:left;font:13.5px/1.45 var(--sans);color:var(--green);margin:0 0 10px;font-weight:600}
 html[data-theme=dark] .stYear{color:var(--gold-l,#d8ae68)}
+
+.stRep{display:block;margin:4px auto 0;max-width:34ch;font-size:.78rem;line-height:1.3;opacity:.75;text-align:center;font-style:italic}
+.stCredNote{font-size:.85rem;opacity:.85}
