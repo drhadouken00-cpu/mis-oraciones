@@ -10,7 +10,7 @@ const byId=id=>prayers.find(p=>p.id===id);
 const MYST=['gloriosos','gozosos','dolorosos','gloriosos','luminosos','dolorosos','gozosos']; // domingo..sábado
 function dailyPrayer(d=new Date()){const pool=window.PRAYERS.filter(p=>/^oracion-/.test(p.id));return pool[(dayNumber(d)*7919)%pool.length]}
 function rosaryToday(){return byId('rosario-'+MYST[new Date().getDay()])}
-function resolve(id){if(id==='__daily')return dailyPrayer();if(id==='__angelus'&&window.ANGELUS)return byId(ANGELUS.todayId());if(id==='__rosary')return rosaryToday();if(id==='__judas')return byId('san-judas-tadeo-28');if(id==='__timer')return null;return byId(id)}
+function resolve(id){if(id==='__daily')return dailyPrayer();if(id==='__angelus'&&window.ANGELUS)return byId(ANGELUS.todayId());if(id==='__rosary')return rosaryToday();if(id==='__judas')return byId('san-judas-tadeo-28');if(id==='__conv30'&&window.CONV30)return byId(CONV30.todayId());if(id==='__timer')return null;return byId(id)}
 function excerpt(p,n=110){const t=(p.parts.find(x=>!x.pause)||{text:''}).text;return t.length>n?t.slice(0,n).replace(/\s\S*$/,'')+'…':t}
 function el(html){const t=document.createElement('template');t.innerHTML=html.trim();return t.content.firstChild}
 
@@ -113,10 +113,10 @@ document.body.append(el(`<dialog id="alarmsDialog"><h2>Alarmas de oración</h2>
 <button type="button" id="testAlarm" class="secondary">Probar aviso</button>
 <button type="button" id="saveAlarms">Guardar alarmas</button><button type="button" id="closeAlarms" class="secondary">Volver</button></dialog>`));
 let alarms=(()=>{try{if(alarmsNative){const a=JSON.parse(AndroidAlarms.get());if(a.length)return a}}catch{}return stored('alarms',[])})();
-alarms=alarms.filter(a=>a.id!=='__night'&&a.id!=='__angelus'&&a.id!=='__judas');
+alarms=alarms.filter(a=>a.id!=='__night'&&a.id!=='__angelus'&&a.id!=='__judas'&&a.id!=='__conv30');
 function prayerOptions(sel){const opts=[['__daily','☀ Oración del día (cambia cada día)'],['__rosary','Santo Rosario (misterios del día)'],['coronilla-misericordia','Coronilla de la Divina Misericordia'],['coronilla-sangre','Coronilla de la Divina Sangre de Cristo'],[GID,'Evangelio del día'],['rosario-completo','Santo Rosario completo'],...prayers.filter(p=>!p.hidden&&!GENERATED.test(p.id)).map(p=>[p.id,p.title])];
  return opts.map(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;o.selected=v===sel;return o})}
-function titleFor(id){if(id==='__daily')return 'Oración del día';if(id==='__angelus')return 'Ángelus';if(id==='__judas')return 'San Judas Tadeo · día 28';if(id==='__rosary')return 'Santo Rosario';return byId(id)?.title||'Tu oración'}
+function titleFor(id){if(id==='__daily')return 'Oración del día';if(id==='__angelus')return 'Ángelus';if(id==='__judas')return 'San Judas Tadeo · día 28';if(id==='__conv30')return 'Conversación con Jesús · 15:00';if(id==='__rosary')return 'Santo Rosario';return byId(id)?.title||'Tu oración'}
 function renderAlarms(){
  const box=$('alarmList');box.replaceChildren();
  if(!alarms.length)box.append(el('<p class="empty">Aún no tienes alarmas. Añade una, por ejemplo a las 8:00 o antes de dormir.</p>'));
@@ -140,7 +140,7 @@ $('exactAlarms').onclick=()=>{if(alarmsNative)AndroidAlarms.exactSettings()};
 $('testAlarm').onclick=()=>{if(alarmsNative)AndroidAlarms.test();else webNotify({id:'__daily',time:''});alarmStatus('Aviso de prueba enviado.')};
 $('saveAlarms').onclick=()=>{
  alarms=alarms.filter(a=>/^\d\d:\d\d$/.test(a.time||''));alarms.forEach(a=>a.title=titleFor(a.id));
- const withNight=[...alarms,...(window.MO.nightAlarm&&MO.nightAlarm()?[MO.nightAlarm()]:[]),...(window.MO.angelusAlarms?MO.angelusAlarms():[]),...(window.MO.judasAlarms?MO.judasAlarms():[])].slice(0,20);localStorage.alarms=JSON.stringify(withNight);let ok=true;
+ const withNight=[...alarms,...(window.MO.nightAlarm&&MO.nightAlarm()?[MO.nightAlarm()]:[]),...(window.MO.angelusAlarms?MO.angelusAlarms():[]),...(window.MO.judasAlarms?MO.judasAlarms():[]),...(window.MO.conv30Alarms?MO.conv30Alarms():[])].slice(0,20);localStorage.alarms=JSON.stringify(withNight);let ok=true;
  if(alarmsNative)ok=AndroidAlarms.set(JSON.stringify(withNight));else if(window.Notification&&Notification.permission==='default')Notification.requestPermission();
  if(!ok){alarmStatus('No se han podido guardar las alarmas.');return}
  renderAlarmSummary();$('alarmsDialog').close();toast(alarms.length?'Alarmas guardadas ✓':'Alarmas eliminadas');
@@ -160,7 +160,7 @@ function webNotify(a){const p=resolve(a.id),body=p?p.title:'Tu momento de oraci�
  try{if(window.Notification&&Notification.permission==='granted'){const n=new Notification('Es hora de rezar ✝',{body});n.onclick=()=>{window.focus();openPrayer(p)};return}}catch{}
  toast('⏰ Es hora de rezar · '+body)}
 if(!alarmsNative)setInterval(()=>{const now=new Date(),hm=pad(now.getHours())+':'+pad(now.getMinutes()),fired=stored('alarmsFired',{});
- [...alarms,...(window.MO.angelusAlarms?MO.angelusAlarms():[]),...(window.MO.judasAlarms?MO.judasAlarms().filter(a=>a.dom===new Date().getDate()):[])].forEach((a,i)=>{const k=(a.id==='__angelus'?'ang':a.id==='__judas'?'jud':i)+'@'+a.time;if(a.on!==false&&a.time===hm&&fired[k]!==ymd()){fired[k]=ymd();localStorage.alarmsFired=JSON.stringify(fired);webNotify(a)}})},20000);
+ [...alarms,...(window.MO.angelusAlarms?MO.angelusAlarms():[]),...(window.MO.judasAlarms?MO.judasAlarms().filter(a=>a.dom===new Date().getDate()):[]),...(window.MO.conv30Alarms?MO.conv30Alarms():[])].forEach((a,i)=>{const k=(a.id==='__angelus'?'ang':a.id==='__judas'?'jud':a.id==='__conv30'?'c30':i)+'@'+a.time;if(a.on!==false&&a.time===hm&&fired[k]!==ymd()){fired[k]=ymd();localStorage.alarmsFired=JSON.stringify(fired);webNotify(a)}})},20000);
 
 // ---------- Volver a inicio / abrir desde notificación ----------
 const baseRender=renderList;window.renderList=renderList=function(){baseRender();if($('streak'))renderCards()};

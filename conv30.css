@@ -1,0 +1,33 @@
+/* Mis oraciones v3.1 (27): Conversación de 30 días. Reutiliza los estilos del Ángelus (angelus.css) para #c30View. */
+#c30View{position:fixed;inset:0;z-index:1;padding-bottom:var(--puiH,56px);box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto minmax(0,31vh) auto auto;grid-template-areas:"top" "cap" "art" "beads" "text" "nav" "foot";background:#0d0b09;color:#f6efe0;overflow:hidden;font-family:Georgia,'Times New Roman',serif;--g:#D4AF5A}
+#c30View[hidden]{display:none}
+#c30View.c30x{--g:#e3c36c}
+#c30View>*:not(.av-bg):not(.av-shade){position:relative;z-index:1}
+#c30View .avTop button,#c30View .avNav button{box-shadow:none;display:inline-grid;place-items:center;background:rgba(20,16,10,.65);color:#f6efe0;border:1px solid rgba(212,175,90,.55);border-radius:20px;min-height:40px;min-width:40px;padding:0 14px;font:15px system-ui,sans-serif;cursor:pointer}
+#c30View .avTop .avBack{display:grid;place-items:center;padding:0;width:42px}
+#c30View.manual .avNav .avNext{min-width:150px;background:linear-gradient(180deg,#d9b866,#a8864b);color:#140f08;border:0;line-height:1;display:grid;place-items:center}
+@media (min-width:720px){#c30View{grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);grid-template-rows:auto auto minmax(0,1fr) auto auto auto;grid-template-areas:"top top" "art cap" "art text" "art beads" "art nav" "art foot"}}
+#c30View .avTop .avTextBtn,#c30View .avTop .avMode{padding:0 10px;font-size:13.5px}
+#c30View .avFoot span{text-decoration:none}
+@media (min-width:720px){#c30View .avStage{inset:14px 18px 40px}#c30View .avCredit{bottom:16px}}
+#c30View .avBack:focus:not(:focus-visible){outline:none;box-shadow:none}
+#tileConv30{--art:url(frescos/mise-jesus.webp);--pos:center 18%}
+.c30Day{display:block;margin:2px 0 4px;font:600 13.5px system-ui,sans-serif;color:var(--ink)}
+.c30Bar{display:flex;gap:3px;flex-wrap:wrap;margin:0 0 6px}
+.c30Bar i{width:7px;height:7px;border-radius:50%;background:color-mix(in srgb,var(--gold) 22%,transparent);border:1px solid color-mix(in srgb,var(--gold) 60%,transparent)}
+.c30Bar i.done{background:var(--gold);border-color:var(--gold)}
+.c30Bar i.cur{background:var(--green);border-color:var(--green);transform:scale(1.25)}
+#c30View .c30Opt{grid-area:beads;display:flex;justify-content:center;gap:8px;padding:2px 12px 0}
+#c30View .c30Opt button{background:rgba(20,16,10,.65);color:#f6efe0;border:1px solid rgba(212,175,90,.55);border-radius:20px;min-height:34px;padding:0 14px;font:13px system-ui,sans-serif;cursor:pointer;box-shadow:none}
+#c30View .c30Opt button[aria-pressed=true]{background:linear-gradient(180deg,#d9b866,#a8864b);color:#140f08;border:0}
+#c30View .avText .ph.p{display:block;font-style:italic;color:rgba(246,239,224,.62)}
+#c30View .avText .ph.p.cur{color:#fff3c0}
+#c30View .avText .ph .hint{display:block;font:12.5px/1.4 system-ui,sans-serif;font-style:normal;color:#cbb488;margin-top:4px}
+#c30View .avText .ph.p:not(.cur) .hint{display:none}
+#c30View .avText .ph.h{font:700 11px/1.6 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--g)}
+#c30View .avText .ph.f{font-weight:600}
+#c30View .avText .ph.c{text-align:center;font-weight:600;color:#f3dfa6}
+#c30View .c30End{margin:10px 6px 6px;text-align:center}
+#c30View .c30End button{min-height:40px;padding:0 18px;border-radius:20px;border:0;background:linear-gradient(180deg,#d9b866,#a8864b);color:#140f08;font:600 14px system-ui,sans-serif;cursor:pointer}
+#c30View .c30End p{margin:8px 0 0;font:13px system-ui,sans-serif;color:#d9ccb0}
+#c30RemDlg .remRow{display:flex;align-items:center;justify-content:space-between;gap:12px}
