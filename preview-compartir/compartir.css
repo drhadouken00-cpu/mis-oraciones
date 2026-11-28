@@ -1,0 +1,11 @@
+.readerActions{display:flex;align-items:center;gap:2px}
+.shareBtn{display:inline-grid;place-items:center;min-width:48px}
+.shareBtn svg{display:block}
+#reader{padding-top:10px}
+.toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:calc(100% - 40px);background:var(--green);color:#fff;border-radius:999px;padding:11px 20px;font:14px/1.35 system-ui,sans-serif;box-shadow:0 10px 26px -10px rgba(0,0,0,.45);z-index:60;text-align:center;opacity:1!important;width:max-content}
+html[data-theme=dark] .toast{background:#385e4c}
+#msgDlg pre{white-space:pre-wrap;overflow-wrap:anywhere;outline:0;font:13.5px/1.5 Georgia,serif;background:color-mix(in srgb,var(--gold) 10%,transparent);border:1px solid var(--line);border-radius:12px;padding:12px;max-height:55dvh;overflow:auto;margin:10px 0}
+.msgLead{color:var(--muted)}
+.pvDbg #showMsg{margin-top:4px;min-height:40px;font-size:13px}
+.pvDbg .langToggle{display:inline-flex}
+.pvDbg #themeToggle{min-height:36px;padding:0 14px;width:auto;display:inline-block;margin:0}

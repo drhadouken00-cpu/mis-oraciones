@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es" class="libro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f8f5ed">
+<title>Mis oraciones · prueba de Compartir</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32.png">
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="../v2.css"><link rel="stylesheet" href="../features.css">
+<link rel="stylesheet" href="../v3.css"><link rel="stylesheet" href="../pwa.css"><link rel="stylesheet" href="../v31b.css">
+<link rel="stylesheet" href="../i18n.css"><link rel="stylesheet" href="../estilo.css"><link rel="stylesheet" href="../logo.css">
+<link rel="stylesheet" href="../preview-angelus/angelus.css">
+<link rel="stylesheet" href="compartir.css">
+</head>
+<body>
+<aside class="pvBanner">
+  <p><strong id="pvTitle"></strong> <span id="pvSub"></span></p>
+  <details class="pvDbg">
+    <summary id="dbgSum"></summary>
+    <div class="dbgGrid">
+      <label><span id="dbgPrayer"></span><select id="dbgPrayerSel"></select></label>
+      <label><span id="dbgApk"></span><select id="dbgApkSel"><option value="1"></option><option value="0"></option></select></label>
+      <label><span id="dbgLangL"></span><span class="langToggle" role="group" data-noi18n="1"><button type="button" lang="es" aria-pressed="true">ES</button><button type="button" lang="en" aria-pressed="false">EN</button></span></label>
+      <label><span id="dbgThemeL"></span><button type="button" class="secondary" id="themeToggle">☾</button></label>
+    </div>
+    <button type="button" class="secondary" id="showMsg"></button>
+  </details>
+</aside>
+
+<main id="reader">
+  <header>
+    <button class="back" id="back" tabindex="-1">‹ &nbsp; <span id="backTxt"></span></button>
+    <span class="readerActions">
+      <button class="icon shareBtn" id="share" type="button">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
+      </button>
+      <button class="icon" id="favorite" type="button">♡</button>
+    </span>
+  </header>
+  <span class="eyebrow" id="eyebrow"></span>
+  <h1 id="readerTitle"></h1>
+  <div class="readerMeta" id="readerMeta"></div>
+  <article id="passages"></article>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<dialog id="msgDlg">
+  <h2 id="msgH"></h2>
+  <p class="msgLead" id="msgLead"></p>
+  <pre id="msgPre"></pre>
+  <button type="button" id="msgClose" class="secondary" autofocus></button>
+</dialog>
+
+<script src="demo-prayers.js"></script>
+<script src="compartir.js"></script>
+</body>
+</html>
