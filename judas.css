@@ -1,0 +1,22 @@
+/* Mis oraciones v3.1 (26): aviso mensual de San Judas Tadeo (día 28). Reutiliza las clases .remRow/.remLead/.remNote/.remBtns de angelus.css */
+#judRemDlg{border:1px solid var(--gold-s);border-radius:20px;padding:20px;width:min(92vw,420px);background:var(--paper,#fffcf4);color:var(--ink)}
+#judRemDlg::backdrop{background:rgba(10,8,5,.5)}
+#judRemDlg h2{font:500 24px var(--serif);margin:0 0 4px}
+#judRemDlg .remMsg{font:13px/1.4 var(--sans);color:var(--green);margin:0 0 8px}
+#judRemDlg .remMsg:empty{display:none}
+#judRemDlg .remBtns{gap:8px;flex-wrap:wrap}
+#judRemDlg .remBtns button[hidden]{display:none}
+#judRemDlg .remSave{min-height:40px;padding:0 22px}
+#judRemDlg .remRow input[type=checkbox]{appearance:none;-webkit-appearance:none;width:46px!important;height:28px!important;min-height:0;margin:0;padding:0;border:0;border-radius:999px;background:#cfc7b3!important;position:relative;cursor:pointer;flex:0 0 46px;box-shadow:none}
+#judRemDlg .remRow input[type=checkbox]::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s}
+#judRemDlg .remRow input[type=checkbox]:checked{background:var(--green)!important}
+#judRemDlg .remRow input[type=checkbox]:checked::after{left:21px}
+html[data-theme=dark] #judRemDlg .remRow input[type=checkbox]{background:#4a4234!important}
+html[data-theme=dark] #judRemDlg .remRow input[type=checkbox]:checked{background:var(--gold)!important}
+#judRemDlg .remRow input[type=checkbox]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#judToggle{margin:6px 0 2px}
+#judRemDlg .judTime{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+#judRemDlg .judTime span{font:600 16px var(--serif)}
+#judRemDlg .judTime small{display:block;color:var(--muted);font:12.5px var(--sans);font-weight:400}
+#judRemDlg .judTime input[type=time]{font:600 20px var(--serif);padding:6px 10px;border:1px solid var(--gold-s);border-radius:12px;background:transparent;color:var(--ink);min-height:44px}
+#judRemDlg .judTime input[type=time]:disabled{opacity:.45}

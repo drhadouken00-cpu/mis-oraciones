@@ -91,7 +91,7 @@ function doImport(text){
  localStorage.favorites=JSON.stringify(favorites);
  let listAdded=0;for(const k of ['day','night'])for(const id of ((d.lists||{})[k]||[]).map(map))if(known.has(id)&&!lists[k].includes(id)){lists[k].push(id);listAdded++}
  saveLists();
- const cur=alarmsNow();let alAdded=0;for(const a of d.alarms||[])if(a&&/^\d\d:\d\d$/.test(a.time)&&!cur.some(c=>c.time===a.time&&c.id===map(a.id))&&cur.length<20){cur.push({time:a.time,id:map(a.id),title:a.title,on:a.on!==false});alAdded++}
+ const cur=alarmsNow();let alAdded=0;for(const a of d.alarms||[])if(a&&/^\d\d:\d\d$/.test(a.time)&&!cur.some(c=>c.time===a.time&&c.id===map(a.id))&&cur.length<20){cur.push({time:a.time,id:map(a.id),title:a.title,on:a.on!==false,...(a.dom>0&&a.dom<=28?{dom:a.dom}:{})});alAdded++}
  if(alAdded){localStorage.alarms=JSON.stringify(cur);if(window.AndroidAlarms)AndroidAlarms.set(JSON.stringify(cur))}
  if(d.streak&&d.streak.count){const s=stored('streak',{last:'',count:0});if((d.streak.last||'')>(s.last||''))localStorage.streak=JSON.stringify({...d.streak,best:Math.max(d.streak.best||0,s.best||0,s.count||0)});else{s.best=Math.max(s.best||0,d.streak.best||0,d.streak.count||0);localStorage.streak=JSON.stringify(s)}}
  const exN=extraIn(d.extra);renderList();needsReload=alAdded>0||exN>0;

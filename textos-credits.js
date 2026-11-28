@@ -14,6 +14,7 @@ const ES_ITEMS=[
  ['Perdón, Señor','acto de contrición de la tradición católica en español.'],
  ['Gracias, Señor','acción de gracias y examen de la noche, de devocionario católico tradicional.'],
  ['Guárdanos, Señor; Oración de la noche; Oración para la noche; Oración infantil antes de dormir; Antes de dormir','oraciones y jaculatorias de devoción popular y de la tradición oral, sin autor conocido, en la forma habitual en que se rezan en español.'],
+ ['Oración a San Judas Tadeo · Día 28','«Visita y oración para el día 28 de cada mes», de los devocionarios católicos tradicionales en español (por ejemplo, el Devocionario Católico, devocionario.com). Texto de devoción popular, sin autor conocido; se reza con tres Glorias y la petición personal.'],
  ['Versiones en inglés','se usa la forma inglesa tradicional cuando existe (por ejemplo, «Jesus, Mary and Joseph…» o la Biblia Douay-Rheims); las demás son traducciones fieles hechas para esta app.']];
 const EN_ITEMS=[
  ['Psalm 91 (90); Psalm 92 (91)','Douay-Rheims Bible, Challoner revision (1899), public domain; the same text as this app’s Bible (Psalms 90 and 91 in the Vulgate numbering). In Spanish: Torres Amat translation (1823–1825), public domain.'],
@@ -26,6 +27,7 @@ const EN_ITEMS=[
  ['Forgive Me, Lord','traditional Act of Contrition from Spanish-speaking Catholic devotion.'],
  ['Thank You, Lord','traditional Catholic evening thanksgiving and examination of conscience.'],
  ['Keep Us, Lord; Night Prayer; Prayer for the Night; Children’s Bedtime Prayer; Before Sleep','prayers and short aspirations from popular devotion and oral tradition, with no known author, in the form in which they are commonly said.'],
+ ['Prayer to Saint Jude Thaddeus · The 28th','“Visit and prayer for the 28th of each month”, from traditional Spanish-language Catholic prayer books (for example the Devocionario Católico, devocionario.com). A text of popular devotion with no known author, said with three Glory Bes and a personal petition. No traditional English wording of this text was found, so the English is a faithful translation made for this app.'],
  ['English versions','the received traditional English wording is used where one exists (for example “Jesus, Mary and Joseph…” or the Douay-Rheims Bible); the others are faithful translations made for this app.']];
 const d=document.createElement('div');d.className='raCredits';d.id='textCredits';d.dataset.noi18n='1';
 const h=document.createElement('h4');h.textContent=T('Textos de las oraciones','Prayer texts');d.append(h);
