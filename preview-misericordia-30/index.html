@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es" class="libro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f8f5ed">
+<title>Mis oraciones · prueba de la Conversación de 30 días</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32.png">
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="../v2.css"><link rel="stylesheet" href="../features.css">
+<link rel="stylesheet" href="../v3.css"><link rel="stylesheet" href="../pwa.css"><link rel="stylesheet" href="../v31b.css">
+<link rel="stylesheet" href="../i18n.css"><link rel="stylesheet" href="../estilo.css"><link rel="stylesheet" href="../logo.css">
+<link rel="stylesheet" href="m30.css">
+</head>
+<body>
+<aside class="pvBanner">
+  <p><strong id="pvTitle"></strong> <span id="pvSub"></span></p>
+  <p class="draft" id="draftNote" hidden></p>
+  <details class="pvDbg">
+    <summary id="dbgSum"></summary>
+    <div class="dbgGrid">
+      <label><span id="dbgDay"></span><select id="dbgDaySel"></select></label>
+      <label><span id="dbgClock"></span><select id="dbgClockSel"></select></label>
+      <label><span id="dbgDone"></span><select id="dbgDoneSel"><option value="0"></option><option value="1"></option></select></label>
+      <label><span id="dbgFri"></span><select id="dbgFriSel"><option value="0"></option><option value="1"></option></select></label>
+    </div>
+  </details>
+</aside>
+
+<main id="home">
+  <header>
+    <button class="icon menuButton" aria-label="Menú" tabindex="-1"><span></span><span></span><span></span></button>
+    <span class="brand centerBrand"><img class="brandIcon" src="../icons/brand-96.png" alt="" width="32" height="32"><span class="brandName">Mis Oraciones</span></span>
+    <div class="topIcons">
+      <button class="icon" aria-label="Buscar" tabindex="-1">⌕</button>
+      <button class="icon" id="themeToggle" aria-label="Tema">☾</button>
+      <div class="langToggle" role="group" aria-label="Idioma" data-noi18n="1"><button type="button" lang="es" aria-pressed="true" title="Español">ES</button><button type="button" lang="en" aria-pressed="false" title="English">EN</button></div>
+      <button class="icon" aria-label="Ajustes" tabindex="-1">⚙</button>
+    </div>
+  </header>
+
+  <p class="ctxNote" id="ctxNote"></p>
+
+  <div class="tiles" id="tiles">
+    <button class="tile" tabindex="-1"><span class="tileIcon" aria-hidden="true">✠</span><strong data-k="tGospel"></strong><small data-k="tGospelSub"></small></button>
+    <button class="tile" tabindex="-1" style="--art:url(../frescos/luminosos-1.webp)"><span class="tileIcon" aria-hidden="true">✿</span><strong data-k="tRosary"></strong><small data-k="tRosarySub"></small></button>
+    <button class="tile" id="tileChaplet" tabindex="-1" style="--art:url(../frescos/mise-jesus.webp);--pos:center 20%"><span class="tileIcon" aria-hidden="true">♱</span><strong data-k="tChaplet"></strong><small data-k="tChapletSub"></small></button>
+    <button class="tile" tabindex="-1" style="--art:url(../frescos/santi-custodia.webp);--pos:center 35%"><span class="tileIcon" aria-hidden="true">◷</span><strong data-k="tTimer"></strong><small data-k="tTimerSub"></small></button>
+    <button class="tile friday" id="tileSangre" tabindex="-1" style="grid-column:1/-1;--art:url(../frescos/sangre-fin.webp)" hidden><span class="tileIcon" aria-hidden="true">✚</span><strong data-k="tFri"></strong><small data-k="tFriSub"></small></button>
+    <button class="tile angTile" tabindex="-1" style="--art:url(../frescos/angelus-virgen.webp)"><span class="tileIcon" aria-hidden="true">🔔</span><strong data-k="tAng"></strong><small data-k="tAngSub"></small></button>
+
+    <!-- NUEVO: tarjeta de la Conversación de 30 días -->
+    <article class="tile angTile m30Tile" id="tileM30" style="--art:url(../frescos/mise-jesus.webp);--pos:center 18%" aria-labelledby="m30Name">
+      <span class="tileIcon" aria-hidden="true">✦</span>
+      <strong id="m30Name"></strong>
+      <small id="m30Sub"></small>
+      <span class="m30Day" id="m30Day"></span>
+      <span class="m30Bar" id="m30Bar" aria-hidden="true"></span>
+      <span class="angStatus" id="m30Status" role="status"></span>
+      <span class="angActions">
+        <button type="button" class="angPray" id="m30Pray"></button>
+        <button type="button" class="secondary angRem" id="m30Rem"></button>
+      </span>
+    </article>
+  </div>
+
+  <details class="pvNotes" id="credits">
+    <summary id="credSum"></summary>
+    <div id="credBody"></div>
+  </details>
+</main>
+
+<dialog id="remDlg">
+  <h2 id="remH"></h2>
+  <p class="remLead" id="remLead"></p>
+  <div class="remRow"><div><b>15:00</b><small id="remRowSub"></small></div><input type="checkbox" id="remChk"></div>
+  <p class="remNote" id="remNote"></p>
+  <div class="remBtns"><button type="button" id="remClose" class="secondary"></button></div>
+</dialog>
+
+<section id="angView" hidden>
+  <div class="av-bg"><div class="bgi on" style="background-image:url(../frescos/mise-jesus.webp)"></div></div>
+  <div class="av-shade"></div>
+  <div class="avTop">
+    <button type="button" id="avBack" aria-label="Volver"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <span class="avTitle" id="avTitle"></span>
+    <button type="button" id="avMode" aria-pressed="true"></button>
+  </div>
+  <div class="avCap"><div class="avSet" id="avSet"></div><div class="avMys" id="avMys"></div></div>
+  <div class="avArt"><div class="avStage"><img class="on" src="../frescos/mise-jesus.webp" alt="" id="avImg" style="--s:1"></div><a class="avCredit" id="avCredit" target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:Divina_Misericordia_(Eugeniusz_Kazimirowski,_1934).jpg"></a></div>
+  <div class="optRow"><button type="button" id="optMsg" aria-pressed="false"></button></div>
+  <div class="avText" id="avText"></div>
+  <div class="avNav">
+    <button type="button" id="avPrev" aria-label="Anterior">⏮</button>
+    <button type="button" id="avPlay" class="main" aria-label="Escuchar">▶</button>
+    <button type="button" id="avNext" aria-label="Siguiente">⏭</button>
+  </div>
+  <div class="avFoot"><span class="trNote" id="trNote"></span></div>
+</section>
+
+<script src="m30-data.js"></script>
+<script src="m30.js"></script>
+</body>
+</html>
