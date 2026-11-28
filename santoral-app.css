@@ -1,0 +1,116 @@
+/* Mis oraciones v3.1 (28) · Santoral (de preview-santoral) */
+#santoralView,.stTiles,.stAppCredits{--sans:system-ui,-apple-system,'Segoe UI',sans-serif}
+
+/* --- marco común: frescos y dibujos en el mismo arco con doble filete dorado --- */
+.stFr{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;flex:none;
+  border-radius:50% 50% 10px 10px/34% 34% 10px 10px;background:#2b241a;
+  box-shadow:0 0 0 2px var(--gold,#b08a2d),0 0 0 5px var(--paper,#fffcf4),0 0 0 6.5px var(--gold-s,#d9c08a),0 8px 22px rgba(40,28,10,.22)}
+html[data-theme=dark] .stFr{box-shadow:0 0 0 2px var(--gold,#c9a24e),0 0 0 5px #17130e,0 0 0 6.5px rgba(212,175,90,.45),0 8px 22px rgba(0,0,0,.5)}
+.stFr img,.stFr svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.stFr img{filter:saturate(.92) sepia(.08)}
+.stFr::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,240,200,.35),inset 0 0 28px rgba(30,20,5,.35);pointer-events:none}
+.stFrL{width:min(300px,72vw);margin:8px auto 0}
+.stFrS{width:96px}
+.stFrXS{width:40px;box-shadow:0 0 0 1.5px var(--gold,#b08a2d)}
+.stFrXS::after{box-shadow:none}
+html[data-theme=dark] .stFrXS{box-shadow:0 0 0 1.5px var(--gold,#c9a24e)}
+
+/* --- tarjeta «Santo del día» --- */
+.tiles .stTile{grid-column:1/-1;min-height:auto;display:flex;align-items:center;gap:20px;padding:18px 18px 18px 22px;cursor:pointer;text-align:left}
+html.libro .tiles .tile.stTile{padding-top:18px}
+html.libro .stTile::before,html.libro .stTile::after{display:none}
+.stTileTx{display:flex;flex-direction:column;gap:3px;min-width:0}
+.stTile strong{font:500 22px/1.2 var(--serif);color:var(--ink)}
+.stKick{font:600 11px/1.3 var(--sans)!important;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)!important}
+.stRank{font:13px/1.35 var(--sans);color:var(--muted)}
+.stMov{font:13px/1.35 var(--sans);color:var(--green)!important;font-weight:600}
+html[data-theme=dark] .stMov{color:var(--gold-l,#d8ae68)!important}
+.stGo{margin-top:6px;font:600 14px var(--sans);color:var(--green)}
+html[data-theme=dark] .stGo{color:var(--gold-l,#d8ae68)}
+
+/* --- ficha --- */
+.stView{margin:26px 0 8px;text-align:center;scroll-margin-top:12px}
+.stHero{display:flex;flex-direction:column;align-items:center;gap:12px}
+.stCredit{font:11px/1.35 var(--sans);color:var(--muted);text-decoration:none;max-width:92%}
+a.stCredit:hover{text-decoration:underline}
+.stDate{margin:14px 0 0;font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.stName{font:500 28px/1.2 var(--serif);margin:4px 0 2px;color:var(--ink)}
+.stView .stRank{margin:0 0 12px}
+.stBio{font:18px/1.6 var(--serif);color:var(--ink);text-align:left;margin:0 0 10px}
+.stPat{font:15px/1.45 var(--sans);color:var(--ink);text-align:left;margin:0 0 10px}
+.stPat b{color:var(--green)}html[data-theme=dark] .stPat b{color:var(--gold-l,#d8ae68)}
+.stPray{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 10px}
+.stPray>span:first-child{font:600 12px var(--sans);color:var(--muted);width:100%;text-align:left}
+.stChip{display:inline-flex;align-items:center;border:1px solid var(--gold-s);border-radius:999px;padding:6px 14px;font:600 14px var(--sans);color:var(--green);background:color-mix(in srgb,var(--gold) 10%,transparent)}
+html[data-theme=dark] .stChip{color:var(--gold-l,#d8ae68)}
+.stNote{font:12.5px/1.45 var(--sans);color:var(--muted);text-align:left;margin:0 0 10px}
+.stNav{display:flex;justify-content:space-between;gap:8px;margin-top:8px}
+.stNav button{min-height:40px;padding:0 16px;font:600 14px var(--sans)}
+
+/* --- calendario --- */
+.stCal{margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+.stH{font:500 24px var(--serif);margin:0 0 10px;text-align:center}
+.stSearch input{width:100%;box-sizing:border-box;font:16px var(--sans);padding:10px 14px;border:1px solid var(--gold-s);border-radius:999px;background:var(--paper,#fffcf4);color:var(--ink)}
+.stMonth{display:flex;align-items:center;justify-content:space-between;margin:12px 0 6px}
+.stMonth[hidden]{display:none}
+.stMonth strong{font:500 21px var(--serif);color:var(--ink)}
+.stMonth button{min-width:42px;min-height:40px;border-radius:999px;font:20px var(--sans);padding:0;background:transparent;border:1px solid var(--gold-s);color:var(--ink);cursor:pointer}
+.stList{list-style:none;padding:0;margin:0}
+.stList li{border-bottom:1px solid var(--line)}
+.stList button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:14px;width:100%;padding:9px 6px;cursor:pointer;border-radius:12px}
+.stList button:hover{background:color-mix(in srgb,var(--gold) 8%,transparent)}
+.stList button.sel{background:color-mix(in srgb,var(--gold) 16%,transparent)}
+.stList button:focus-visible{outline:2px solid var(--gold)}
+.stDay{min-width:30px;font:600 17px var(--serif);color:var(--gold);text-align:right}
+.stList .stRes~li .stDay{min-width:86px;font-size:13px;text-align:left}
+.stList button.today .stDay{color:var(--green)}
+html[data-theme=dark] .stList button.today .stDay{color:var(--gold-l,#d8ae68)}
+.stList button.today .stDay::after{content:" •"}
+.stRowTx{display:flex;flex-direction:column;min-width:0}
+.stRowTx b{font:500 16.5px/1.25 var(--serif);color:var(--ink)}
+.stRowTx small{font:12px/1.3 var(--sans);color:var(--muted)}
+.stRes{padding:8px 4px;font:13px var(--sans);color:var(--muted)}
+
+/* --- créditos --- */
+.stNotes{margin:22px 0 0;font:14px/1.55 var(--sans);color:var(--ink);border-top:1px solid var(--line);padding-top:12px}
+.stNotes summary{cursor:pointer;font-weight:600;color:var(--green)}
+html[data-theme=dark] .stNotes summary{color:var(--gold-l,#d8ae68)}
+.stNotes h3{font:600 15px var(--sans);margin:14px 0 4px;color:var(--gold)}
+.stNotes ul{padding-left:18px;margin:4px 0}.stNotes li{margin:4px 0}.stNotes a{color:var(--green);word-break:break-word}
+html[data-theme=dark] .stNotes a{color:var(--gold-l,#d8ae68)}
+.stCredList{font-size:12.5px}
+html .stList li button,html.libro .stList li button{border:0!important;box-shadow:none!important;background:transparent;border-radius:12px!important;min-height:0;font:inherit;color:inherit;text-align:left}
+html .stList li button.sel{background:color-mix(in srgb,var(--gold) 16%,transparent)}
+.stAlso{text-align:left;margin:0 0 10px;font:15px/1.45 var(--sans);color:var(--ink)}
+.stAlso>span{font:600 12px var(--sans);color:var(--muted)}
+.stAlso ul{margin:4px 0 0;padding-left:18px}.stAlso li{margin:2px 0}.stAlso small{color:var(--muted)}
+.stLoc{text-align:left;font:14px/1.45 var(--sans);color:var(--ink);margin:0 0 10px}
+.stLoc b{color:var(--green)}html[data-theme=dark] .stLoc b{color:var(--gold-l,#d8ae68)}
+.stYear{text-align:left;font:13.5px/1.45 var(--sans);color:var(--green);margin:0 0 10px;font-weight:600}
+html[data-theme=dark] .stYear{color:var(--gold-l,#d8ae68)}
+
+.stRep{display:block;margin:4px auto 0;max-width:34ch;font-size:.78rem;line-height:1.3;opacity:.75;text-align:center;font-style:italic}
+.stCredNote{font-size:.85rem;opacity:.85}
+
+/* --- integración en la app --- */
+.stTiles{margin-top:14px}
+#santoralView{max-width:660px}
+#santoralView[hidden]{display:none!important}
+.stTop{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:44px;max-width:100%}
+.stTop .stBack{all:unset;box-sizing:border-box;cursor:pointer;color:var(--green);font:600 15.5px var(--sans);padding:8px 2px;-webkit-tap-highlight-color:transparent}
+html[data-theme=dark] .stTop .stBack{color:var(--gold-l,#d8ae68)}
+.stTopT{font:500 19px var(--serif);color:var(--ink);flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stView{margin-top:12px}
+button.stChip{cursor:pointer;font:600 14px var(--sans);min-height:38px;box-shadow:none;-webkit-tap-highlight-color:transparent}
+button.stChip:active{transform:scale(.97)}
+.stUrl{font-size:.85em;color:var(--muted);word-break:break-all}
+.stAppCredits h3{font:600 14px var(--sans);margin:12px 0 4px;color:var(--gold)}
+.stAppCredits ul{padding-left:18px;margin:4px 0}.stAppCredits li{margin:4px 0}
+.stAppCredits a{color:var(--green);word-break:break-word}
+html[data-theme=dark] .stAppCredits a{color:var(--gold-l,#d8ae68)}
+body.santoralOn #player{display:none!important}
+#stTile.stTile{flex-direction:row;align-items:center;gap:20px;padding:18px 18px 18px 22px;min-height:auto;cursor:pointer;text-align:left}
+#santoralView .stTop .stBack{all:unset;box-sizing:border-box;cursor:pointer;color:var(--green);font:600 15.5px var(--sans);padding:8px 2px}
+html[data-theme=dark] #santoralView .stTop .stBack{color:var(--gold-l,#d8ae68)}
+#santoralView button.stChip{display:inline-flex;align-items:center;border:1px solid var(--gold-s);border-radius:999px;padding:6px 14px;font:600 14px var(--sans);color:var(--green);background:color-mix(in srgb,var(--gold) 10%,transparent);box-shadow:none;min-height:38px;width:auto}
+html[data-theme=dark] #santoralView button.stChip{color:var(--gold-l,#d8ae68)}
