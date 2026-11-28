@@ -91,3 +91,10 @@ html[data-theme=dark] .pvNotes a{color:var(--gold-l,#d8ae68)}
 .stCredList{font-size:12.5px}
 html .stList li button,html.libro .stList li button{border:0!important;box-shadow:none!important;background:transparent;border-radius:12px!important;min-height:0;font:inherit;color:inherit;text-align:left}
 html .stList li button.sel{background:color-mix(in srgb,var(--gold) 16%,transparent)}
+.stAlso{text-align:left;margin:0 0 10px;font:15px/1.45 var(--sans);color:var(--ink)}
+.stAlso>span{font:600 12px var(--sans);color:var(--muted)}
+.stAlso ul{margin:4px 0 0;padding-left:18px}.stAlso li{margin:2px 0}.stAlso small{color:var(--muted)}
+.stLoc{text-align:left;font:14px/1.45 var(--sans);color:var(--ink);margin:0 0 10px}
+.stLoc b{color:var(--green)}html[data-theme=dark] .stLoc b{color:var(--gold-l,#d8ae68)}
+.stYear{text-align:left;font:13.5px/1.45 var(--sans);color:var(--green);margin:0 0 10px;font-weight:600}
+html[data-theme=dark] .stYear{color:var(--gold-l,#d8ae68)}

@@ -20,8 +20,9 @@ const T={
 es:{pvTitle:'Prueba · Santoral',pvSub:'Página sin enlazar: no cambia la app ni tus datos.',dbgSum:'Opciones de prueba',dbgDate:'Fecha',dbgToday:'Volver a hoy',
  ctx:'Así se verían la tarjeta «Santo del día», la ficha y el calendario.',today:'Santo del día',see:'Ver ficha',calH:'Santoral',q:'Buscar un santo o patronazgo…',
  months:['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
- rank:{S:'Solemnidad',F:'Fiesta',M:'Memoria',m:'Memoria libre',C:'Conmemoración','':''},
- cal:{R:'Calendario romano general',E:'Calendario propio de España',M:'Martirologio romano',L:'Devoción popular'},
+ rank:{S:'Solemnidad',F:'Fiesta',M:'Memoria obligatoria',m:'Memoria libre',C:'Conmemoración','':''},
+ cal:{R:'Calendario romano general',E:'Calendario propio de España',M:'Martirologio romano · sin celebración en el calendario de España'},
+ also:'Hoy también (calendario de España)',loc:'Devoción local',
  pat:'Patrón de',patF:'Patronazgo',pray:'Para rezar en la app',prev:'Día anterior',next:'Día siguiente',fresco:'Fresco',icon:'Dibujo',
  leap:'solo en años bisiestos',noRes:'Sin resultados.',res:n=>n+' resultado'+(n===1?'':'s'),
  mov:'Hoy, además',credSum:'Créditos y fuentes',
@@ -30,8 +31,9 @@ es:{pvTitle:'Prueba · Santoral',pvSub:'Página sin enlazar: no cambia la app ni
 en:{pvTitle:'Preview · Saints',pvSub:'Unlinked page: it does not change the app or your data.',dbgSum:'Test options',dbgDate:'Date',dbgToday:'Back to today',
  ctx:'This is how the "Saint of the day" card, the saint page and the calendar would look.',today:'Saint of the day',see:'Open',calH:'Saints',q:'Search a saint or patronage…',
  months:['January','February','March','April','May','June','July','August','September','October','November','December'],
- rank:{S:'Solemnity',F:'Feast',M:'Memorial',m:'Optional memorial',C:'Commemoration','':''},
- cal:{R:'General Roman Calendar',E:'Proper calendar of Spain',M:'Roman Martyrology',L:'Popular devotion'},
+ rank:{S:'Solemnity',F:'Feast',M:'Obligatory memorial',m:'Optional memorial',C:'Commemoration','':''},
+ cal:{R:'General Roman Calendar',E:'Proper calendar of Spain',M:'Roman Martyrology · no celebration in the Spanish calendar'},
+ also:'Also today (calendar of Spain)',loc:'Local devotion',
  pat:'Patron of',patF:'Patronage',pray:'To pray in the app',prev:'Previous day',next:'Next day',fresco:'Fresco',icon:'Drawing',
  leap:'leap years only',noRes:'No results.',res:n=>n+' result'+(n===1?'':'s'),
  mov:'Also today',credSum:'Credits and sources',
@@ -59,6 +61,26 @@ function movable(d){const y=d.getFullYear(),E=easter(y),L=[];
  let sf=null;for(let i=26;i<=31;i++){const x=new Date(y,11,i,12);if(x.getDay()===0){sf=x;break}}add(sf||new Date(y,11,30,12),'Sagrada Familia','The Holy Family');
  for(let i=7;i<=13;i++){const x=new Date(y,0,i,12);if(x.getDay()===0){add(x,'Bautismo del Señor','Baptism of the Lord');break}}
  return L}
+
+
+/* ---------- precedencia en el año elegido (Normas universales del año litúrgico) ---------- */
+const LORD=new Set(['02-02','08-06','09-14','11-09','01-06','12-25','03-25']);
+const fmtD=d=>d.toLocaleDateString(st.lang==='en'?'en-GB':'es-ES',{day:'numeric',month:'long'});
+function transfers(y){const E=easter(y),palm=addD(E,-7),dm=addD(E,7),ash=addD(E,-46),T={};
+ const j=new Date(y,2,19,12);if(j>=palm&&j<=E)T['03-19']=addD(palm,-1);else if(j.getDay()===0)T['03-19']=addD(j,1);
+ const a=new Date(y,2,25,12);if(a>=palm&&a<=dm)T['03-25']=addD(dm,1);else if(a.getDay()===0)T['03-25']=addD(a,1);
+ return T}
+function yearNote(k,y){const e=S[k];if(!e.r||e.c==='M')return '';const es=st.lang==='es';
+ const [m,dd]=k.split('-').map(Number);if(k==='02-29'&&!(y%4===0&&(y%100!==0||y%400===0)))return '';
+ const d=new Date(y,m-1,dd,12),E=easter(y),ash=addD(E,-46),palm=addD(E,-7),oct=addD(E,7),T=transfers(y);
+ if(T[k])return es?`En ${y} se traslada al ${fmtD(T[k])}.`:`In ${y} it is moved to ${fmtD(T[k])}.`;
+ if(e.r==='S')return '';
+ const sun=d.getDay()===0,holy=d>=palm&&d<=oct,lent=d>=ash&&d<palm,adv17=m===12&&dd>=17&&dd<=24,xoct=m===12&&dd>=29;
+ if(e.r==='F'){if(holy)return es?`En ${y} cae en Semana Santa u octava de Pascua: ese año no se celebra.`:`In ${y} it falls in Holy Week or the Easter octave: not celebrated that year.`;
+  if(sun&&!LORD.has(k))return es?`En ${y} cae en domingo: prevalece el domingo.`:`In ${y} it falls on a Sunday: the Sunday takes precedence.`;return ''}
+ if(sun||holy)return es?`En ${y} ${sun?'cae en domingo':'cae en Semana Santa u octava de Pascua'}: ese año no se celebra.`:`In ${y} it falls ${sun?'on a Sunday':'in Holy Week or the Easter octave'}: not celebrated that year.`;
+ if(lent||adv17||xoct)return es?`En ${y} cae en ${lent?'Cuaresma':adv17?'las ferias mayores de Adviento':'la octava de Navidad'}: se hace solo conmemoración.`:`In ${y} it falls ${lent?'in Lent':adv17?'in the last days of Advent':'in the Christmas octave'}: only a commemoration.`;
+ return ''}
 
 /* ---------- biblioteca de atributos (dibujo de línea, 100×100) ---------- */
 const P=(d,w)=>`<path d="${d}"${w?` stroke-width="${w}"`:''}/>`,C=(x,y,r,f)=>`<circle cx="${x}" cy="${y}" r="${r}"${f?' fill="currentColor" stroke="none"':''}/>`;
@@ -154,33 +176,35 @@ const L=()=>T[st.lang],ix=()=>st.lang==='en'?1:0;
 function dayLabel(k){const [m,d]=k.split('-').map(Number);return st.lang==='en'?`${L().months[m-1]} ${d}`:`${d} de ${L().months[m-1]}`}
 function rankLine(e){const r=L().rank[e.r];return [r,L().cal[e.c]].filter(Boolean).join(' · ')}
 function patron(e){return e.p?`<p class="stPat"><b>${L().patF}:</b> ${e.p[ix()]}</p>`:''}
+function others(e){return e.o?`<div class="stAlso"><span>${L().also}</span><ul>${e.o.map(o=>`<li>${o[ix()+2]} <small>· ${L().rank[o[0]]}${o[1]==='E'?(st.lang==='en'?' (Spain)':' (España)'):''}</small></li>`).join('')}</ul></div>`:''}
 function prayers(e){return e.pr?`<div class="stPray"><span>${L().pray}</span>${e.pr.map(p=>`<span class="stChip">✠ ${PR[st.lang][p]||p}</span>`).join('')}</div>`:''}
-function tile(){const k=key(st.date),e=S[k],mv=movable(st.date);
+function tile(){const k=key(st.date),e=S[k],mv=movable(st.date);const T=transfers(st.date.getFullYear());for(const t in T)if(same(T[t],st.date))mv.unshift([S[t].n[0]+' (celebración trasladada)',S[t].n[1]+' (transferred celebration)']);
  $('stTile').innerHTML=`<span class="stFr stFrS">${art(k,false)}</span><span class="stTileTx"><small class="stKick">${L().today} · ${dayLabel(k)}</small><strong>${e.n[ix()]}</strong><small class="stRank">${rankLine(e)}</small>${mv.length?`<small class="stMov">✦ ${L().mov}: ${mv.map(x=>x[ix()]).join(' · ')}</small>`:''}<span class="stGo">${L().see} ›</span></span>`;
  $('stTile').onclick=$('stTile').onkeydown=ev=>{if(ev.type==='keydown'&&ev.key!=='Enter')return;select(k,true)}}
-function view(){const k=st.sel,e=S[k],f=e.f&&F[k];
+function view(){const k=st.sel,e=S[k],f=e.f&&F[k],yn=yearNote(k,st.date.getFullYear());
  const credit=f?`<a class="stCredit" href="${f.url}" target="_blank" rel="noopener">${f.t[ix()]} · ${f.ar} · ${f.w[ix()]} · ${st.lang==='en'?'Public domain':'Dominio público'}</a>`:`<span class="stCredit">${L().icon} · ${st.lang==='en'?'Mis Oraciones, generated':'Mis Oraciones, generado'}</span>`;
  $('stView').innerHTML=`<div class="stHero"><span class="stFr stFrL">${art(k,false)}</span>${credit}</div>
 <p class="stDate">${dayLabel(k)}${k==='02-29'?` · <i>${L().leap}</i>`:''}</p><h2 class="stName">${e.n[ix()]}</h2><p class="stRank">${rankLine(e)}</p>
-<p class="stBio">${e.b[ix()]}</p>${patron(e)}${prayers(e)}${(e.r&&e.c!=='M'&&e.c!=='L')?`<p class="stNote">${L().note}</p>`:''}
+<p class="stBio">${e.b[ix()]}</p>${patron(e)}${others(e)}${e.loc?`<p class="stLoc"><b>${L().loc}:</b> ${e.loc[ix()]}</p>`:''}${prayers(e)}${yn?`<p class="stYear">✦ ${yn}</p>`:''}
 <div class="stNav"><button type="button" class="secondary" id="vPrev">‹ ${L().prev}</button><button type="button" class="secondary" id="vNext">${L().next} ›</button></div>`;
  const ks=Object.keys(S).sort(),i=ks.indexOf(k);
  $('vPrev').onclick=()=>select(ks[(i+365)%366]);$('vNext').onclick=()=>select(ks[(i+1)%366])}
 const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 function row(k){const e=S[k],[m,d]=k.split('-');const today=k===key(st.date);
- return `<li><button type="button" data-k="${k}" class="${k===st.sel?'sel':''}${today?' today':''}"><span class="stDay">${st.q?dayLabel(k):+d}</span><span class="stFr stFrXS">${art(k,true)}</span><span class="stRowTx"><b>${e.n[ix()]}</b><small>${rankLine(e)}${e.f?' · '+L().fresco:''}</small></span></button></li>`}
+ return `<li><button type="button" data-k="${k}" class="${k===st.sel?'sel':''}${today?' today':''}"><span class="stDay">${st.q?dayLabel(k):+d}</span><span class="stFr stFrXS">${art(k,true)}</span><span class="stRowTx"><b>${e.n[ix()]}</b><small>${rankLine(e)}${e.o?' · +'+e.o.length:''}${e.f?' · '+L().fresco:''}</small></span></button></li>`}
 function list(){const q=norm(st.q.trim());let ks=Object.keys(S).sort();
  $('stMonthBar').hidden=!!q;
- if(q){ks=ks.filter(k=>{const e=S[k];return norm(e.n.join(' ')+' '+(e.p?e.p.join(' '):'')).includes(q)});$('stList').innerHTML=(ks.length?`<li class="stRes">${L().res(ks.length)}</li>`:`<li class="stRes">${L().noRes}</li>`)+ks.slice(0,60).map(row).join('')}
+ if(q){ks=ks.filter(k=>{const e=S[k];return norm(e.n.join(' ')+' '+(e.p?e.p.join(' '):'')+' '+(e.o?e.o.map(o=>o[2]+' '+o[3]).join(' '):'')).includes(q)});$('stList').innerHTML=(ks.length?`<li class="stRes">${L().res(ks.length)}</li>`:`<li class="stRes">${L().noRes}</li>`)+ks.slice(0,60).map(row).join('')}
  else{$('mName').textContent=L().months[st.month-1].replace(/^./,c=>c.toUpperCase());ks=ks.filter(k=>+k.slice(0,2)===st.month);$('stList').innerHTML=ks.map(row).join('')}
  $('stList').querySelectorAll('button[data-k]').forEach(b=>b.onclick=()=>select(b.dataset.k,true))}
 function select(k,scroll){st.sel=k;st.month=+k.slice(0,2);view();list();if(scroll)$('stView').scrollIntoView({behavior:'smooth',block:'start'})}
 function credits(){const es=st.lang==='es';const fr=Object.keys(F).sort();
  $('credBody').innerHTML=`<h3>${es?'Calendario':'Calendar'}</h3><ul>
-<li>${es?'Base: <i>Calendarium Romanum Generale</i> vigente (reforma de 1969 y añadidos posteriores) y calendario propio de España aprobado por la Conferencia Episcopal Española, contrastados con':'Base: the current <i>Calendarium Romanum Generale</i> (1969 reform and later additions) and the proper calendar of Spain approved by the Spanish Bishops’ Conference, checked against'} <a href="https://gcatholic.org/calendar/2026/ES-es" target="_blank" rel="noopener">GCatholic · ${es?'calendario de España':'calendar of Spain'} 2025-2028</a> ${es?'y el':'and the'} <a href="https://www.conferenciaepiscopal.es/" target="_blank" rel="noopener">${es?'Calendario Litúrgico-Pastoral de la CEE':'CEE liturgical-pastoral calendar'}</a>.</li>
-<li>${es?'Días sin celebración en el calendario: un santo conocido del <i>Martyrologium Romanum</i> (ed. 2004), comprobado con las páginas de cada día de':'Days with no celebration in the calendar: a well-known saint from the <i>Martyrologium Romanum</i> (2004 ed.), checked against each day’s page on'} <a href="https://es.wikipedia.org/wiki/1_de_enero" target="_blank" rel="noopener">Wikipedia</a>.</li>
-<li>${es?'Cuatro días llevan una devoción popular muy arraigada en España (San Fermín, la Merced, la Medalla Milagrosa, la Esperanza); están marcados como tal.':'Four days carry a popular devotion deeply rooted in Spain (Saint Fermin, Our Lady of Mercy, the Miraculous Medal, Our Lady of Hope); they are marked as such.'}</li>
-<li>${es?'Las fiestas móviles (Pascua, Pentecostés, Corpus…) se calculan cada año y solo se indican como nota.':'Movable feasts (Easter, Pentecost, Corpus Christi…) are computed each year and only shown as a note.'}</li>
+<li>${es?'Todas las solemnidades, fiestas y memorias (obligatorias y libres) siguen el calendario litúrgico vigente en España, con sus fechas propias:':'All solemnities, feasts and memorials (obligatory and optional) follow the liturgical calendar in force in Spain, with its own dates:'} <a href="https://www.conferenciaepiscopal.es/wp-content/uploads/2026/01/Calendario-Liturgico-CEE-2026.pdf" target="_blank" rel="noopener">${es?'Conferencia Episcopal Española, Calendario Litúrgico-Pastoral 2025-2026':'Spanish Bishops’ Conference, Liturgical-Pastoral Calendar 2025-2026'}</a> ${es?'(elaborado según el <i>Calendarium Romanum</i> y el Calendario propio de España), contrastado año a año con':'(prepared according to the <i>Calendarium Romanum</i> and the Proper Calendar of Spain), checked year by year against'} <a href="https://gcatholic.org/calendar/2026/ES-es" target="_blank" rel="noopener">GCatholic · ${es?'calendario de España':'calendar of Spain'} 2025-2028</a>.</li>
+<li>${es?'Rangos y precedencias: <i>Missale Romanum</i> (editio typica tertia) y Misal Romano en español (3.ª ed., CEE), con las Normas universales sobre el año litúrgico y el calendario. La ficha avisa cuando, en el año elegido, la celebración cae en domingo, Cuaresma o Semana Santa, o se traslada (San José, la Anunciación).':'Ranks and precedence: <i>Missale Romanum</i> (editio typica tertia) and the Spanish Roman Missal (3rd ed., CEE), with the Universal Norms on the Liturgical Year and the Calendar. The page warns when, in the chosen year, a celebration falls on a Sunday, in Lent or Holy Week, or is transferred (Saint Joseph, the Annunciation).'}</li>
+<li>${es?'Solo los días sin ninguna celebración en el calendario de España llevan un santo del <i>Martyrologium Romanum</i> (ed. 2004), marcado como tal y comprobado con las páginas de cada día de':'Only days with no celebration at all in the Spanish calendar carry a saint from the <i>Martyrologium Romanum</i> (2004 ed.), marked as such and checked against each day’s page on'} <a href="https://es.wikipedia.org/wiki/1_de_enero" target="_blank" rel="noopener">Wikipedia</a>.</li>
+<li>${es?'Las devociones locales (San Fermín en Navarra, la Medalla Milagrosa, la Virgen de la Esperanza) aparecen solo como nota, no como celebración del calendario.':'Local devotions (Saint Fermin in Navarre, the Miraculous Medal, Our Lady of Hope) appear only as a note, not as a calendar celebration.'}</li>
+<li>${es?'Las fiestas móviles (Pascua, Pentecostés, Corpus…) se calculan cada año y se indican como nota.':'Movable feasts (Easter, Pentecost, Corpus Christi…) are computed each year and shown as a note.'}</li>
 <li>${es?'Las biografías son textos breves redactados para esta app a partir de datos históricos comunes; no son citas de ninguna obra. Las oraciones enlazadas son las que ya tiene la app, con sus propias fuentes.':'The biographies are short texts written for this app from common historical facts; they are not quotations from any work. The linked prayers are the app’s own, with their own sources.'}</li></ul>
 <h3>${es?'Frescos':'Frescoes'} (${fr.length}) · ${es?'dominio público, vía Wikimedia Commons':'public domain, via Wikimedia Commons'}</h3><ul class="stCredList">${fr.map(k=>{const f=F[k];return `<li><b>${dayLabel(k)}</b> · ${f.t[ix()]} — ${f.ar}, ${f.w[ix()]}. <a href="${f.url}" target="_blank" rel="noopener">${f.file}</a> · ${es?'Dominio público':'Public domain'}</li>`}).join('')}</ul>
 <h3>${es?'Dibujos':'Drawings'} (${366-fr.length})</h3><ul><li>${es?'Medallones generados para esta app (SVG): fondo en tonos de fresco, nimbo dorado y el atributo tradicional del santo. Sin imágenes de terceros.':'Medallions generated for this app (SVG): fresco-toned background, golden halo and the saint’s traditional attribute. No third-party images.'}</li></ul>`}
