@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es" class="libro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f8f5ed">
+<title>Mis oraciones · prueba del santoral</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../v2.css">
+<link rel="stylesheet" href="../features.css">
+<link rel="stylesheet" href="../v3.css">
+<link rel="stylesheet" href="../pwa.css">
+<link rel="stylesheet" href="../v31b.css">
+<link rel="stylesheet" href="../i18n.css">
+<link rel="stylesheet" href="../estilo.css">
+<link rel="stylesheet" href="../logo.css">
+<link rel="stylesheet" href="santoral.css">
+</head>
+<body>
+<aside class="pvBanner">
+  <p><strong id="pvTitle">Prueba · Santoral</strong> <span id="pvSub">Página sin enlazar: no cambia la app ni tus datos.</span></p>
+  <details class="pvDbg">
+    <summary id="dbgSum">Opciones de prueba</summary>
+    <div class="dbgGrid">
+      <label><span id="dbgDate">Fecha</span><input type="date" id="dbgDateIn"></label>
+      <label><span id="dbgToday">Volver a hoy</span><button type="button" id="dbgTodayBtn" class="secondary">↺</button></label>
+    </div>
+    <p class="dbgInfo" id="dbgInfo"></p>
+  </details>
+</aside>
+
+<main id="home">
+  <header>
+    <button class="icon menuButton" aria-label="Menú" tabindex="-1"><span></span><span></span><span></span></button>
+    <span class="brand centerBrand"><img class="brandIcon" src="../icons/brand-96.png" alt="" width="32" height="32"><span class="brandName">Mis Oraciones</span></span>
+    <div class="topIcons">
+      <button class="icon" aria-label="Buscar" tabindex="-1">⌕</button>
+      <button class="icon" id="themeToggle" aria-label="Tema">☾</button>
+      <div class="langToggle" role="group" aria-label="Idioma" data-noi18n="1"><button type="button" lang="es" aria-pressed="true" title="Español">ES</button><button type="button" lang="en" aria-pressed="false" title="English">EN</button></div>
+      <button class="icon" aria-label="Ajustes" tabindex="-1">⚙</button>
+    </div>
+  </header>
+
+  <p class="ctxNote" id="ctxNote"></p>
+
+  <!-- Tarjeta «Santo del día» (iría en el inicio, junto a las demás) -->
+  <div class="tiles">
+    <article class="tile stTile" id="stTile" tabindex="0" role="button"></article>
+  </div>
+
+  <!-- Ficha del santo -->
+  <section class="stView" id="stView" aria-live="polite"></section>
+
+  <!-- Calendario -->
+  <section class="stCal" id="stCal">
+    <h2 class="stH" id="calH">Santoral</h2>
+    <div class="stSearch"><input type="search" id="stQ" autocomplete="off"></div>
+    <div class="stMonth" id="stMonthBar">
+      <button type="button" id="mPrev" aria-label="‹">‹</button>
+      <strong id="mName"></strong>
+      <button type="button" id="mNext" aria-label="›">›</button>
+    </div>
+    <ol class="stList" id="stList"></ol>
+  </section>
+
+  <details class="pvNotes" id="credits">
+    <summary id="credSum">Créditos y fuentes</summary>
+    <div id="credBody"></div>
+  </details>
+</main>
+
+<svg id="stDefs" width="0" height="0" style="position:absolute" aria-hidden="true"></svg>
+<script src="santoral-data.js"></script>
+<script src="santoral.js"></script>
+</body>
+</html>
